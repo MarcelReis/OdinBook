@@ -14,9 +14,17 @@ export type Scalars = {
 export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
+  uri: Scalars['String'];
   username: Scalars['String'];
   name: Scalars['String'];
   friends: Array<User>;
+};
+
+export type Deity = {
+  __typename?: 'Deity';
+  id: Scalars['ID'];
+  uri: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type Mutation = {
@@ -31,10 +39,22 @@ export type MutationCreateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  user?: Maybe<User>;
+  user: User;
+  deities: Array<Deity>;
 };
 
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
 };
+
+export type QueryCreateAccountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type QueryCreateAccountQuery = (
+  { __typename?: 'Query' }
+  & { deities: Array<(
+    { __typename?: 'Deity' }
+    & Pick<Deity, 'id' | 'uri' | 'name'>
+  )> }
+);

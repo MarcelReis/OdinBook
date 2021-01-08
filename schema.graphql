@@ -1,8 +1,15 @@
 type User {
   id: ID!
+  uri: String!
   username: String!
   name: String!
   friends: [User!]!
+}
+
+type Deity {
+  id: ID!
+  uri: String!
+  name: String!
 }
 
 type Mutation {
@@ -10,5 +17,6 @@ type Mutation {
 }
 
 type Query {
-  user(id: ID!): User
+  user(id: ID!): User!
+  deities: [Deity!]!
 }

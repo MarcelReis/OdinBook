@@ -1,0 +1,7 @@
+query QueryCreateAccount {
+  deities {
+    id
+    uri
+    name
+  }
+}
