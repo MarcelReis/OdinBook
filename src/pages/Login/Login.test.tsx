@@ -145,6 +145,11 @@ describe("The <LoginPage />", () => {
         mutationVariables.surname
       );
       userEvent.type(screen.getByLabelText(/email/i), mutationVariables.email!);
+      userEvent.type(
+        screen.getAllByLabelText(/password/i)[1],
+        mutationVariables.password
+      );
+
       userEvent.selectOptions(screen.getByLabelText(/deity/i), "thor");
 
       const createAccountButton = screen.getByRole("button", {
@@ -158,6 +163,29 @@ describe("The <LoginPage />", () => {
       await waitFor(() => {
         expect(createAccountButton).not.toBeDisabled();
       });
+    });
+  });
+
+  describe("When trying to submit without filling", () => {
+    it("Should display an error", async () => {
+      setup();
+
+      userEvent.click(getCreateAccountButton());
+      expect(
+        await screen.findByRole("option", { name: /thor/i })
+      ).toBeInTheDocument();
+
+      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+
+      userEvent.click(
+        screen.getByRole("button", {
+          name: "Create",
+        })
+      );
+
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        /fill all required fields/i
+      );
     });
   });
 });
