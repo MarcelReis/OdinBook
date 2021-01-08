@@ -8,12 +8,12 @@ export const queryCreateAccount = loader("./QueryCreateAccount.graphql");
 const LoginPage = () => {
   const [creatingAccount, setCreatingAccount] = useState(false);
 
-  const [loadCreateAccount, result] = useLazyQuery<QueryCreateAccountQuery>(
+  const [load, result] = useLazyQuery<QueryCreateAccountQuery>(
     queryCreateAccount
   );
 
   const createAccount = () => {
-    loadCreateAccount();
+    !result.called && load();
     setCreatingAccount(true);
   };
 
