@@ -18,6 +18,7 @@ export type User = {
   username: Scalars['String'];
   name: Scalars['String'];
   friends: Array<User>;
+  deity: Deity;
 };
 
 export type Deity = {
@@ -29,12 +30,15 @@ export type Deity = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createUser: User;
+  createAccount: User;
 };
 
 
-export type MutationCreateUserArgs = {
-  username: Scalars['String'];
+export type MutationCreateAccountArgs = {
+  firstName: Scalars['String'];
+  surname: Scalars['String'];
+  password: Scalars['String'];
+  deityID: Scalars['String'];
 };
 
 export type Query = {
@@ -47,6 +51,22 @@ export type Query = {
 export type QueryUserArgs = {
   id: Scalars['ID'];
 };
+
+export type CreateAccountMutationVariables = Exact<{
+  firstName: Scalars['String'];
+  surname: Scalars['String'];
+  password: Scalars['String'];
+  deityID: Scalars['String'];
+}>;
+
+
+export type CreateAccountMutation = (
+  { __typename?: 'Mutation' }
+  & { createAccount: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username'>
+  ) }
+);
 
 export type QueryCreateAccountQueryVariables = Exact<{ [key: string]: never; }>;
 

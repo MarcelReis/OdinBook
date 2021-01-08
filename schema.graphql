@@ -4,6 +4,7 @@ type User {
   username: String!
   name: String!
   friends: [User!]!
+  deity: Deity!
 }
 
 type Deity {
@@ -13,7 +14,12 @@ type Deity {
 }
 
 type Mutation {
-  createUser(username: String!): User!
+  createAccount(
+    firstName: String!
+    surname: String!
+    password: String!
+    deityID: String!
+  ): User!
 }
 
 type Query {

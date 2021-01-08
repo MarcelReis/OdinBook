@@ -1,0 +1,16 @@
+mutation CreateAccount(
+  $firstName: String!
+  $surname: String!
+  $password: String!
+  $deityID: String!
+) {
+  createAccount(
+    firstName: $firstName
+    surname: $surname
+    password: $password
+    deityID: $deityID
+  ) {
+    id
+    username
+  }
+}

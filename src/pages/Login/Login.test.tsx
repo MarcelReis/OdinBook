@@ -2,38 +2,62 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import userEvent from "@testing-library/user-event";
 
-import LoginPage, { queryCreateAccount } from "./Login";
-import { QueryCreateAccountQuery } from "../../generated/graphql";
+import LoginPage, { mutationCreateAccount, queryCreateAccount } from "./Login";
+import {
+  CreateAccountMutation,
+  CreateAccountMutationVariables,
+  QueryCreateAccountQuery,
+} from "../../generated/graphql";
 
-const mocks: Record<string, MockedResponse<QueryCreateAccountQuery>> = {
-  default: {
-    request: {
-      query: queryCreateAccount,
+const queryMock: MockedResponse<QueryCreateAccountQuery> = {
+  request: {
+    query: queryCreateAccount,
+  },
+  result: {
+    data: {
+      deities: [
+        {
+          id: "1",
+          name: "Thor",
+          uri: "thor",
+        },
+        {
+          id: "2",
+          name: "Odin",
+          uri: "odin",
+        },
+        {
+          id: "3",
+          name: "Loki",
+          uri: "loki",
+        },
+        {
+          id: "4",
+          name: "Freya",
+          uri: "freya",
+        },
+      ],
     },
-    result: {
-      data: {
-        deities: [
-          {
-            id: "1",
-            name: "Thor",
-            uri: "thor",
-          },
-          {
-            id: "2",
-            name: "Odin",
-            uri: "odin",
-          },
-          {
-            id: "3",
-            name: "Loki",
-            uri: "loki",
-          },
-          {
-            id: "4",
-            name: "Freya",
-            uri: "freya",
-          },
-        ],
+  },
+};
+
+const mutationVariables: CreateAccountMutationVariables = {
+  firstName: "Marcelo",
+  surname: "Reis",
+  password: "123456",
+  deityID: "1",
+};
+
+const mutationMock: MockedResponse<CreateAccountMutation> = {
+  request: {
+    query: mutationCreateAccount,
+    variables: mutationVariables,
+  },
+  result: {
+    data: {
+      createAccount: {
+        id: "",
+        username: "_marcelreis",
       },
     },
   },
@@ -42,7 +66,7 @@ const mocks: Record<string, MockedResponse<QueryCreateAccountQuery>> = {
 describe("The <LoginPage />", () => {
   const setup = () =>
     render(
-      <MockedProvider mocks={[mocks.default]} addTypename={false}>
+      <MockedProvider mocks={[queryMock, mutationMock]} addTypename={false}>
         <LoginPage />
       </MockedProvider>
     );
@@ -68,10 +92,6 @@ describe("The <LoginPage />", () => {
     it("Should render the form to create account", async () => {
       setup();
 
-      expect(screen.queryByLabelText(/first name/i)).not.toBeInTheDocument();
-      expect(screen.queryByLabelText(/surname/i)).not.toBeInTheDocument();
-      expect(screen.queryByLabelText(/deity/i)).not.toBeInTheDocument();
-
       await waitFor(() => {
         userEvent.click(getCreateAccountButton());
       });
@@ -79,6 +99,13 @@ describe("The <LoginPage />", () => {
       expect(screen.getByLabelText(/first name/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/surname/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/deity/i)).toBeInTheDocument();
+
+      expect(screen.getAllByLabelText(/password/i)[0]).toBeInTheDocument();
+      expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+
+      expect(
+        screen.getByRole("button", { name: /create$/i })
+      ).toBeInTheDocument();
     });
 
     it("Should load the currently available deities", async () => {
@@ -97,5 +124,9 @@ describe("The <LoginPage />", () => {
         ).toBeInTheDocument();
       });
     });
+  });
+
+  describe("When submiting the create account", () => {
+    it("Should execute the mutation", () => {});
   });
 });
