@@ -3,6 +3,7 @@ type User {
   uri: String!
   username: String!
   name: String!
+  email: String!
   friends: [User!]!
   deity: Deity!
 }
@@ -17,8 +18,9 @@ type Mutation {
   createAccount(
     firstName: String!
     surname: String!
+    email: String
     password: String!
-    deityID: String!
+    deityURI: String!
   ): User!
 }
 

@@ -44,8 +44,9 @@ const queryMock: MockedResponse<QueryCreateAccountQuery> = {
 const mutationVariables: CreateAccountMutationVariables = {
   firstName: "Marcelo",
   surname: "Reis",
+  email: "test@marcelreis.dev",
   password: "123456",
-  deityID: "1",
+  deityID: "thor",
 };
 
 const mutationMock: MockedResponse<CreateAccountMutation> = {
@@ -118,15 +119,45 @@ describe("The <LoginPage />", () => {
       expect(deitiesSelect).toBeDisabled();
       expect(deitiesSelect).toHaveTextContent(/loading/i);
 
-      await waitFor(() => {
-        expect(
-          screen.getByRole("option", { name: /thor/i })
-        ).toBeInTheDocument();
-      });
+      expect(
+        await screen.findByRole("option", { name: /thor/i })
+      ).toBeInTheDocument();
+      expect(deitiesSelect).not.toBeDisabled();
     });
   });
 
-  describe("When submiting the create account", () => {
-    it("Should execute the mutation", () => {});
+  describe("When filling the input fields and submitting", () => {
+    it("Should disabled the 'Create' button", async () => {
+      setup();
+
+      userEvent.click(getCreateAccountButton());
+
+      expect(
+        await screen.findByRole("option", { name: /thor/i })
+      ).toBeInTheDocument();
+
+      userEvent.type(
+        screen.getByLabelText(/first name/i),
+        mutationVariables.firstName
+      );
+      userEvent.type(
+        screen.getByLabelText(/surname/i),
+        mutationVariables.surname
+      );
+      userEvent.type(screen.getByLabelText(/email/i), mutationVariables.email!);
+      userEvent.selectOptions(screen.getByLabelText(/deity/i), "thor");
+
+      const createAccountButton = screen.getByRole("button", {
+        name: "Create",
+      });
+      expect(createAccountButton).not.toBeDisabled();
+
+      userEvent.click(createAccountButton);
+      expect(createAccountButton).toBeDisabled();
+
+      await waitFor(() => {
+        expect(createAccountButton).not.toBeDisabled();
+      });
+    });
   });
 });

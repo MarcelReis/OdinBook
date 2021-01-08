@@ -16,7 +16,7 @@ const LoginPage = () => {
   const [load, result] = useLazyQuery<QueryCreateAccountQuery>(
     queryCreateAccount
   );
-  const [createAccont] = useMutation<
+  const [createAccont, mutationResult] = useMutation<
     CreateAccountMutation,
     CreateAccountMutationVariables
   >(mutationCreateAccount);
@@ -26,8 +26,20 @@ const LoginPage = () => {
     setCreatingAccount(true);
   };
 
-  const createAccountSubmitHandler = async () => {
-    await createAccont({});
+  const createAccountSubmitHandler = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    await createAccont({
+      variables: {
+        firstName: "Marcelo",
+        surname: "Reis",
+        email: "test@marcelreis.dev",
+        password: "123456",
+        deityID: "thor",
+      },
+    });
   };
 
   return (
@@ -58,9 +70,9 @@ const LoginPage = () => {
             <input type="text" id="surname" />
 
             <label htmlFor="deity">Deity</label>
-            <select name="cars" id="deity" disabled>
+            <select name="cars" id="deity" disabled={!result.data}>
               {!result.data ? (
-                <option value="">Loading...</option>
+                <option value="loading">Loading...</option>
               ) : (
                 result.data.deities.map((deity) => (
                   <option key={deity.uri} value={deity.uri}>
@@ -76,7 +88,9 @@ const LoginPage = () => {
             <label htmlFor="password-create">Password</label>
             <input type="password" id="password-create" />
 
-            <button type="submit">Create</button>
+            <button type="submit" disabled={mutationResult.loading}>
+              Create
+            </button>
           </form>
         </div>
       )}

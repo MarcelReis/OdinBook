@@ -17,6 +17,7 @@ export type User = {
   uri: Scalars['String'];
   username: Scalars['String'];
   name: Scalars['String'];
+  email: Scalars['String'];
   friends: Array<User>;
   deity: Deity;
 };
@@ -37,6 +38,7 @@ export type Mutation = {
 export type MutationCreateAccountArgs = {
   firstName: Scalars['String'];
   surname: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
   password: Scalars['String'];
   deityID: Scalars['String'];
 };
@@ -55,6 +57,7 @@ export type QueryUserArgs = {
 export type CreateAccountMutationVariables = Exact<{
   firstName: Scalars['String'];
   surname: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
   password: Scalars['String'];
   deityID: Scalars['String'];
 }>;
