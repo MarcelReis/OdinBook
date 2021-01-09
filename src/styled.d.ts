@@ -24,5 +24,8 @@ declare module "styled-components" {
       blue: Color;
       purple: Color;
     };
+
+    borderRadius: [string, string];
+    boxShadow: [string];
   }
 }

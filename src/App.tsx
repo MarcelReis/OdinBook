@@ -1,8 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch } from "react-router-dom";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-
-import Routes from "./Routes";
+import { Route, Switch } from "react-router-dom";
 
 import useAuth from "./hooks/useAuth";
 
@@ -11,13 +8,12 @@ import LoadingPage from "./pages/Loading";
 
 import Footer from "./components/Footer";
 import Appbar from "./components/Appbar";
+import SignUp from "./pages/SignUp";
+import FeedPage from "./pages/Feed";
+import NotFound from "./pages/NotFound";
+import ProfilePage from "./pages/Profile";
 
-const client = new ApolloClient({
-  uri: "https://localhost:3001",
-  cache: new InMemoryCache(),
-});
-
-function App() {
+function Routes() {
   const { isLogged, loading } = useAuth();
 
   if (loading) {
@@ -26,25 +22,30 @@ function App() {
 
   if (!isLogged) {
     return (
-      <ApolloProvider client={client}>
-        <LoginPage />
-      </ApolloProvider>
+      <Switch>
+        <Route exact path="/signup" component={SignUp} />
+        <Route component={LoginPage} />
+      </Switch>
     );
   }
 
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Appbar />
-
-        <Switch>
-          <Routes />
-        </Switch>
-
-        <Footer />
-      </BrowserRouter>
-    </ApolloProvider>
+    <Switch>
+      <Route exact path="/" component={FeedPage} />
+      <Route exact path="/:user" component={ProfilePage} />
+      <Route component={NotFound} />
+    </Switch>
   );
 }
+
+const App = () => {
+  return (
+    <>
+      <Appbar />
+      <Routes />
+      <Footer />
+    </>
+  );
+};
 
 export default App;
