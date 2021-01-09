@@ -6,6 +6,7 @@ import {
   CreateAccountMutationVariables,
   QueryCreateAccountQuery,
 } from "../../generated/graphql";
+import useAuth from "../../hooks/useAuth";
 
 export const queryCreateAccount = loader("./QueryCreateAccount.graphql");
 export const mutationCreateAccount = loader("./MutationCreateAccont.graphql");
@@ -22,6 +23,8 @@ const initialState = {
 };
 
 const LoginPage = () => {
+  const { facebookLogin } = useAuth();
+
   const [creatingAccount, setCreatingAccount] = useState(false);
   const [state, setState] = useState(initialState);
 
@@ -73,16 +76,16 @@ const LoginPage = () => {
   return (
     <>
       <div>
-        <form>
+        <div>
           <label htmlFor="username">Username</label>
           <input id="username" type="text" />
 
           <label htmlFor="password">Password</label>
           <input id="password" type="text" />
 
-          <button>Continue with Facebook</button>
+          <button onClick={facebookLogin}>Continue with Facebook</button>
           <button type="submit">Log In</button>
-        </form>
+        </div>
         <hr />
 
         <button onClick={openCreateAccount}>Create New Account</button>
