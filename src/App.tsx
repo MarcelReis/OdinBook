@@ -1,5 +1,7 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ThemeProvider } from "./theme";
 
 import useAuth from "./hooks/useAuth";
 
@@ -12,6 +14,11 @@ import SignUp from "./pages/SignUp";
 import FeedPage from "./pages/Feed";
 import NotFound from "./pages/NotFound";
 import ProfilePage from "./pages/Profile";
+
+const client = new ApolloClient({
+  uri: "https://localhost:3001",
+  cache: new InMemoryCache(),
+});
 
 function Routes() {
   const { isLogged, loading } = useAuth();
@@ -40,11 +47,15 @@ function Routes() {
 
 const App = () => {
   return (
-    <>
-      <Appbar />
-      <Routes />
-      <Footer />
-    </>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <ThemeProvider>
+          <Appbar />
+          <Routes />
+          <Footer />
+        </ThemeProvider>
+      </BrowserRouter>
+    </ApolloProvider>
   );
 };
 
