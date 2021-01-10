@@ -9,6 +9,8 @@ const currentUser = makeVar<null | firebase.User>(null);
 const auth = firebase.auth();
 
 const facebookProvider = new firebase.auth.FacebookAuthProvider();
+const githubProvider = new firebase.auth.GithubAuthProvider();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 auth.onAuthStateChanged((user) => {
   if (isLoading()) {
@@ -25,10 +27,11 @@ const useAuth = () => {
   return {
     isLogged: !!user,
     loading,
-    login: () => null,
+    logout: () => auth.signOut(),
 
     facebookLogin: () => auth.signInWithPopup(facebookProvider),
-    logout: () => auth.signOut(),
+    githubLogin: () => auth.signInWithPopup(githubProvider),
+    googleLogin: () => auth.signInWithPopup(googleProvider),
   };
 };
 

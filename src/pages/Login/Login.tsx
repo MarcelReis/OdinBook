@@ -10,7 +10,7 @@ import * as S from "./Login.styled";
 
 import { Facebook } from "@styled-icons/boxicons-logos/Facebook";
 import { Github } from "@styled-icons/boxicons-logos/Github";
-import { Twitter } from "@styled-icons/boxicons-logos/Twitter";
+import { Google } from "@styled-icons/boxicons-logos/Google";
 
 import Button from "../../marvieUI/atoms/Button";
 import Divisor from "../../marvieUI/atoms/Divisor";
@@ -18,7 +18,7 @@ import TextField from "../../marvieUI/atoms/TextField";
 import Typography from "../../marvieUI/atoms/Typography";
 
 const LoginPage = () => {
-  const { facebookLogin } = useAuth();
+  const { facebookLogin, githubLogin, googleLogin } = useAuth();
   const history = useHistory();
 
   const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   return (
     <S.MainGrid>
-      <img src="/image.png" alt="" width="100%" />
+      <S.Image src="/image.png" alt="" />
       <S.LoginBox>
         <Typography as="h2" style={{ fontSize: "42px", textAlign: "center" }}>
           Welcome
@@ -70,12 +70,12 @@ const LoginPage = () => {
           <S.FacebookButton onClick={facebookLogin}>
             <Facebook size="32px" />
           </S.FacebookButton>
-          <S.GithubkButton>
+          <S.GithubkButton onClick={githubLogin}>
             <Github size="32px" />
           </S.GithubkButton>
-          <S.TwitterButton>
-            <Twitter size="32px" />
-          </S.TwitterButton>
+          <S.GoogleButton onClick={googleLogin}>
+            <Google size="32px" />
+          </S.GoogleButton>
         </S.SocialButtons>
         <br />
         <Button variant="secondary" onClick={() => history.push("/signup")}>

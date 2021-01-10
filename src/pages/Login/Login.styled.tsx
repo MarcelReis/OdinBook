@@ -8,16 +8,17 @@ export const MainGrid = styled.div`
   max-width: 1200px;
   margin: auto;
   place-items: center;
+  gap: 32px;
 
   padding: ${(props) => props.theme.space.md};
 
-  ${media.lessThan("sm")} {
+  ${media.lessThan("md")} {
     grid-template-columns: 1fr;
   }
-  ${media.between("sm", "md")} {
+  ${media.between("md", "lg")} {
     grid-template-columns: 1fr 1fr;
   }
-  ${media.greaterThan("md")} {
+  ${media.greaterThan("lg")} {
     grid-template-columns: 3fr 2fr;
   }
 `;
@@ -44,6 +45,11 @@ export const FacebookButton = styled(Button)`
 export const GithubkButton = styled(Button)`
   background: #24292e;
 `;
-export const TwitterButton = styled(Button)`
-  background: #1da1f2;
+export const GoogleButton = styled(Button)`
+  background: #db4437;
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  padding: 32px;
 `;
