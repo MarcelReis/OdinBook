@@ -6,9 +6,13 @@ import {
   CreateAccountMutationVariables,
   QueryCreateAccountQuery,
 } from "../../generated/graphql";
-import Surface from "../../marvieUI/atoms/Surface";
 import Button from "../../marvieUI/atoms/Button";
 import Container from "../../marvieUI/atoms/Container";
+import TextField from "../../marvieUI/atoms/TextField";
+
+import { PermIdentity } from "@styled-icons/material/PermIdentity";
+import { Lock } from "@styled-icons/material/Lock";
+import { Email } from "@styled-icons/material/Email";
 
 export const queryCreateAccount = loader("./QueryCreateAccount.graphql");
 export const mutationCreateAccount = loader("./MutationCreateAccont.graphql");
@@ -67,79 +71,72 @@ const SignUpPage = () => {
 
   return (
     <Container>
-      <Surface rounded>
-        <form onSubmit={createAccountSubmitHandler}>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            value={state.firstName}
-            onChange={({ target: { value } }) =>
-              updateState({ firstName: value })
-            }
-          />
+      <form onSubmit={createAccountSubmitHandler}>
+        <TextField
+          id="firstname"
+          label="First Name"
+          placeholder="First name"
+          icon={PermIdentity}
+          onChange={({ target }) => updateState({ firstName: target.value })}
+        />
 
-          <label htmlFor="surname">Surname</label>
-          <input
-            type="text"
-            id="surname"
-            value={state.surname}
-            onChange={({ target: { value } }) =>
-              updateState({ surname: value })
-            }
-          />
+        <TextField
+          id="surname"
+          label="Surname"
+          placeholder="Surname"
+          icon={PermIdentity}
+          onChange={({ target }) => updateState({ surname: target.value })}
+        />
 
-          <label htmlFor="deity">Deity</label>
-          <select
-            name="cars"
-            id="deity"
-            disabled={!result.data}
-            value={state.deity}
-            onChange={({ target: { value } }) => updateState({ deity: value })}
-          >
-            {!result.data ? (
-              <option value="loading">Loading...</option>
-            ) : (
-              <>
-                <option value="none" disabled>
-                  Select
+        <label htmlFor="deity">Deity</label>
+        <select
+          name="cars"
+          id="deity"
+          disabled={!result.data}
+          value={state.deity}
+          onChange={({ target: { value } }) => updateState({ deity: value })}
+        >
+          {!result.data ? (
+            <option value="loading">Loading...</option>
+          ) : (
+            <>
+              <option value="none" disabled>
+                Select
+              </option>
+              {result.data.deities.map((deity) => (
+                <option key={deity.uri} value={deity.uri}>
+                  {deity.name}
                 </option>
-                {result.data.deities.map((deity) => (
-                  <option key={deity.uri} value={deity.uri}>
-                    {deity.name}
-                  </option>
-                ))}
-              </>
-            )}
-          </select>
-
-          <label htmlFor="email-create">Email</label>
-          <input
-            type="email"
-            id="email-create"
-            value={state.email}
-            onChange={({ target: { value } }) => updateState({ email: value })}
-          />
-
-          <label htmlFor="password-create">Password</label>
-          <input
-            type="password"
-            id="password-create"
-            value={state.password}
-            onChange={({ target: { value } }) =>
-              updateState({ password: value })
-            }
-          />
-
-          {!state.isValid && state.validating && (
-            <p role="alert">Fill all required fields</p>
+              ))}
+            </>
           )}
+        </select>
 
-          <Button type="submit" disabled={mutationResult.loading}>
-            Create
-          </Button>
-        </form>
-      </Surface>
+        <TextField
+          id="email"
+          label="Email"
+          placeholder="Email"
+          icon={Email}
+          onChange={({ target }) => updateState({ email: target.value })}
+        />
+
+        <TextField
+          id="password"
+          type="password"
+          label="Password"
+          placeholder="Password"
+          icon={Lock}
+          onChange={({ target }) => updateState({ password: target.value })}
+        />
+
+        {!state.isValid && state.validating && (
+          <p role="alert">Fill all required fields</p>
+        )}
+
+        <Button type="submit" disabled={mutationResult.loading}>
+          Create
+        </Button>
+      </form>
     </Container>
   );
 };

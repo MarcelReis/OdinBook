@@ -18,7 +18,7 @@ const Container = styled.div`
     bottom: 0;
     left: 56px;
     height: 2px;
-    width: calc(100% - 24px);
+    width: calc(100% - 32px);
     background: #000;
     opacity: 0.1;
     border-radius: 8px;
