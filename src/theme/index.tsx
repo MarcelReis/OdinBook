@@ -4,6 +4,25 @@ import { ThemeProvider as Provider } from "styled-components";
 
 import styledReset from "styled-reset";
 
+type BreakingPointKeys = "xs" | "sm" | "md" | "lg" | "xl";
+
+const breakpoints: Record<BreakingPointKeys, number> = {
+  xs: 0,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+};
+
+export const media = {
+  lessThan: (bp: BreakingPointKeys) =>
+    `@media (max-width: ${breakpoints[bp]}px)`,
+  greaterThan: (bp: BreakingPointKeys) =>
+    `@media (min-width: ${breakpoints[bp]}px)`,
+  between: (bp1: BreakingPointKeys, bp2: BreakingPointKeys) =>
+    `@media (min-width: ${breakpoints[bp1]}px) and (max-width: ${breakpoints[bp2]}px)`,
+};
+
 const styledBase = css`
   *,
   *::before,
@@ -11,16 +30,13 @@ const styledBase = css`
     box-sizing: inherit;
   }
 
-  html,
-  body {
-    height: 100%;
-  }
-
   html {
+    height: 100%;
     font-size: 16px;
   }
 
   body {
+    min-height: 100%;
     position: relative;
     box-sizing: border-box;
     font-family: "Source Sans Pro", sans-serif;

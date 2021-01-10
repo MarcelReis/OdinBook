@@ -1,9 +1,35 @@
 import styled from "styled-components";
 import Button from "../../marvieUI/atoms/Button";
 
-export const LoginBox = styled.div`
+import { media } from "../../theme";
+
+export const MainGrid = styled.div`
+  display: grid;
+  max-width: 1200px;
   margin: auto;
-  max-width: 400px;
+  place-items: center;
+
+  padding: ${(props) => props.theme.space.md};
+
+  ${media.lessThan("sm")} {
+    grid-template-columns: 1fr;
+  }
+  ${media.between("sm", "md")} {
+    grid-template-columns: 1fr 1fr;
+  }
+  ${media.greaterThan("md")} {
+    grid-template-columns: 3fr 2fr;
+  }
+`;
+
+export const LoginBox = styled.div`
+  width: 100%;
+
+  ${media.greaterThan("sm")} {
+    padding: ${(props) => props.theme.space.sm};
+    border-radius: 24px;
+    background: ${({ theme }) => theme.pallete.surface[1]};
+  }
 `;
 
 export const SocialButtons = styled.div`
@@ -20,8 +46,4 @@ export const GithubkButton = styled(Button)`
 `;
 export const TwitterButton = styled(Button)`
   background: #1da1f2;
-`;
-
-export const Box = styled.div`
-  margin: 16px 32px;
 `;

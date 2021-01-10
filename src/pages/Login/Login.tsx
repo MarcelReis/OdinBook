@@ -25,44 +25,46 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <S.LoginBox>
-      <div>
+    <S.MainGrid>
+      <img src="/image.png" alt="" width="100%" />
+      <S.LoginBox>
+        <Typography as="h2" style={{ fontSize: "42px", textAlign: "center" }}>
+          Welcome
+        </Typography>
+
         <br />
-        <S.Box as="form">
-          <Typography>Bem Vindo</Typography>
+        <br />
 
-          <br />
+        <TextField
+          icon={Email}
+          label="Username"
+          placeholder="Username"
+          id="email"
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <br />
 
-          <TextField
-            icon={Email}
-            label="Username"
-            placeholder="Username"
-            id="email"
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-          <br />
+        <TextField
+          icon={Lock}
+          label="Password"
+          placeholder="Password"
+          id="password"
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
 
-          <TextField
-            icon={Lock}
-            label="Password"
-            placeholder="Password"
-            id="password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
+        <br />
 
-          <br />
+        <Button type="submit">Log In</Button>
+        <Divisor />
 
-          <Button type="submit">Log In</Button>
-        </S.Box>
-      </div>
-      <Divisor />
+        <Typography as="h2" style={{ fontSize: "18px", textAlign: "center" }}>
+          Login with:
+        </Typography>
 
-      <S.Box>
-        <Typography>Login with:</Typography>
         <br />
         <S.SocialButtons>
           <S.FacebookButton onClick={facebookLogin}>
@@ -79,8 +81,8 @@ const LoginPage = () => {
         <Button variant="secondary" onClick={() => history.push("/signup")}>
           Create New Account
         </Button>
-      </S.Box>
-    </S.LoginBox>
+      </S.LoginBox>
+    </S.MainGrid>
   );
 };
 
