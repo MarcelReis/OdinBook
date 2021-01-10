@@ -44,7 +44,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const darkTheme: DefaultTheme = {
   pallete: {
-    background: "#1F2E35",
+    background: "linear-gradient(138.13deg, #22343C 25.87%, #1F2E35 100%)",
 
     surface: [
       "linear-gradient(138.13deg, #2A3C44 25.75%, #23343C 100%)",
@@ -55,7 +55,7 @@ export const darkTheme: DefaultTheme = {
 
     red: ["#FF464F", "#FF575F", "#623A42"],
     orange: ["#FF8A34", "#FF974A", ""],
-    yellow: ["#FFBC25", "#FFC542", ""],
+    yellow: ["#FFBC25", "#FFC542", "#625B39"],
     green: ["#25C685", "#3DD598", "#286053"],
     blue: ["#005DF2", "#0062FF", "#163E72"],
     purple: ["#6952DC", "#755FE2", "#393D69"],

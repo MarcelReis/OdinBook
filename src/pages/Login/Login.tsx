@@ -1,41 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+
+import { Email } from "@styled-icons/material/Email";
+import { Lock } from "@styled-icons/material/Lock";
 
 import useAuth from "../../hooks/useAuth";
 
 import * as S from "./Login.styled";
 
-import Surface from "../../marvieUI/atoms/Surface";
 import Button from "../../marvieUI/atoms/Button";
-import Container from "../../marvieUI/atoms/Container";
 import Divisor from "../../marvieUI/atoms/Divisor";
+import TextField from "../../marvieUI/atoms/TextField";
 
 const LoginPage = () => {
   const { facebookLogin } = useAuth();
   const history = useHistory();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
-    <Container>
-      <S.LoginBox>
-        <Surface variant={1} rounded>
-          <div>
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" />
+    <S.LoginBox>
+      <div>
+        <TextField
+          icon={Email}
+          label="Username"
+          placeholder="Username"
+          id="email"
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <br />
 
-            <label htmlFor="password">Password</label>
-            <input id="password" type="text" />
+        <TextField
+          icon={Lock}
+          label="Password"
+          placeholder="Password"
+          id="password"
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
 
-            <button onClick={facebookLogin}>Continue with Facebook</button>
-            <Button type="submit">Log In</Button>
-          </div>
-          <Divisor />
+        <br />
 
-          <Button variant="secondary" onClick={() => history.push("/signup")}>
-            Create New Account
-          </Button>
-        </Surface>
-      </S.LoginBox>
-    </Container>
+        <button onClick={facebookLogin}>Continue with Facebook</button>
+        <Button type="submit">Log In</Button>
+      </div>
+      <Divisor />
+
+      <Button variant="secondary" onClick={() => history.push("/signup")}>
+        Create New Account
+      </Button>
+    </S.LoginBox>
   );
 };
 
