@@ -23,6 +23,11 @@ const Button = styled.button<ButtonProps>`
   font-weight: bold;
   cursor: pointer;
   ${({ variant }) => (variant === "secondary" ? secondary : primary)}
+  transition: transform 200ms ease;
+
+  &:active {
+    transform: translateY(2px);
+  }
 `;
 
 export default Button;

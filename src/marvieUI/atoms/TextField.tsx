@@ -3,15 +3,13 @@ import { StyledIcon } from "styled-icons/types";
 
 const Container = styled.div`
   position: relative;
-  overflow: hidden;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 38px 1fr;
 
-  margin-left: 32px;
   height: 58px;
   padding-top: 4px;
-  width: calc(100% - 32px);
+  width: 100%;
 
   &::after {
     content: "";
@@ -20,9 +18,9 @@ const Container = styled.div`
     bottom: 0;
     left: 56px;
     height: 2px;
-    width: 100%;
+    width: calc(100% - 24px);
     background: #000;
-    opacity: 0.05;
+    opacity: 0.1;
     border-radius: 8px;
   }
 `;
@@ -43,7 +41,7 @@ const Label = styled.label`
 const Input = styled.input`
   background-color: inherit;
   border: none;
-  padding: 0 32px 0 8px;
+  padding: 2px 8px;
   width: 100%;
   border-radius: 12px 0 0 12px;
   font-size: 18px;
