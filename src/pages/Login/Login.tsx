@@ -18,11 +18,17 @@ import TextField from "../../marvieUI/atoms/TextField";
 import Typography from "../../marvieUI/atoms/Typography";
 
 const LoginPage = () => {
-  const { facebookLogin, githubLogin, googleLogin } = useAuth();
+  const { facebookLogin, githubLogin, googleLogin, mailLogin } = useAuth();
   const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const onSubmitLogin = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    mailLogin(email, password);
+  };
 
   return (
     <S.MainGrid>
@@ -35,30 +41,32 @@ const LoginPage = () => {
         <br />
         <br />
 
-        <TextField
-          icon={Email}
-          label="Username"
-          placeholder="Username"
-          id="email"
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <br />
+        <form action="" onSubmit={onSubmitLogin}>
+          <TextField
+            icon={Email}
+            label="Username"
+            placeholder="Username"
+            id="email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <br />
 
-        <TextField
-          icon={Lock}
-          label="Password"
-          placeholder="Password"
-          id="password"
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
+          <TextField
+            icon={Lock}
+            label="Password"
+            placeholder="Password"
+            id="password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <br />
 
-        <br />
+          <Button type="submit">Log In</Button>
+        </form>
 
-        <Button type="submit">Log In</Button>
         <Divisor />
 
         <Typography as="h2" style={{ fontSize: "18px", textAlign: "center" }}>

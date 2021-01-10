@@ -29,6 +29,8 @@ const useAuth = () => {
     loading,
     logout: () => auth.signOut(),
 
+    mailLogin: (email: string, password: string) =>
+      auth.signInWithEmailAndPassword(email, password),
     facebookLogin: () => auth.signInWithPopup(facebookProvider),
     githubLogin: () => auth.signInWithPopup(githubProvider),
     googleLogin: () => auth.signInWithPopup(googleProvider),
