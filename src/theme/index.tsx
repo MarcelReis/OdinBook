@@ -44,7 +44,20 @@ export const GlobalStyle = createGlobalStyle`
   ${styledBase}
 `;
 
+const commonTheme: Pick<DefaultTheme, "space"> = {
+  space: {
+    xxs: "8px",
+    xs: "16px",
+    sm: "24px",
+    md: "32px",
+    lg: "40px",
+    xl: "48px",
+    xxl: "56px",
+  },
+};
+
 export const darkTheme: DefaultTheme = {
+  ...commonTheme,
   pallete: {
     background: "linear-gradient(138.13deg, #22343C 25.87%, #1F2E35 100%)",
 
@@ -69,6 +82,7 @@ export const darkTheme: DefaultTheme = {
 };
 
 export const lightTheme: DefaultTheme = {
+  ...commonTheme,
   pallete: {
     background: "#FFFFFF",
 
