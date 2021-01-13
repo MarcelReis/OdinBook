@@ -8,7 +8,7 @@ import {
 } from "../../generated/graphql";
 import Button from "../../marvieUI/atoms/Button";
 import Container from "../../marvieUI/atoms/Container";
-import TextField from "../../marvieUI/atoms/TextField";
+import TextField from "../../marvieUI/organisms/TextField";
 
 import { PermIdentity } from "@styled-icons/material/PermIdentity";
 import { Lock } from "@styled-icons/material/Lock";

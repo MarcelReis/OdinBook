@@ -13,7 +13,7 @@ import { Google } from "@styled-icons/boxicons-logos/Google";
 
 import Button from "../../marvieUI/atoms/Button";
 import Divisor from "../../marvieUI/atoms/Divisor";
-import TextField from "../../marvieUI/atoms/TextField";
+import TextField from "../../marvieUI/organisms/TextField";
 import Typography from "../../marvieUI/atoms/Typography";
 
 const LoginPage = () => {
