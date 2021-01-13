@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { Email } from "@styled-icons/material/Email";
-import { Lock } from "@styled-icons/material/Lock";
-
 import useAuth from "../../hooks/useAuth";
 
 import * as S from "./Login.styled";
 
+import { Email } from "@styled-icons/material/Email";
+import { Lock } from "@styled-icons/material/Lock";
 import { Facebook } from "@styled-icons/boxicons-logos/Facebook";
 import { Github } from "@styled-icons/boxicons-logos/Github";
 import { Google } from "@styled-icons/boxicons-logos/Google";

@@ -53,6 +53,11 @@ const styledBase = css`
   button {
     font-size: inherit;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -62,13 +67,13 @@ export const GlobalStyle = createGlobalStyle`
 
 const commonTheme: Pick<DefaultTheme, "space"> = {
   space: {
-    xxs: "8px",
-    xs: "16px",
-    sm: "24px",
-    md: "32px",
-    lg: "40px",
-    xl: "48px",
-    xxl: "56px",
+    xxs: "4px",
+    xs: "8px",
+    sm: "16px",
+    md: "24px",
+    lg: "32px",
+    xl: "40px",
+    xxl: "48px",
   },
 };
 

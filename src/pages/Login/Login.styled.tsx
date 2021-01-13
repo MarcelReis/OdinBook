@@ -10,7 +10,7 @@ export const MainGrid = styled.div`
   place-items: center;
   gap: 32px;
 
-  padding: ${(props) => props.theme.space.md};
+  padding: ${(props) => props.theme.space.lg};
 
   ${media.lessThan("md")} {
     grid-template-columns: 1fr;
@@ -27,7 +27,7 @@ export const LoginBox = styled.div`
   width: 100%;
 
   ${media.greaterThan("sm")} {
-    padding: ${(props) => props.theme.space.sm};
+    padding: ${(props) => props.theme.space.md};
     border-radius: 24px;
     background: ${({ theme }) => theme.pallete.surface[1]};
   }
