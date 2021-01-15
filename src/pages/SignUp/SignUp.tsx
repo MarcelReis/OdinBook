@@ -32,7 +32,7 @@ const SignUpPage = () => {
   const [state, setState] = useState(initialState);
 
   const result = useQuery<QueryCreateAccountQuery>(queryCreateAccount);
-  const [createAccont, mutationResult] = useMutation<
+  const [createAccount, mutationResult] = useMutation<
     CreateAccountMutation,
     CreateAccountMutationVariables
   >(mutationCreateAccount);
@@ -40,10 +40,10 @@ const SignUpPage = () => {
   const updateState = (partial: Partial<typeof initialState>) =>
     setState((state) => ({ ...state, ...partial }));
 
-  const createAccountSubmitHandler = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
+  const createAccountSubmitHandler = async ({
+    preventDefault,
+  }: React.FormEvent<HTMLFormElement>) => {
+    preventDefault();
 
     const isValid = !!(
       state.firstName &&
@@ -58,7 +58,7 @@ const SignUpPage = () => {
       return;
     }
 
-    await createAccont({
+    await createAccount({
       variables: {
         firstName: state.firstName,
         surname: state.surname,

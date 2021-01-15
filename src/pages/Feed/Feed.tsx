@@ -1,11 +1,13 @@
 import React from "react";
 
+import NewPost from "../../marvieUI/organisms/NewPost";
+
 import * as S from "./Feed.styled";
 
 const FeedPage = () => {
   return (
     <S.Container>
-      <S.CreatePost></S.CreatePost>
+      <NewPost />
     </S.Container>
   );
 };

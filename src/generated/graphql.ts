@@ -14,9 +14,9 @@ export type Scalars = {
 export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
-  uri: Scalars['String'];
   username: Scalars['String'];
   name: Scalars['String'];
+  thumb: Scalars['String'];
   email: Scalars['String'];
   friends: Array<User>;
   deity: Deity;
@@ -27,6 +27,24 @@ export type Deity = {
   id: Scalars['ID'];
   uri: Scalars['String'];
   name: Scalars['String'];
+};
+
+export type Post = {
+  __typename?: 'Post';
+  id: Scalars['ID'];
+  user: User;
+  datetime: Scalars['String'];
+  likes: Scalars['Int'];
+  comments: Array<Comment>;
+};
+
+export type Comment = {
+  __typename?: 'Comment';
+  id: Scalars['ID'];
+  user: User;
+  datetime: Scalars['String'];
+  content: Scalars['String'];
+  likes: Scalars['Int'];
 };
 
 export type Mutation = {

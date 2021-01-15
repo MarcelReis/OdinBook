@@ -3,14 +3,14 @@ mutation CreateAccount(
   $surname: String!
   $email: String
   $password: String!
-  $deityURI: String!
+  $deityID: String!
 ) {
   createAccount(
     firstName: $firstName
     surname: $surname
     email: $email
     password: $password
-    deityURI: $deityURI
+    deityID: $deityID
   ) {
     id
     username
