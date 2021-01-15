@@ -1,6 +1,11 @@
+import React from "react";
 import { makeVar, useReactiveVar } from "@apollo/client";
-import { createGlobalStyle, DefaultTheme, css } from "styled-components";
-import { ThemeProvider as Provider } from "styled-components";
+import {
+  ThemeProvider as Provider,
+  createGlobalStyle,
+  DefaultTheme,
+  css,
+} from "styled-components";
 
 import styledReset from "styled-reset";
 
@@ -40,12 +45,19 @@ const styledBase = css`
     position: relative;
     box-sizing: border-box;
     font-family: "Source Sans Pro", sans-serif;
-    background: ${({ theme }) => theme.pallete.background};
-    color: ${({ theme }) => theme.pallete.text[0]};
+    color: ${({ theme }) => theme.palette.text[0]};
+    display: flex;
+    flex-direction: column;
+  }
+
+  #root {
+    flex-grow: 1;
+    height: 100%;
+    background: ${({ theme }) => theme.palette.background};
   }
 
   hr {
-    background: ${({ theme }) => theme.pallete.text[2]};
+    background: ${({ theme }) => theme.palette.text[2]};
     height: 2px;
     border: none;
   }
@@ -79,7 +91,7 @@ const commonTheme: Pick<DefaultTheme, "space"> = {
 
 export const darkTheme: DefaultTheme = {
   ...commonTheme,
-  pallete: {
+  palette: {
     background: "linear-gradient(138.13deg, #22343C 25.87%, #1F2E35 100%)",
 
     surface: [
@@ -104,7 +116,7 @@ export const darkTheme: DefaultTheme = {
 
 export const lightTheme: DefaultTheme = {
   ...commonTheme,
-  pallete: {
+  palette: {
     background: "#FFFFFF",
 
     surface: ["#FFFFFF", "#EDF1FA", "#FFFFFF"],

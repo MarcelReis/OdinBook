@@ -6,12 +6,12 @@ type ButtonProps = {
 };
 
 const primary = css<ButtonProps>`
-  background-color: ${({ theme, color }) => theme.pallete[color ?? "green"][0]};
+  background-color: ${({ theme, color }) => theme.palette[color ?? "green"][0]};
   color: #fff;
 `;
 const secondary = css<ButtonProps>`
-  background-color: ${({ theme, color }) => theme.pallete[color ?? "green"][2]};
-  color: ${({ theme, color }) => theme.pallete[color ?? "green"][1]};
+  background-color: ${({ theme, color }) => theme.palette[color ?? "green"][2]};
+  color: ${({ theme, color }) => theme.palette[color ?? "green"][1]};
 `;
 
 const Button = styled.button<ButtonProps>`

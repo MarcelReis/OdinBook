@@ -6,8 +6,8 @@ export const Appbar = styled.header`
   display: flex;
   justify-content: space-between;
   height: 56px;
-  background: ${({ theme }) => theme.pallete.surface[1]};
-  padding: 0px ${(props) => props.theme.space.xs};
+  background: ${({ theme }) => theme.palette.surface[1]};
+  padding: 0 ${(props) => props.theme.space.xs};
 `;
 
 export const Title = styled.h2`
@@ -26,12 +26,12 @@ export const Menu = styled.div`
   position: absolute;
   top: 56px;
   padding: 24px;
-  background: ${({ theme }) => theme.pallete.surface[1]};
-  border: 1px solid ${({ theme }) => theme.pallete.text[2]};
+  background: ${({ theme }) => theme.palette.surface[1]};
+  border: 1px solid ${({ theme }) => theme.palette.text[2]};
   width: 100%;
 
   ${media.lessThan("md")} {
-    right: 0px;
+    right: 0;
     width: 100%;
   }
   ${media.greaterThan("md")} {

@@ -3,12 +3,9 @@ import IconButton from "../../atoms/IconButton";
 
 export const Container = styled.div`
   position: relative;
+  grid-template-columns: 42px 1fr;
   display: grid;
-  grid-template-columns: 48px 1fr;
   gap: 16px;
-  padding: 16px;
-  background: ${({ theme }) => theme.palette.surface[1]};
-  border-radius: 16px;
 `;
 
 export const Input = styled.input`
@@ -22,14 +19,13 @@ export const Input = styled.input`
 `;
 
 export const PostButton = styled(IconButton)`
-  margin: 4px;
+  margin: 1px;
   position: absolute;
-  right: 16px;
-  top: 16px;
+  right: 0;
+  top: 0;
 
   svg {
-    padding: 6px;
-    height: 36px;
-    width: 36px;
+    height: 32px;
+    width: 32px;
   }
 `;

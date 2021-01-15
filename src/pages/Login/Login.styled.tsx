@@ -29,7 +29,7 @@ export const LoginBox = styled.div`
   ${media.greaterThan("sm")} {
     padding: ${(props) => props.theme.space.md};
     border-radius: 24px;
-    background: ${({ theme }) => theme.pallete.surface[1]};
+    background: ${({ theme }) => theme.palette.surface[1]};
   }
 `;
 
@@ -42,7 +42,7 @@ export const SocialButtons = styled.div`
 export const FacebookButton = styled(Button)`
   background: #3b5998;
 `;
-export const GithubkButton = styled(Button)`
+export const GithubButton = styled(Button)`
   background: #24292e;
 `;
 export const GoogleButton = styled(Button)`

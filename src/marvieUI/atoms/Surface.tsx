@@ -6,7 +6,7 @@ type SurfaceProps = {
 };
 
 const Surface = styled.div<SurfaceProps>`
-  background: ${({ theme, variant }) => theme.pallete.surface[variant ?? 0]};
+  background: ${({ theme, variant }) => theme.palette.surface[variant ?? 0]};
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme, rounded }) =>
     rounded ? theme.borderRadius[0] : 0};

@@ -5,7 +5,7 @@ type TypographyProps = {
 };
 
 const Typography = styled.span<TypographyProps>`
-  color: ${({ theme, contrast }) => theme.pallete.text[contrast ?? 0]};
+  color: ${({ theme, contrast }) => theme.palette.text[contrast ?? 0]};
 `;
 
 export default Typography;

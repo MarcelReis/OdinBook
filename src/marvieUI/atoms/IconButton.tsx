@@ -10,8 +10,8 @@ const IconButton = styled.button<IconButtonProps>`
   border: none;
   border-radius: 24px;
   cursor: pointer;
-  color: ${({ theme }) => theme.pallete.text[0]};
-  background: ${({ theme }) => theme.pallete.surface[2]};
+  color: ${({ theme }) => theme.palette.text[0]};
+  background: ${({ theme }) => theme.palette.surface[2]};
 
   svg {
     padding: 4px;

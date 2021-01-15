@@ -18,7 +18,7 @@ const size = css<AvatarProps>`
 const Avatar = styled.img<AvatarProps>`
   ${size};
   border-radius: 50%;
-  background: ${({ theme }) => theme.pallete.surface[2]};
+  background: ${({ theme }) => theme.palette.surface[2]};
   border: none;
 `;
 

@@ -7,7 +7,7 @@ declare module "styled-components" {
   type TextColor = [string, string, string, string];
 
   export interface DefaultTheme {
-    pallete: {
+    palette: {
       background: string;
 
       // Surface

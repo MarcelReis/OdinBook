@@ -77,9 +77,9 @@ const LoginPage = () => {
           <S.FacebookButton onClick={facebookLogin}>
             <Facebook size="32px" />
           </S.FacebookButton>
-          <S.GithubkButton onClick={githubLogin}>
+          <S.GithubButton onClick={githubLogin}>
             <Github size="32px" />
-          </S.GithubkButton>
+          </S.GithubButton>
           <S.GoogleButton onClick={googleLogin}>
             <Google size="32px" />
           </S.GoogleButton>

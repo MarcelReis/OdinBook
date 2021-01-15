@@ -28,8 +28,8 @@ const Container = styled.div`
 const Label = styled.label`
   width: 38px;
   height: 48px;
-  color: ${({ theme }) => theme.pallete.yellow[1]};
-  background-color: ${({ theme }) => theme.pallete.yellow[2]};
+  color: ${({ theme }) => theme.palette.yellow[1]};
+  background-color: ${({ theme }) => theme.palette.yellow[2]};
   border-radius: 12px;
   font-size: 0;
 
@@ -45,7 +45,7 @@ const Input = styled.input`
   width: 100%;
   border-radius: 12px 0 0 12px;
   font-size: 18px;
-  color: ${({ theme }) => theme.pallete.text[1]};
+  color: ${({ theme }) => theme.palette.text[1]};
 `;
 
 type InputProps = Pick<
