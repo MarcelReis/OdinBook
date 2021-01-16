@@ -10,4 +10,9 @@ deploy-functions:
 
 run:
 	lerna run start --parallel & \
-	firebase emulators:start 
+	firebase emulators:start
+
+run-functions:
+	cd ./packages/functions && \
+	yarn run start &
+	firebase emulators:start
