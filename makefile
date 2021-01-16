@@ -1,2 +1,13 @@
 deploy-front:
-	yarn run build && firebase deploy --only hosting
+	cd ./packages/app && \
+	yarn run build && \
+	firebase deploy --only hosting
+
+deploy-functions:
+	cd ./packages/functions && \
+	yarn run build && \
+	firebase deploy --only functions
+
+run:
+	lerna run start --parallel & \
+	firebase emulators:start 
