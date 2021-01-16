@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Comment as CommentType, User } from "../../../generated/graphql";
 
 import * as S from "./Post.styled";
@@ -39,7 +40,9 @@ const Post = () => {
       <S.Header>
         <Avatar src={props.user.thumb} alt="" />
         <S.HeaderText>
-          <S.Name>{props.user.name}</S.Name>
+          <S.Name>
+            <Link to={`/${props.user.username}`}>{props.user.name}</Link>
+          </S.Name>
           <S.Datetime>{props.datetime}</S.Datetime>
         </S.HeaderText>
       </S.Header>

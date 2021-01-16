@@ -34,7 +34,7 @@ export const Content = styled.p`
   color: ${({ theme }) => theme.palette.text[0]};
   line-height: 1.5;
   padding-bottom: 24px;
-  border-bottom: 2px solid ${({ theme }) => theme.palette.text[2]};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.text[2]};
 `;
 
 export const Interactions = styled.ul`
@@ -42,7 +42,7 @@ export const Interactions = styled.ul`
   grid-template-columns: repeat(2, 1fr);
   padding: 16px 4px;
   margin-bottom: 16px;
-  border-bottom: 2px solid ${({ theme }) => theme.palette.text[2]};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.text[2]};
 `;
 
 export const Interaction = styled.li`
