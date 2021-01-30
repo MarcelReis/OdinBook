@@ -33,7 +33,9 @@ const Appbar = () => {
           </S.Title>
         </Route>
         <Route>
-          <S.Title as="h2">OdinBook</S.Title>
+          <S.Title as="h2">
+            <Link to="/">OdinBook</Link>
+          </S.Title>
         </Route>
       </Switch>
 
