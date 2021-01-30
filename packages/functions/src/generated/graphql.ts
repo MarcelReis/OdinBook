@@ -46,28 +46,3 @@ export type Query = {
 export type QueryUserArgs = {
   username: Scalars['String'];
 };
-
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_1_Query = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'hello'>
-);
-
-export type UserPageQueryVariables = Exact<{
-  username: Scalars['String'];
-}>;
-
-
-export type UserPageQuery = (
-  { __typename?: 'Query' }
-  & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'surname' | 'thumb'>
-    & { friends: Array<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'username'>
-    )> }
-  ) }
-);

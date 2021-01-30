@@ -7,13 +7,18 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "tsc --watch",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "engines": {
     "node": "12"
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@graphql-codegen/cli": "^1.20.1",
+    "@graphql-codegen/introspection": "^1.18.1",
+    "@graphql-codegen/typescript": "^1.20.2",
+    "@graphql-codegen/typescript-operations": "^1.17.14",
     "apollo-server-cloud-functions": "^2.19.2",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",

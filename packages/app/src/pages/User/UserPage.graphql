@@ -1,0 +1,13 @@
+query UserPage($username: String!) {
+  user(username: $username) {
+    id
+    name
+    surname
+    thumb
+    friends {
+      id
+      name
+      username
+    }
+  }
+}

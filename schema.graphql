@@ -2,46 +2,21 @@ type User {
   id: ID!
   username: String!
   name: String!
-  thumb: String!
+  surname: String!
+  thumb: String
   email: String!
   friends: [User!]!
-  deity: Deity!
 }
 
-type Deity {
-  id: ID!
-  uri: String!
-  name: String!
-}
-
-type Post {
-  id: ID!
-  user: User!
-  datetime: String!
-  likes: Int!
-  comments: [Comment!]!
-}
-
-type Comment {
-  id: ID!
-  user: User!
-  datetime: String!
-  content: String!
-  likes: Int!
+input CreateUserInput {
+  username: String
 }
 
 type Mutation {
-  createAccount(
-    firstName: String!
-    surname: String!
-    email: String
-    password: String!
-    deityID: String!
-  ): User!
+  createUser(input: CreateUserInput!): User
 }
 
 type Query {
-  user(id: ID!): User!
-  deities: [Deity!]!
+  user(username: String!): User!
   hello: String!
 }

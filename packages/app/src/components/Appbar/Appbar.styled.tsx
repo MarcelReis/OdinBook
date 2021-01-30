@@ -29,6 +29,7 @@ export const Menu = styled.div`
   background: ${({ theme }) => theme.palette.surface[1]};
   border: 1px solid ${({ theme }) => theme.palette.text[2]};
   width: 100%;
+  z-index: 10;
 
   ${media.lessThan("md")} {
     right: 0;

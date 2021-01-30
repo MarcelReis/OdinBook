@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Comment as CommentType, User } from "../../../generated/graphql";
+import { User } from "../../../generated/graphql";
 
 import * as S from "./Post.styled";
 import Avatar from "../../atoms/Avatar";
@@ -16,7 +16,7 @@ export type PostProps = {
   datetime: string;
   content: string;
   likes: number;
-  comments: Pick<CommentType, "user" | "datetime" | "content" | "likes">[];
+  comments: any;
 };
 
 export const fakeProps: PostProps = {
@@ -38,7 +38,7 @@ const Post = () => {
   return (
     <S.Container>
       <S.Header>
-        <Avatar src={props.user.thumb} alt="" />
+        <Avatar src={props.user.thumb ?? ""} alt="" />
         <S.HeaderText>
           <S.Name>
             <Link to={`/${props.user.username}`}>{props.user.name}</Link>

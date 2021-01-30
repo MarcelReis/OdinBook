@@ -10,10 +10,10 @@ import LoadingPage from "./pages/Loading";
 
 import Footer from "./components/Footer";
 import Appbar from "./components/Appbar";
-import SignUp from "./pages/SignUp";
+import SignUpPage from "./pages/SignUp";
 import FeedPage from "./pages/Feed";
 import NotFound from "./pages/NotFound";
-import ProfilePage from "./pages/Profile";
+import UserPage from "./pages/User";
 
 const client = new ApolloClient({
   uri:
@@ -33,7 +33,7 @@ function Routes() {
   if (!isLogged) {
     return (
       <Switch>
-        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/signup" component={SignUpPage} />
         <Route component={LoginPage} />
       </Switch>
     );
@@ -42,7 +42,7 @@ function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={FeedPage} />
-      <Route exact path="/:user" component={ProfilePage} />
+      <Route exact path="/:user" component={UserPage} />
       <Route component={NotFound} />
     </Switch>
   );
