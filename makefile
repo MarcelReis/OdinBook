@@ -9,10 +9,10 @@ deploy-functions:
 	firebase deploy --only functions
 
 run:
-	lerna run start --parallel & \
-	firebase emulators:start --import=./.firebase/db --export-on-exit
+	lerna run start --parallel
 
 run-functions:
-	cd ./packages/functions && \
-	yarn run start &
+	lerna run start --scope=functions
+
+run-emulators:
 	firebase emulators:start --import=./.firebase/db --export-on-exit

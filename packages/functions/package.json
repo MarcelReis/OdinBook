@@ -5,7 +5,7 @@
     "build": "tsc",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
-    "start": "npm run build --watch",
+    "start": "tsc --watch",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
@@ -14,8 +14,10 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "apollo-server-cloud-functions": "^2.19.2",
     "firebase-admin": "^9.2.0",
-    "firebase-functions": "^3.11.0"
+    "firebase-functions": "^3.11.0",
+    "graphql": "^15.5.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.9.1",
