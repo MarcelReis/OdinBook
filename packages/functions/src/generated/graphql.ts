@@ -44,5 +44,5 @@ export type Query = {
 
 
 export type QueryUserArgs = {
-  username: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
 };

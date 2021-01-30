@@ -12,10 +12,10 @@ run:
 	lerna run start --parallel
 
 run-app:
-	lerna run start --scope=app
+	lerna run start --scope=app --stream
 
 run-functions:
-	lerna run start --scope=functions
+	lerna run start --scope=functions --stream
 
 run-emulators:
 	firebase emulators:start --import=./.firebase/db --export-on-exit

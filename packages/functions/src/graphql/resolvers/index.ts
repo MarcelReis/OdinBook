@@ -2,6 +2,8 @@ import { IResolvers } from "apollo-server-cloud-functions";
 import { TContext } from "..";
 import { Query, QueryUserArgs } from "../../generated/graphql";
 
+import { UserDoc } from "../models/userDoc";
+
 export const resolvers: IResolvers<void, TContext> = {
   Query: {
     async hello(
@@ -15,11 +17,33 @@ export const resolvers: IResolvers<void, TContext> = {
     async user(
       parent: any,
       args: QueryUserArgs,
-      { firestore }
+      { firestore, auth, req }
     ): Promise<Query["user"]> {
-      const docRef = firestore.collection("user").doc(args.username);
+      console.log("args", args);
 
-      const doc = await docRef.get();
+      let doc: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>;
+
+      if (!args.username) {
+        const tokenId = req.get("Authorization")?.split("Bearer ")[1];
+
+        if (!tokenId) {
+          throw "Invalid authorization header";
+        }
+
+        const user = await auth.verifyIdToken(tokenId);
+
+        const querySnapshot = await firestore
+          .collection("user")
+          .where("uid", "==", user.uid)
+          .limit(1)
+          .get();
+
+        doc = querySnapshot.docs[0];
+      } else {
+        const docRef = firestore.collection("user").doc(args.username);
+        doc = await docRef.get();
+      }
+
       if (!doc.exists) {
         throw "No such user!";
       }

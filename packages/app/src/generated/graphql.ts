@@ -44,7 +44,7 @@ export type Query = {
 
 
 export type QueryUserArgs = {
-  username: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
 };
 
 export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
@@ -56,7 +56,7 @@ export type Unnamed_1_Query = (
 );
 
 export type UserPageQueryVariables = Exact<{
-  username: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
 }>;
 
 

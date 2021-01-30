@@ -8,7 +8,8 @@ type FriendRequest = {
   date: Date;
 };
 
-type UserDoc = {
+export type UserDoc = {
+  uid: string;
   name: string;
   firstname: string;
   surname: string;

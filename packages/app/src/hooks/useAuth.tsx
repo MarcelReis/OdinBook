@@ -6,6 +6,11 @@ import firebase from "../firebase";
 const isLoading = makeVar(true);
 const currentUser = makeVar<null | firebase.User>(null);
 
+currentUser.onNextChange(async (user) => {
+  const tokenID = await user?.getIdToken();
+  localStorage.setItem("tokenID", tokenID || "");
+});
+
 const auth = firebase.auth();
 
 if (process.env.NODE_ENV === "development") {
@@ -27,6 +32,8 @@ auth.onAuthStateChanged((user) => {
 const useAuth = () => {
   const user = useReactiveVar(currentUser);
   const loading = useReactiveVar(isLoading);
+
+  (window as any).user = currentUser();
 
   return {
     isLogged: !!user,
