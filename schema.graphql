@@ -43,4 +43,5 @@ type Mutation {
 type Query {
   user(id: ID!): User!
   deities: [Deity!]!
+  hello: String!
 }

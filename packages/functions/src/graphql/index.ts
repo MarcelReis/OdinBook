@@ -1,11 +1,12 @@
 import { ApolloServer, gql } from "apollo-server-cloud-functions";
+import * as fs from "fs";
+import * as path from "path";
 
-// Construct a schema, using GraphQL schema language
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
+const schemaString = fs
+  .readFileSync(path.join(__dirname, "../../../../schema.graphql"), "utf-8")
+  .toString();
+
+const typeDefs = gql(schemaString);
 
 // Provide resolver functions for your schema fields
 const resolvers = {

@@ -16,7 +16,10 @@ import NotFound from "./pages/NotFound";
 import ProfilePage from "./pages/Profile";
 
 const client = new ApolloClient({
-  uri: "https://localhost:3001",
+  uri:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5001/odinbook-30f97/us-central1/graphql"
+      : "",
   cache: new InMemoryCache(),
 });
 

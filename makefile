@@ -11,6 +11,9 @@ deploy-functions:
 run:
 	lerna run start --parallel
 
+run-app:
+	lerna run start --scope=app
+
 run-functions:
 	lerna run start --scope=functions
 
