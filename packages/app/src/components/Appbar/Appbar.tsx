@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Route, Switch, useLocation } from "react-router-dom";
+import { Link, Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { loader } from "graphql.macro";
 
 import { KeyboardArrowDown } from "@styled-icons/material/KeyboardArrowDown";
@@ -10,16 +10,17 @@ import IconButton from "../../marvieUI/atoms/IconButton";
 import { useDarkMode } from "../../theme";
 
 import * as S from "./Appbar.styled";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { AppbarQuery } from "../../generated/graphql";
 
 const query = loader("./Appbar.graphql");
 
 const Appbar = () => {
+  const history = useHistory();
+  const location = useLocation();
   const { isLogged, logout } = useAuth();
   const { isDarkmode, toggleDarkmode } = useDarkMode();
-
-  const location = useLocation();
+  const [fetchUser, { data, error }] = useLazyQuery<AppbarQuery>(query);
 
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -29,7 +30,15 @@ const Appbar = () => {
     setOpenMenu(false);
   }, [location.pathname, isLogged]);
 
-  const { data } = useQuery<AppbarQuery>(query);
+  useEffect(() => {
+    if (isLogged) {
+      fetchUser();
+    }
+  }, [isLogged, fetchUser]);
+
+  if (isLogged && error && location.pathname !== "/register") {
+    history.push("/register");
+  }
 
   return (
     <S.Appbar>

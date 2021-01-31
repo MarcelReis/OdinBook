@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { StyledIcon } from "styled-icons/types";
 
 const Container = styled.div`
@@ -6,6 +6,7 @@ const Container = styled.div`
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 38px 1fr;
+  overflow: hidden;
 
   height: 58px;
   padding-top: 4px;
@@ -25,7 +26,14 @@ const Container = styled.div`
   }
 `;
 
-const Label = styled.label`
+const labelColor = css<{ valid?: boolean }>`
+  color: ${({ theme, valid }) =>
+    theme.palette[valid ? "green" : valid === false ? "red" : "yellow"][1]};
+  background-color: ${({ theme, valid }) =>
+    theme.palette[valid ? "green" : valid === false ? "red" : "yellow"][2]};
+`;
+
+const Label = styled.label<{ valid?: boolean }>`
   width: 38px;
   height: 48px;
   color: ${({ theme }) => theme.palette.yellow[1]};
@@ -36,6 +44,8 @@ const Label = styled.label`
   svg {
     margin: 14px 9px;
   }
+
+  ${labelColor}
 `;
 
 const Input = styled.input`
@@ -59,12 +69,13 @@ type InputProps = Pick<
 type TextFieldProps = InputProps & {
   label: string;
   icon: StyledIcon;
+  valid?: boolean;
 };
 
 const TextField = (props: TextFieldProps) => {
   return (
     <Container>
-      <Label htmlFor={props.id}>
+      <Label htmlFor={props.id} valid={props.valid}>
         <span> {props.label}</span>
         <props.icon size="20px" title={props.label} />
       </Label>

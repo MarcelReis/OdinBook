@@ -24,12 +24,14 @@ export type User = {
 };
 
 export type CreateUserInput = {
-  username?: Maybe<Scalars['String']>;
+  username: Scalars['String'];
+  firstname: Scalars['String'];
+  surname: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createUser?: Maybe<User>;
+  createUser: User;
 };
 
 
@@ -65,6 +67,19 @@ export type FeedPageQueryVariables = Exact<{ [key: string]: never; }>;
 export type FeedPageQuery = (
   { __typename?: 'Query' }
   & Pick<Query, 'hello'>
+);
+
+export type FinishRegistrationMutationVariables = Exact<{
+  input: CreateUserInput;
+}>;
+
+
+export type FinishRegistrationMutation = (
+  { __typename?: 'Mutation' }
+  & { createUser: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'firstname' | 'username'>
+  ) }
 );
 
 export type UserPageQueryVariables = Exact<{

@@ -10,11 +10,13 @@ type User {
 }
 
 input CreateUserInput {
-  username: String
+  username: String!
+  firstname: String!
+  surname: String!
 }
 
 type Mutation {
-  createUser(input: CreateUserInput!): User
+  createUser(input: CreateUserInput!): User!
 }
 
 type Query {

@@ -20,6 +20,7 @@ import SignUpPage from "./pages/SignUp";
 import FeedPage from "./pages/Feed";
 import NotFound from "./pages/NotFound";
 import UserPage from "./pages/User";
+import FinishRegistrationPage from "./pages/FinishRegistration";
 
 const httpLink = createHttpLink({
   uri:
@@ -64,6 +65,7 @@ function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={FeedPage} />
+      <Route exact path="/register" component={FinishRegistrationPage} />
       <Route exact path="/:user" component={UserPage} />
       <Route component={NotFound} />
     </Switch>

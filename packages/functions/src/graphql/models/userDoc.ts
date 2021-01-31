@@ -10,7 +10,6 @@ type FriendRequest = {
 
 export type UserDoc = {
   uid: string;
-  name: string;
   firstname: string;
   surname: string;
   email: string;

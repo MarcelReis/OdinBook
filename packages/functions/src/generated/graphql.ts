@@ -24,12 +24,14 @@ export type User = {
 };
 
 export type CreateUserInput = {
-  username?: Maybe<Scalars['String']>;
+  username: Scalars['String'];
+  firstname: Scalars['String'];
+  surname: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createUser?: Maybe<User>;
+  createUser: User;
 };
 
 
