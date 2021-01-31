@@ -25,9 +25,7 @@ const UserPage = () => {
 
   return (
     <div>
-      <h1>
-        {data.user.name} {data.user.surname}
-      </h1>
+      <h1>{data.user.name}</h1>
 
       <img src={data.user.thumb || "https://placekitten.com/50/50"} alt="" />
 

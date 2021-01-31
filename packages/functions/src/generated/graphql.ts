@@ -16,6 +16,7 @@ export type User = {
   id: Scalars['ID'];
   username: Scalars['String'];
   name: Scalars['String'];
+  firstname: Scalars['String'];
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
   email: Scalars['String'];

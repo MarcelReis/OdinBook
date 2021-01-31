@@ -16,6 +16,7 @@ export type User = {
   id: Scalars['ID'];
   username: Scalars['String'];
   name: Scalars['String'];
+  firstname: Scalars['String'];
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
   email: Scalars['String'];
@@ -47,16 +48,27 @@ export type QueryUserArgs = {
   username?: Maybe<Scalars['String']>;
 };
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+export type AppbarQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_1_Query = (
+export type AppbarQuery = (
+  { __typename?: 'Query' }
+  & { user: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
+  ) }
+);
+
+export type FeedPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FeedPageQuery = (
   { __typename?: 'Query' }
   & Pick<Query, 'hello'>
 );
 
 export type UserPageQueryVariables = Exact<{
-  username?: Maybe<Scalars['String']>;
+  username: Scalars['String'];
 }>;
 
 
@@ -64,7 +76,7 @@ export type UserPageQuery = (
   { __typename?: 'Query' }
   & { user: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'surname' | 'thumb'>
+    & Pick<User, 'id' | 'name' | 'thumb'>
     & { friends: Array<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'name' | 'username'>

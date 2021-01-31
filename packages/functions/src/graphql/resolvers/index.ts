@@ -1,4 +1,4 @@
-import { IResolvers } from "apollo-server-cloud-functions";
+import { ApolloError, IResolvers } from "apollo-server-cloud-functions";
 import { TContext } from "..";
 import { Query, QueryUserArgs } from "../../generated/graphql";
 
@@ -19,8 +19,6 @@ export const resolvers: IResolvers<void, TContext> = {
       args: QueryUserArgs,
       { firestore, auth, req }
     ): Promise<Query["user"]> {
-      console.log("args", args);
-
       let doc: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>;
 
       if (!args.username) {
@@ -44,16 +42,20 @@ export const resolvers: IResolvers<void, TContext> = {
         doc = await docRef.get();
       }
 
-      if (!doc.exists) {
-        throw "No such user!";
+      if (!doc?.exists && args.username === undefined) {
+        throw new ApolloError("Registration not finished", "NOT_REGISTERED");
+      }
+      if (!doc?.exists) {
+        throw new ApolloError("User not found", "NOT_FOUND");
       }
 
       const data = doc.data()! as UserDoc;
 
       return {
-        id: `UN-${data.username}`,
+        id: `${data.uid}`,
         username: data.username,
-        name: data.name,
+        name: data.firstname + " " + data.surname,
+        firstname: data.firstname,
         surname: data.surname,
         thumb: data.thumb,
         email: data.email,

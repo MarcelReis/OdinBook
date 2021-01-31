@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
+import { loader } from "graphql.macro";
 
 import { KeyboardArrowDown } from "@styled-icons/material/KeyboardArrowDown";
 
 import useAuth from "../../hooks/useAuth";
+import IconButton from "../../marvieUI/atoms/IconButton";
 
 import { useDarkMode } from "../../theme";
 
 import * as S from "./Appbar.styled";
-import IconButton from "../../marvieUI/atoms/IconButton";
+import { useQuery } from "@apollo/client";
+import { AppbarQuery } from "../../generated/graphql";
+
+const query = loader("./Appbar.graphql");
 
 const Appbar = () => {
   const { isLogged, logout } = useAuth();
@@ -23,6 +28,8 @@ const Appbar = () => {
   useEffect(() => {
     setOpenMenu(false);
   }, [location.pathname, isLogged]);
+
+  const { data } = useQuery<AppbarQuery>(query);
 
   return (
     <S.Appbar>
@@ -40,9 +47,19 @@ const Appbar = () => {
       </Switch>
 
       {isLogged && (
-        <IconButton onClick={toggleMenu}>
-          <KeyboardArrowDown />
-        </IconButton>
+        <S.Box>
+          {data && (
+            <S.Tag to={`/${data.user.username}`} activeClassName="on">
+              <S.Image
+                src={data.user.thumb || "https://placekitten.com/32/32"}
+              />
+              <S.Name>{data.user.firstname}</S.Name>
+            </S.Tag>
+          )}
+          <IconButton onClick={toggleMenu}>
+            <KeyboardArrowDown />
+          </IconButton>
+        </S.Box>
       )}
 
       {openMenu && (

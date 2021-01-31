@@ -1,0 +1,8 @@
+query Appbar {
+  user {
+    id
+    username
+    firstname
+    thumb
+  }
+}

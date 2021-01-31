@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { media } from "../../theme";
 
@@ -40,4 +41,36 @@ export const Menu = styled.div`
     max-width: 300px;
     border-radius: 12px;
   }
+`;
+
+export const Box = styled.div`
+  display: flex;
+`;
+
+export const Tag = styled(NavLink)`
+  margin: 8px;
+  display: flex;
+  height: calc(100% - 16px);
+  font-weight: bold;
+  border-radius: 24px;
+
+  &.on {
+    color: ${({ theme }) => theme.palette.green[1]};
+    background: ${({ theme }) => theme.palette.green[2]};
+  }
+
+  ${media.lessThan("sm")} {
+    display: none;
+  }
+`;
+
+export const Name = styled.p`
+  padding: 10px;
+`;
+
+export const Image = styled.img`
+  border-radius: 16px;
+  margin: 4px;
+  width: 32px;
+  height: 32px;
 `;
