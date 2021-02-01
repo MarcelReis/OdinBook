@@ -1,8 +1,8 @@
 import "firebase/auth";
 import { makeVar, useReactiveVar } from "@apollo/client";
 
-import firebase from "../firebase";
-import { userVar } from "./useRegistration";
+import firebase from "../../firebase";
+import { userVar } from "./_apolloVars";
 
 const isLoadingVar = makeVar(true);
 const firebaseUserVar = makeVar<null | firebase.User>(null);
@@ -31,7 +31,6 @@ auth.onAuthStateChanged(async (user) => {
     localStorage.removeItem("tokenID");
   }
 
-  console.log("user :>> ", user);
   if (user) {
     userVar(null);
   }

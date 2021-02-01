@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
+import { useAuth, useUser } from "../../lib/odinAuth";
 
 import { KeyboardArrowDown } from "@styled-icons/material/KeyboardArrowDown";
 
-import useAuth from "../../hooks/useAuth";
 import IconButton from "../../marvieUI/atoms/IconButton";
 
 import { useDarkMode } from "../../theme";
 
 import * as S from "./Appbar.styled";
-import { useUser } from "../../hooks/useRegistration";
 
 const Appbar = () => {
   const location = useLocation();

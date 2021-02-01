@@ -9,6 +9,8 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { ThemeProvider } from "./theme";
 
+import { useRegistration } from "./lib/odinAuth";
+
 import LoginPage from "./pages/Login";
 import LoadingPage from "./pages/Loading";
 
@@ -19,8 +21,6 @@ import FeedPage from "./pages/Feed";
 import NotFound from "./pages/NotFound";
 import UserPage from "./pages/User";
 import FinishRegistrationPage from "./pages/FinishRegistration";
-
-import { useRegistration } from "./hooks/useRegistration";
 
 const httpLink = createHttpLink({
   uri:

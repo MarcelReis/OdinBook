@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
-import useAuth from "../../hooks/useAuth";
+import { useAuth } from "../../lib/odinAuth";
 
 import * as S from "./Login.styled";
 

@@ -1,26 +1,14 @@
-import { makeVar, useLazyQuery, useReactiveVar } from "@apollo/client";
-import { GetCurrentUserQuery } from "../generated/graphql";
+import { useLazyQuery, useReactiveVar } from "@apollo/client";
+import { GetCurrentUserQuery } from "../../generated/graphql";
 import useAuth from "./useAuth";
 
 import { loader } from "graphql.macro";
 import { useEffect } from "react";
-
-export const userVar = makeVar<false | null | GetCurrentUserQuery["user"]>(
-  false
-);
-export const loadingUserVar = makeVar<boolean>(false);
+import { loadingUserVar, userVar } from "./_apolloVars";
 
 const query = loader("./getCurrentUser.graphql");
 
-export const useUser = () => {
-  const user = useReactiveVar(userVar);
-
-  return user;
-};
-
-(window as any).userVar = userVar;
-
-export const useRegistration = () => {
+const useRegistration = () => {
   const { isLogged, loading: loadingAuth } = useAuth();
   const user = useReactiveVar(userVar);
   const loadingUser = useReactiveVar(loadingUserVar);
@@ -66,3 +54,5 @@ export const useRegistration = () => {
     isRegistered: isLoading ? null : !!user,
   };
 };
+
+export default useRegistration;

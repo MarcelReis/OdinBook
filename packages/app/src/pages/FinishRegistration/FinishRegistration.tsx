@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import { loader } from "graphql.macro";
+import { useMutation } from "@apollo/client";
+import { loadingUserVar, userVar } from "../../lib/odinAuth/_apolloVars";
+
+import {
+  CreateUserInput,
+  FinishRegistrationMutation,
+  FinishRegistrationMutationVariables,
+} from "../../generated/graphql";
+
+import Button from "../../marvieUI/atoms/Button";
 import TextField from "../../marvieUI/organisms/TextField";
 
 import * as S from "./FinishRegistration.styled";
 
 import { AccountCircle } from "@styled-icons/material/AccountCircle";
 import { FontDownload } from "@styled-icons/material/FontDownload";
-
-import Button from "../../marvieUI/atoms/Button";
-import { useMutation } from "@apollo/client";
-import {
-  CreateUserInput,
-  FinishRegistrationMutation,
-  FinishRegistrationMutationVariables,
-} from "../../generated/graphql";
-import { loader } from "graphql.macro";
-import { loadingUserVar, userVar } from "../../hooks/useRegistration";
 
 const mutation = loader("./FinishRegistration.graphql");
 
