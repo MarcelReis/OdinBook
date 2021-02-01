@@ -2,11 +2,12 @@ import "firebase/auth";
 import { makeVar, useReactiveVar } from "@apollo/client";
 
 import firebase from "../firebase";
+import { userVar } from "./useRegistration";
 
-const isLoading = makeVar(true);
-const currentUser = makeVar<null | firebase.User>(null);
+const isLoadingVar = makeVar(true);
+const firebaseUserVar = makeVar<null | firebase.User>(null);
 
-currentUser.onNextChange(async (user) => {
+firebaseUserVar.onNextChange(async (user) => {
   const tokenID = await user?.getIdToken();
   localStorage.setItem("tokenID", tokenID || "");
 });
@@ -21,30 +22,55 @@ const facebookProvider = new firebase.auth.FacebookAuthProvider();
 const githubProvider = new firebase.auth.GithubAuthProvider();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-auth.onAuthStateChanged((user) => {
-  if (isLoading()) {
-    isLoading(false);
+auth.onAuthStateChanged(async (user) => {
+  const tokenID = await user?.getIdToken();
+
+  if (tokenID) {
+    localStorage.setItem("tokenID", tokenID);
+  } else {
+    localStorage.removeItem("tokenID");
   }
 
-  currentUser(user);
+  console.log("user :>> ", user);
+  if (user) {
+    userVar(null);
+  }
+
+  firebaseUserVar(user);
+
+  if (isLoadingVar()) {
+    isLoadingVar(false);
+  }
 });
 
 const useAuth = () => {
-  const user = useReactiveVar(currentUser);
-  const loading = useReactiveVar(isLoading);
-
-  (window as any).user = currentUser();
+  const user = useReactiveVar(firebaseUserVar);
+  const loading = useReactiveVar(isLoadingVar);
 
   return {
     isLogged: !!user,
     loading,
     logout: () => auth.signOut(),
 
-    mailLogin: (email: string, password: string) =>
-      auth.signInWithEmailAndPassword(email, password),
-    facebookLogin: () => auth.signInWithPopup(facebookProvider),
-    githubLogin: () => auth.signInWithPopup(githubProvider),
-    googleLogin: () => auth.signInWithPopup(googleProvider),
+    mailLogin: (email: string, password: string) => {
+      isLoadingVar(true);
+      auth.signInWithEmailAndPassword(email, password);
+    },
+
+    facebookLogin: () => {
+      isLoadingVar(true);
+      auth.signInWithRedirect(facebookProvider);
+    },
+
+    githubLogin: () => {
+      isLoadingVar(true);
+      auth.signInWithRedirect(githubProvider);
+    },
+
+    googleLogin: () => {
+      isLoadingVar(true);
+      auth.signInWithRedirect(googleProvider);
+    },
   };
 };
 

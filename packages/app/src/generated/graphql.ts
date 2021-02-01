@@ -61,6 +61,17 @@ export type AppbarQuery = (
   ) }
 );
 
+export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCurrentUserQuery = (
+  { __typename?: 'Query' }
+  & { user: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
+  ) }
+);
+
 export type FeedPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 

@@ -14,6 +14,7 @@ import {
   FinishRegistrationMutationVariables,
 } from "../../generated/graphql";
 import { loader } from "graphql.macro";
+import { loadingUserVar, userVar } from "../../hooks/useRegistration";
 
 const mutation = loader("./FinishRegistration.graphql");
 
@@ -38,9 +39,10 @@ const FinishRegistrationPage = () => {
       username,
     };
 
-    console.log("input :>> ", input);
-
-    createUser({ variables: { input } }).catch((error) => console.error(error));
+    createUser({ variables: { input } }).then(({ data }) => {
+      userVar(data?.createUser);
+      loadingUserVar(false);
+    });
   };
 
   return (

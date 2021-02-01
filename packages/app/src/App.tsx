@@ -9,8 +9,6 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { ThemeProvider } from "./theme";
 
-import useAuth from "./hooks/useAuth";
-
 import LoginPage from "./pages/Login";
 import LoadingPage from "./pages/Loading";
 
@@ -21,6 +19,8 @@ import FeedPage from "./pages/Feed";
 import NotFound from "./pages/NotFound";
 import UserPage from "./pages/User";
 import FinishRegistrationPage from "./pages/FinishRegistration";
+
+import { useRegistration } from "./hooks/useRegistration";
 
 const httpLink = createHttpLink({
   uri:
@@ -47,9 +47,9 @@ const client = new ApolloClient({
 });
 
 function Routes() {
-  const { isLogged, loading } = useAuth();
+  const { isLoading, isLogged, isRegistered } = useRegistration();
 
-  if (loading) {
+  if (isLoading) {
     return <LoadingPage />;
   }
 
@@ -62,10 +62,13 @@ function Routes() {
     );
   }
 
+  if (!isRegistered) {
+    return <FinishRegistrationPage />;
+  }
+
   return (
     <Switch>
       <Route exact path="/" component={FeedPage} />
-      <Route exact path="/register" component={FinishRegistrationPage} />
       <Route exact path="/:user" component={UserPage} />
       <Route component={NotFound} />
     </Switch>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Route, Switch, useHistory, useLocation } from "react-router-dom";
-import { loader } from "graphql.macro";
+import { Link, Route, Switch, useLocation } from "react-router-dom";
 
 import { KeyboardArrowDown } from "@styled-icons/material/KeyboardArrowDown";
 
@@ -10,17 +9,13 @@ import IconButton from "../../marvieUI/atoms/IconButton";
 import { useDarkMode } from "../../theme";
 
 import * as S from "./Appbar.styled";
-import { useLazyQuery } from "@apollo/client";
-import { AppbarQuery } from "../../generated/graphql";
-
-const query = loader("./Appbar.graphql");
+import { useUser } from "../../hooks/useRegistration";
 
 const Appbar = () => {
-  const history = useHistory();
   const location = useLocation();
   const { isLogged, logout } = useAuth();
   const { isDarkmode, toggleDarkmode } = useDarkMode();
-  const [fetchUser, { data, error }] = useLazyQuery<AppbarQuery>(query);
+  const user = useUser();
 
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -29,16 +24,6 @@ const Appbar = () => {
   useEffect(() => {
     setOpenMenu(false);
   }, [location.pathname, isLogged]);
-
-  useEffect(() => {
-    if (isLogged) {
-      fetchUser();
-    }
-  }, [isLogged, fetchUser]);
-
-  if (isLogged && error && location.pathname !== "/register") {
-    history.push("/register");
-  }
 
   return (
     <S.Appbar>
@@ -57,12 +42,10 @@ const Appbar = () => {
 
       {isLogged && (
         <S.Box>
-          {data && (
-            <S.Tag to={`/${data.user.username}`} activeClassName="on">
-              <S.Image
-                src={data.user.thumb || "https://placekitten.com/32/32"}
-              />
-              <S.Name>{data.user.firstname}</S.Name>
+          {user && (
+            <S.Tag to={`/${user.username}`} activeClassName="on">
+              <S.Image src={user.thumb || "https://placekitten.com/32/32"} />
+              <S.Name>{user.firstname}</S.Name>
             </S.Tag>
           )}
           <IconButton onClick={toggleMenu}>
