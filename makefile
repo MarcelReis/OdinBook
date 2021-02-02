@@ -18,4 +18,4 @@ run-functions:
 	lerna run start --scope=functions --stream
 
 run-emulators:
-	firebase emulators:start --import=./.firebase/db --export-on-exit
+	firebase emulators:start --import=./.firebase --export-on-exit

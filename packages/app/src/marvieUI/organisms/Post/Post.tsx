@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { User } from "../../../generated/graphql";
+import { User_Full } from "../../../generated/graphql";
 
 import * as S from "./Post.styled";
 import Avatar from "../../atoms/Avatar";
@@ -11,7 +11,7 @@ import { Favorite } from "@styled-icons/material/Favorite";
 import { FavoriteBorder } from "@styled-icons/material/FavoriteBorder";
 
 export type PostProps = {
-  user: Pick<User, "name" | "thumb" | "username">;
+  user: Pick<User_Full, "name" | "thumb" | "username">;
   liked: boolean;
   datetime: string;
   content: string;

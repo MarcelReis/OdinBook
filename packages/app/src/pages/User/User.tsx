@@ -33,7 +33,9 @@ const UserPage = () => {
         <header>Friends: {data.user.friends.length}</header>
         <ul>
           {data.user.friends.map((friend) => (
-            <li>{friend.name}</li>
+            <li>
+              {friend.firstname} {friend.surname}
+            </li>
           ))}
         </ul>
       </div>

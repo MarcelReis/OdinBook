@@ -12,7 +12,24 @@ export type Scalars = {
 };
 
 export type User = {
-  __typename?: 'User';
+  id: Scalars['ID'];
+  username: Scalars['String'];
+  firstname: Scalars['String'];
+  surname: Scalars['String'];
+  thumb?: Maybe<Scalars['String']>;
+};
+
+export type User_Basic = User & {
+  __typename?: 'User_Basic';
+  id: Scalars['ID'];
+  username: Scalars['String'];
+  firstname: Scalars['String'];
+  surname: Scalars['String'];
+  thumb?: Maybe<Scalars['String']>;
+};
+
+export type User_Full = User & {
+  __typename?: 'User_Full';
   id: Scalars['ID'];
   username: Scalars['String'];
   name: Scalars['String'];
@@ -20,7 +37,7 @@ export type User = {
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
   email: Scalars['String'];
-  friends: Array<User>;
+  friends: Array<User_Basic>;
 };
 
 export type CreateUserInput = {
@@ -31,7 +48,7 @@ export type CreateUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createUser: User;
+  createUser: User_Full;
 };
 
 
@@ -41,7 +58,8 @@ export type MutationCreateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  user: User;
+  user: User_Full;
+  users: Array<User_Basic>;
   hello: Scalars['String'];
 };
 

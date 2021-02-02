@@ -14,8 +14,11 @@ const schemaString = fs
 
 const typeDefs = gql(schemaString);
 
+const databaseRef = admin.database().ref("/");
+
 export type TContext = {
   firestore: FirebaseFirestore.Firestore;
+  database: typeof databaseRef;
   auth: admin.auth.Auth;
   req: functions.https.Request;
   res: functions.Response;
@@ -34,6 +37,7 @@ const server = new ApolloServer({
     res: functions.Response;
   }): TContext => ({
     firestore: admin.firestore(),
+    database: databaseRef,
     auth: admin.auth(),
     req,
     res,

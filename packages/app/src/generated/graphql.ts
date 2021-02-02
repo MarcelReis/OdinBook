@@ -12,7 +12,24 @@ export type Scalars = {
 };
 
 export type User = {
-  __typename?: 'User';
+  id: Scalars['ID'];
+  username: Scalars['String'];
+  firstname: Scalars['String'];
+  surname: Scalars['String'];
+  thumb?: Maybe<Scalars['String']>;
+};
+
+export type User_Basic = User & {
+  __typename?: 'User_Basic';
+  id: Scalars['ID'];
+  username: Scalars['String'];
+  firstname: Scalars['String'];
+  surname: Scalars['String'];
+  thumb?: Maybe<Scalars['String']>;
+};
+
+export type User_Full = User & {
+  __typename?: 'User_Full';
   id: Scalars['ID'];
   username: Scalars['String'];
   name: Scalars['String'];
@@ -20,7 +37,7 @@ export type User = {
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
   email: Scalars['String'];
-  friends: Array<User>;
+  friends: Array<User_Basic>;
 };
 
 export type CreateUserInput = {
@@ -31,7 +48,7 @@ export type CreateUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createUser: User;
+  createUser: User_Full;
 };
 
 
@@ -41,7 +58,8 @@ export type MutationCreateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  user: User;
+  user: User_Full;
+  users: Array<User_Basic>;
   hello: Scalars['String'];
 };
 
@@ -50,25 +68,14 @@ export type QueryUserArgs = {
   username?: Maybe<Scalars['String']>;
 };
 
-export type AppbarQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AppbarQuery = (
-  { __typename?: 'Query' }
-  & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
-  ) }
-);
-
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetCurrentUserQuery = (
   { __typename?: 'Query' }
   & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
+    { __typename?: 'User_Full' }
+    & Pick<User_Full, 'id' | 'username' | 'firstname' | 'thumb'>
   ) }
 );
 
@@ -88,8 +95,8 @@ export type FinishRegistrationMutationVariables = Exact<{
 export type FinishRegistrationMutation = (
   { __typename?: 'Mutation' }
   & { createUser: (
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'firstname' | 'username'>
+    { __typename?: 'User_Full' }
+    & Pick<User_Full, 'id' | 'firstname' | 'username'>
   ) }
 );
 
@@ -101,11 +108,22 @@ export type UserPageQueryVariables = Exact<{
 export type UserPageQuery = (
   { __typename?: 'Query' }
   & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'thumb'>
+    { __typename?: 'User_Full' }
+    & Pick<User_Full, 'id' | 'name' | 'thumb'>
     & { friends: Array<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'username'>
+      { __typename?: 'User_Basic' }
+      & Pick<User_Basic, 'id' | 'firstname' | 'surname' | 'username'>
     )> }
   ) }
+);
+
+export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUsersQuery = (
+  { __typename?: 'Query' }
+  & { users: Array<(
+    { __typename?: 'User_Basic' }
+    & Pick<User_Basic, 'thumb' | 'firstname' | 'surname' | 'username'>
+  )> }
 );

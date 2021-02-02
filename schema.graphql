@@ -1,4 +1,20 @@
-type User {
+interface User {
+  id: ID!
+  username: String!
+  firstname: String!
+  surname: String!
+  thumb: String
+}
+
+type User_Basic implements User {
+  id: ID!
+  username: String!
+  firstname: String!
+  surname: String!
+  thumb: String
+}
+
+type User_Full implements User {
   id: ID!
   username: String!
   name: String!
@@ -6,7 +22,7 @@ type User {
   surname: String!
   thumb: String
   email: String!
-  friends: [User!]!
+  friends: [User_Basic!]!
 }
 
 input CreateUserInput {
@@ -16,10 +32,11 @@ input CreateUserInput {
 }
 
 type Mutation {
-  createUser(input: CreateUserInput!): User!
+  createUser(input: CreateUserInput!): User_Full!
 }
 
 type Query {
-  user(username: String): User!
+  user(username: String): User_Full!
+  users: [User_Basic!]!
   hello: String!
 }

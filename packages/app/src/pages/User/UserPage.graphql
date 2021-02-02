@@ -5,7 +5,8 @@ query UserPage($username: String!) {
     thumb
     friends {
       id
-      name
+      firstname
+      surname
       username
     }
   }
