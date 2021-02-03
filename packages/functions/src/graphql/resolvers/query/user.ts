@@ -8,7 +8,7 @@ async function userResolver(
   _: any,
   args: QueryUserArgs,
   { firestore, auth, req }: TContext
-): Promise<Query["user"]> {
+): Promise<Omit<Query["user"], "connections">> {
   let doc: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>;
 
   if (!args.username) {
@@ -49,7 +49,6 @@ async function userResolver(
     surname: data.surname,
     thumb: data.thumb,
     email: data.email,
-    friends: (data.friends as any) ?? [],
   };
 }
 

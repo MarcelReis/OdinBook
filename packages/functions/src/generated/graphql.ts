@@ -37,7 +37,7 @@ export type User_Full = User & {
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
   email: Scalars['String'];
-  friends: Array<User_Basic>;
+  connections: Array<FriendConnection>;
 };
 
 export type CreateUserInput = {
@@ -46,14 +46,51 @@ export type CreateUserInput = {
   surname: Scalars['String'];
 };
 
+export const enum ConnectionStatus {
+  Pending = 'PENDING',
+  Waiting = 'WAITING',
+  Connected = 'CONNECTED',
+  Blocked = 'BLOCKED'
+};
+
+export type CreateFriendConnectionInput = {
+  username: Scalars['String'];
+};
+
+export type UpdateFriendConnectionInput = {
+  id: Scalars['String'];
+  accept: Scalars['Boolean'];
+};
+
+export type FriendConnection = {
+  __typename?: 'FriendConnection';
+  id: Scalars['ID'];
+  user: User_Basic;
+  createdAt: Scalars['String'];
+  acceptedAt?: Maybe<Scalars['String']>;
+  status?: Maybe<ConnectionStatus>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: User_Full;
+  createFriendConnection: User_Full;
+  updateFriendConnection: User_Full;
 };
 
 
 export type MutationCreateUserArgs = {
   input: CreateUserInput;
+};
+
+
+export type MutationCreateFriendConnectionArgs = {
+  input: CreateFriendConnectionInput;
+};
+
+
+export type MutationUpdateFriendConnectionArgs = {
+  input: UpdateFriendConnectionInput;
 };
 
 export type Query = {

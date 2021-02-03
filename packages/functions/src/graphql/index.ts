@@ -14,14 +14,15 @@ const schemaString = fs
 
 const typeDefs = gql(schemaString);
 
-const databaseRef = admin.database().ref("/");
+const database = admin.database();
 
 export type TContext = {
   firestore: FirebaseFirestore.Firestore;
-  database: typeof databaseRef;
+  database: admin.database.Database;
   auth: admin.auth.Auth;
   req: functions.https.Request;
   res: functions.Response;
+  tokenID?: string;
 };
 
 const server = new ApolloServer({
@@ -37,10 +38,11 @@ const server = new ApolloServer({
     res: functions.Response;
   }): TContext => ({
     firestore: admin.firestore(),
-    database: databaseRef,
+    database,
     auth: admin.auth(),
     req,
     res,
+    tokenID: req.get("Authorization")?.split("Bearer ")[1],
   }),
 });
 

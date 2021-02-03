@@ -22,11 +22,10 @@ export type UserDoc = {
   firstname: string;
   surname: string;
   thumb: string;
-
   email: string;
 
   friends: UserFriend[];
-  friendRequests: {
+  friendRequests?: {
     incoming: FriendRequest[];
     outgoing: FriendRequest[];
   };

@@ -22,7 +22,8 @@ type User_Full implements User {
   surname: String!
   thumb: String
   email: String!
-  friends: [User_Basic!]!
+
+  connections: [FriendConnection!]!
 }
 
 input CreateUserInput {
@@ -31,8 +32,35 @@ input CreateUserInput {
   surname: String!
 }
 
+enum ConnectionStatus {
+  PENDING
+  WAITING
+  CONNECTED
+  BLOCKED
+}
+
+input CreateFriendConnectionInput {
+  username: String!
+}
+
+input UpdateFriendConnectionInput {
+  id: String!
+  accept: Boolean!
+}
+
+type FriendConnection {
+  id: ID!
+  user: User_Basic!
+  createdAt: String!
+  acceptedAt: String
+  status: ConnectionStatus
+}
+
 type Mutation {
   createUser(input: CreateUserInput!): User_Full!
+
+  createFriendConnection(input: CreateFriendConnectionInput!): User_Full!
+  updateFriendConnection(input: UpdateFriendConnectionInput!): User_Full!
 }
 
 type Query {

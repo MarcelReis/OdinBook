@@ -8,7 +8,8 @@ async function usersResolver(
   args: QueryUserArgs,
   { database }: TContext
 ): Promise<Query["users"]> {
-  const usersRef = database.child("users");
+  const databaseRef = database.ref("/");
+  const usersRef = databaseRef.child("users");
 
   const snapshot = await usersRef.get();
 

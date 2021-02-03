@@ -1,13 +1,15 @@
 import { ApolloError } from "apollo-server-cloud-functions";
 import { TContext } from "../..";
-import { CreateUserInput, User_Full } from "../../../generated/graphql";
+import { CreateUserInput, Mutation } from "../../../generated/graphql";
 import { UserDoc, UserDocBasicInfo } from "../../models/userDoc";
 
 async function createUserMutation(
   _: any,
   args: { input: CreateUserInput },
   { firestore, database, auth, req }: TContext
-): Promise<User_Full> {
+): Promise<Mutation["createUser"]> {
+  const databaseRef = database.ref("/");
+
   const tokenId = req.get("Authorization")?.split("Bearer ")[1];
   if (!tokenId) {
     throw new ApolloError("Invalid authorization header");
@@ -47,8 +49,11 @@ async function createUserMutation(
 
   await userCollection.doc(args.input.username).set(full_data);
 
-  const usersRef = database.child("users");
+  const usersRef = databaseRef.child("users");
   await usersRef.update({ [basic_data.username]: { ...basic_data } });
+
+  const usernameRef = databaseRef.child("usernames");
+  await usernameRef.update({ [uid]: basic_data.username });
 
   return {
     id: full_data.id,
@@ -58,7 +63,7 @@ async function createUserMutation(
     surname: full_data.surname,
     thumb: full_data.thumb,
     email: full_data.email ?? "",
-    friends: [],
+    connections: [],
   };
 }
 

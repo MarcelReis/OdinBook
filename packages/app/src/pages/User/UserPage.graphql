@@ -3,11 +3,5 @@ query UserPage($username: String!) {
     id
     name
     thumb
-    friends {
-      id
-      firstname
-      surname
-      username
-    }
   }
 }
