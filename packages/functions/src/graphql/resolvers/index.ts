@@ -45,7 +45,7 @@ export const resolvers: IResolvers<void, TContext> = {
       }
 
       return Object.entries(data).map(([username, data]) => ({
-        id: `UC-${[parent.username, username].sort().join("-")}`,
+        id: `UC-${parent.username}#${username}`,
         user: {
           id: data.userID,
           username,

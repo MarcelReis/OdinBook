@@ -56,7 +56,7 @@ async function createFriendConnectionMutation(
     [ownUser.username]: ownConnection,
   });
 
-  return { name: "fudeu" } as any;
+  return { id: ownUser.id, connections: [ownConnection] } as any;
 }
 
 export default createFriendConnectionMutation;
