@@ -40,6 +40,10 @@ export const resolvers: IResolvers<void, TContext> = {
 
       const data = snapshot.val() as ConnectionsObject;
 
+      if (!data) {
+        return [];
+      }
+
       return Object.entries(data).map(([username, data]) => ({
         id: `UC-${[parent.username, username].sort().join("-")}`,
         user: {
