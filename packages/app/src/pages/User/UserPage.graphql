@@ -3,5 +3,16 @@ query UserPage($username: String!) {
     id
     name
     thumb
+
+    connections {
+      id
+      user {
+        id
+        firstname
+        surname
+        username
+      }
+      status
+    }
   }
 }

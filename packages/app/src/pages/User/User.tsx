@@ -1,7 +1,12 @@
 import { useQuery } from "@apollo/client";
 import { loader } from "graphql.macro";
-import { useParams } from "react-router-dom";
-import { UserPageQuery, UserPageQueryVariables } from "../../generated/graphql";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
+import {
+  ConnectionStatus,
+  UserPageQuery,
+  UserPageQueryVariables,
+} from "../../generated/graphql";
 
 export const query = loader("./UserPage.graphql");
 
@@ -23,6 +28,10 @@ const UserPage = () => {
     return <div>Not found</div>;
   }
 
+  const acceptedConnections = data.user.connections.filter(
+    ({ status }) => status === ConnectionStatus.Connected
+  );
+
   return (
     <div>
       <h1>{data.user.name}</h1>
@@ -30,11 +39,13 @@ const UserPage = () => {
       <img src={data.user.thumb || "https://placekitten.com/50/50"} alt="" />
 
       <div>
-        <header>Friends: {data.user.friends.length}</header>
+        <header>Friends: {acceptedConnections.length}</header>
         <ul>
-          {data.user.friends.map((friend) => (
+          {acceptedConnections.map((connection) => (
             <li>
-              {friend.firstname} {friend.surname}
+              <Link to={`/${connection.user.username}`}>
+                {connection.user.firstname} {connection.user.surname}
+              </Link>
             </li>
           ))}
         </ul>

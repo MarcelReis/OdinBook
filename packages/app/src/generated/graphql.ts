@@ -147,6 +147,14 @@ export type UserPageQuery = (
   & { user: (
     { __typename?: 'User_Full' }
     & Pick<User_Full, 'id' | 'name' | 'thumb'>
+    & { connections: Array<(
+      { __typename?: 'FriendConnection' }
+      & Pick<FriendConnection, 'id' | 'status'>
+      & { user: (
+        { __typename?: 'User_Basic' }
+        & Pick<User_Basic, 'id' | 'firstname' | 'surname' | 'username'>
+      ) }
+    )> }
   ) }
 );
 
