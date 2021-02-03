@@ -34,7 +34,7 @@ async function createFriendConnectionMutation(
 
   const ownConnection: ConnectionObject = {
     ...newConnection,
-    status: ConnectionStatus.Waiting,
+    status: ConnectionStatus.Pending,
     userID: ownUser.id,
     firstname: ownUser.firstname,
     surname: ownUser.surname,
@@ -42,7 +42,7 @@ async function createFriendConnectionMutation(
 
   const reqConnection: ConnectionObject = {
     ...newConnection,
-    status: ConnectionStatus.Pending,
+    status: ConnectionStatus.Waiting,
     userID: reqUser.id,
     firstname: reqUser.firstname,
     surname: reqUser.surname,
