@@ -11,6 +11,7 @@ import updateFriendConnectionMutation from "./mutation/updateFriendConnection";
 
 import { ConnectionsObject } from "../models/Connection";
 import { FriendConnection } from "../../generated/graphql";
+import { friendConnectionsToGraph } from "../helpers/transformToGraph";
 
 export const resolvers: IResolvers<void, TContext> = {
   Query: {
@@ -44,18 +45,7 @@ export const resolvers: IResolvers<void, TContext> = {
         return [];
       }
 
-      return Object.entries(data).map(([username, data]) => ({
-        id: `UC-${parent.username}#${username}`,
-        user: {
-          id: data.userID,
-          username,
-          firstname: data.firstname,
-          surname: data.surname,
-        },
-        createdAt: data.createdAt,
-        acceptedAt: data.acceptedAt,
-        status: data.status,
-      }));
+      return friendConnectionsToGraph(data, parent.username);
     },
   },
 };

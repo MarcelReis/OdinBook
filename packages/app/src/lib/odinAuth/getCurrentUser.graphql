@@ -4,5 +4,16 @@ query GetCurrentUser {
     username
     firstname
     thumb
+
+    connections {
+      id
+      user {
+        id
+        firstname
+        surname
+        username
+      }
+      status
+    }
   }
 }

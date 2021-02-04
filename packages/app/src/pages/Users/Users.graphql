@@ -4,5 +4,6 @@ query GetUsers {
     firstname
     surname
     username
+    connectionStatus @client
   }
 }

@@ -1,0 +1,10 @@
+mutation CreateFriendConnection($input: CreateFriendConnectionInput!) {
+  createFriendConnection(input: $input) {
+    id
+    username
+    connections {
+      id
+      status
+    }
+  }
+}

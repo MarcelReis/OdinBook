@@ -3,6 +3,8 @@ import styled, { css } from "styled-components";
 type ButtonProps = {
   color?: "red" | "orange" | "yellow" | "green" | "blue" | "purple";
   variant?: "primary" | "secondary";
+  size?: "md" | "sm";
+  square?: boolean;
 };
 
 const primary = css<ButtonProps>`
@@ -12,6 +14,16 @@ const primary = css<ButtonProps>`
 const secondary = css<ButtonProps>`
   background-color: ${({ theme, color }) => theme.palette[color ?? "green"][2]};
   color: ${({ theme, color }) => theme.palette[color ?? "green"][1]};
+`;
+
+const squareButton = css<ButtonProps>`
+  font-size: 0;
+  height: 58px;
+  width: 58px;
+
+  svg {
+    height: 32px;
+  }
 `;
 
 const Button = styled.button<ButtonProps>`
@@ -24,6 +36,8 @@ const Button = styled.button<ButtonProps>`
   cursor: pointer;
   ${({ variant }) => (variant === "secondary" ? secondary : primary)}
   transition: transform 200ms ease;
+
+  ${(props) => props.square && squareButton}
 
   &:active {
     transform: translateY(2px);

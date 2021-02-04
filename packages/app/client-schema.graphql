@@ -1,0 +1,19 @@
+interface User {
+  connectionStatus: ConnectionStatus @client
+}
+
+type User_Basic implements User {
+  connectionStatus: ConnectionStatus @client
+}
+
+type User_Full implements User {
+  connectionStatus: ConnectionStatus @client
+}
+
+enum ConnectionStatus {
+  PENDING
+  WAITING
+  CONNECTED
+  BLOCKED
+  SELF
+}

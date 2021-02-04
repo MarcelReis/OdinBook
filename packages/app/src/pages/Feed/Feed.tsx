@@ -1,17 +1,17 @@
 import React from "react";
 
+import Post from "../../marvieUI/organisms/Post";
+import { Container } from "../../marvieUI/atoms/Container";
 import NewPost from "../../marvieUI/organisms/NewPost";
 
-import * as S from "./Feed.styled";
-
-import Post from "../../marvieUI/organisms/Post";
+// import * as S from "./Feed.styled";
 
 const FeedPage = () => {
   return (
-    <S.Container>
+    <Container>
       <NewPost />
       <Post />
-    </S.Container>
+    </Container>
   );
 };
 

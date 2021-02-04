@@ -1,14 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import {
-  ApolloClient,
-  ApolloProvider,
-  createHttpLink,
-  InMemoryCache,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "./theme";
 
+import { client } from "./apollo";
 import { useRegistration } from "./lib/odinAuth";
 
 import LoginPage from "./pages/Login";
@@ -22,30 +17,6 @@ import NotFound from "./pages/NotFound";
 import UserPage from "./pages/User";
 import FinishRegistrationPage from "./pages/FinishRegistration";
 import UsersPage from "./pages/Users";
-
-const httpLink = createHttpLink({
-  uri:
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:5001/odinbook-30f97/us-central1/graphql"
-      : "",
-  credentials: "same-origin",
-});
-
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("tokenID");
-
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  };
-});
-
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
 
 function Routes() {
   const { isLoading, isLogged, isRegistered } = useRegistration();

@@ -3,7 +3,9 @@ query UserPage($username: String!) {
     id
     name
     thumb
+    username
 
+    connectionStatus @client
     connections {
       id
       user {

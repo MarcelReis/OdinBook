@@ -25,7 +25,7 @@ const UserPage = () => {
   }
 
   if (error || !data) {
-    return <div>Not found</div>;
+    return <div>Error!</div>;
   }
 
   const acceptedConnections = data.user.connections.filter(
@@ -36,13 +36,23 @@ const UserPage = () => {
     <div>
       <h1>{data.user.name}</h1>
 
+      {data.user.connectionStatus === ConnectionStatus.Connected && (
+        <div>Friends</div>
+      )}
+      {data.user.connectionStatus === ConnectionStatus.Waiting && (
+        <div>Friend request sent</div>
+      )}
+      {data.user.connectionStatus === ConnectionStatus.Pending && (
+        <div>Pending friend request</div>
+      )}
+
       <img src={data.user.thumb || "https://placekitten.com/50/50"} alt="" />
 
       <div>
         <header>Friends: {acceptedConnections.length}</header>
         <ul>
           {acceptedConnections.map((connection) => (
-            <li>
+            <li key={connection.id}>
               <Link to={`/${connection.user.username}`}>
                 {connection.user.firstname} {connection.user.surname}
               </Link>

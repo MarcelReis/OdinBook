@@ -12,32 +12,35 @@ export type Scalars = {
 };
 
 export type User = {
-  id: Scalars['ID'];
-  username: Scalars['String'];
+  connectionStatus?: Maybe<ConnectionStatus>;
   firstname: Scalars['String'];
+  id: Scalars['ID'];
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
+  username: Scalars['String'];
 };
 
 export type User_Basic = User & {
   __typename?: 'User_Basic';
-  id: Scalars['ID'];
-  username: Scalars['String'];
+  connectionStatus?: Maybe<ConnectionStatus>;
   firstname: Scalars['String'];
+  id: Scalars['ID'];
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
+  username: Scalars['String'];
 };
 
 export type User_Full = User & {
   __typename?: 'User_Full';
-  id: Scalars['ID'];
-  username: Scalars['String'];
-  name: Scalars['String'];
+  connectionStatus?: Maybe<ConnectionStatus>;
+  connections: Array<FriendConnection>;
+  email: Scalars['String'];
   firstname: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
-  email: Scalars['String'];
-  connections: Array<FriendConnection>;
+  username: Scalars['String'];
 };
 
 export type CreateUserInput = {
@@ -47,10 +50,11 @@ export type CreateUserInput = {
 };
 
 export enum ConnectionStatus {
-  Pending = 'PENDING',
-  Waiting = 'WAITING',
+  Blocked = 'BLOCKED',
   Connected = 'CONNECTED',
-  Blocked = 'BLOCKED'
+  Pending = 'PENDING',
+  Self = 'SELF',
+  Waiting = 'WAITING'
 }
 
 export type CreateFriendConnectionInput = {
@@ -105,6 +109,23 @@ export type QueryUserArgs = {
   username?: Maybe<Scalars['String']>;
 };
 
+export type CreateFriendConnectionMutationVariables = Exact<{
+  input: CreateFriendConnectionInput;
+}>;
+
+
+export type CreateFriendConnectionMutation = (
+  { __typename?: 'Mutation' }
+  & { createFriendConnection: (
+    { __typename?: 'User_Full' }
+    & Pick<User_Full, 'id' | 'username'>
+    & { connections: Array<(
+      { __typename?: 'FriendConnection' }
+      & Pick<FriendConnection, 'id' | 'status'>
+    )> }
+  ) }
+);
+
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -113,6 +134,14 @@ export type GetCurrentUserQuery = (
   & { user: (
     { __typename?: 'User_Full' }
     & Pick<User_Full, 'id' | 'username' | 'firstname' | 'thumb'>
+    & { connections: Array<(
+      { __typename?: 'FriendConnection' }
+      & Pick<FriendConnection, 'id' | 'status'>
+      & { user: (
+        { __typename?: 'User_Basic' }
+        & Pick<User_Basic, 'id' | 'firstname' | 'surname' | 'username'>
+      ) }
+    )> }
   ) }
 );
 
@@ -133,7 +162,15 @@ export type FinishRegistrationMutation = (
   { __typename?: 'Mutation' }
   & { createUser: (
     { __typename?: 'User_Full' }
-    & Pick<User_Full, 'id' | 'firstname' | 'username'>
+    & Pick<User_Full, 'id' | 'username' | 'firstname' | 'thumb'>
+    & { connections: Array<(
+      { __typename?: 'FriendConnection' }
+      & Pick<FriendConnection, 'id' | 'status'>
+      & { user: (
+        { __typename?: 'User_Basic' }
+        & Pick<User_Basic, 'id' | 'firstname' | 'surname' | 'username'>
+      ) }
+    )> }
   ) }
 );
 
@@ -146,7 +183,7 @@ export type UserPageQuery = (
   { __typename?: 'Query' }
   & { user: (
     { __typename?: 'User_Full' }
-    & Pick<User_Full, 'id' | 'name' | 'thumb'>
+    & Pick<User_Full, 'id' | 'name' | 'thumb' | 'username' | 'connectionStatus'>
     & { connections: Array<(
       { __typename?: 'FriendConnection' }
       & Pick<FriendConnection, 'id' | 'status'>
@@ -165,6 +202,6 @@ export type GetUsersQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
     { __typename?: 'User_Basic' }
-    & Pick<User_Basic, 'thumb' | 'firstname' | 'surname' | 'username'>
+    & Pick<User_Basic, 'thumb' | 'firstname' | 'surname' | 'username' | 'connectionStatus'>
   )> }
 );
