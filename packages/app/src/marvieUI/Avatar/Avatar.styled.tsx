@@ -15,11 +15,9 @@ const size = css<AvatarProps>`
   height: ${({ size }) => sizeMap[size ?? "md"]}px;
 `;
 
-const Avatar = styled.img<AvatarProps>`
+export const Avatar = styled.img<AvatarProps>`
   ${size};
   border-radius: 50%;
   background: ${({ theme }) => theme.palette.surface[2]};
   border: none;
 `;
-
-export default Avatar;

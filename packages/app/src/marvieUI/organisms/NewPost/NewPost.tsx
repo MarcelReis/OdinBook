@@ -2,7 +2,7 @@ import React from "react";
 import { Send } from "@styled-icons/material/Send";
 
 import * as S from "./NewPost.styled";
-import Avatar from "../../atoms/Avatar";
+import Avatar from "../../Avatar";
 
 const NewPost = () => {
   return (

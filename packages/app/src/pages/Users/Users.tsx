@@ -6,7 +6,7 @@ import { loader } from "graphql.macro";
 import * as S from "./Users.styled";
 
 import { Container } from "../../marvieUI/atoms/Container";
-import Avatar from "../../marvieUI/atoms/Avatar";
+import Avatar from "../../marvieUI/Avatar";
 import Typography from "../../marvieUI/atoms/Typography";
 
 import ConnectionButton from "../../components/ConnectionButton";

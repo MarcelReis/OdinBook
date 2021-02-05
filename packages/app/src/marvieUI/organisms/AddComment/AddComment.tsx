@@ -1,7 +1,7 @@
 import React from "react";
 
 import * as S from "./AddComment.styled";
-import Avatar from "../../atoms/Avatar";
+import Avatar from "../../Avatar";
 import { Comment } from "@styled-icons/material/Comment";
 
 const AddComment = () => {

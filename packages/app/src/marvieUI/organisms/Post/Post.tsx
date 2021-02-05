@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { User_Full } from "../../../generated/graphql";
 
 import * as S from "./Post.styled";
-import Avatar from "../../atoms/Avatar";
+import Avatar from "../../Avatar";
 import AddComment from "../AddComment/AddComment";
 
 import { Comment } from "@styled-icons/material/Comment";
