@@ -8,15 +8,15 @@ import { useRegistration } from "./lib/odinAuth";
 
 import LoginPage from "./pages/Login";
 import LoadingPage from "./pages/Loading";
-
-import Footer from "./components/Footer";
-import Appbar from "./components/Appbar";
 import SignUpPage from "./pages/SignUp";
 import FeedPage from "./pages/Feed";
 import NotFound from "./pages/NotFound";
 import UserPage from "./pages/User";
 import FinishRegistrationPage from "./pages/FinishRegistration";
 import UsersPage from "./pages/Users";
+
+import Footer from "./components/Footer";
+import Appbar from "./components/Appbar";
 
 function Routes() {
   const { isLoading, isLogged, isRegistered } = useRegistration();

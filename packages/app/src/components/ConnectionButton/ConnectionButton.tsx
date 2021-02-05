@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { loader } from "graphql.macro";
-import React from "react";
+import React, { useState } from "react";
 import {
   ConnectionStatus,
   CreateFriendConnectionMutation,
@@ -24,16 +24,17 @@ function ConnectionButton(props: PropsType) {
     CreateFriendConnectionMutation,
     CreateFriendConnectionMutationVariables
   >(createConnectionMutation);
+  const [status, setStatus] = useState(props.status);
 
-  if (props.status === ConnectionStatus.Connected) {
+  if (status === ConnectionStatus.Connected) {
     return <div>Friends</div>;
   }
 
-  if (props.status === ConnectionStatus.Waiting) {
+  if (status === ConnectionStatus.Waiting) {
     return <div>Pending</div>;
   }
 
-  if (props.status === ConnectionStatus.Pending) {
+  if (status === ConnectionStatus.Pending) {
     return (
       <div>
         <Button
@@ -60,14 +61,14 @@ function ConnectionButton(props: PropsType) {
     );
   }
 
-  if (props.status !== ConnectionStatus.Self)
+  if (status !== ConnectionStatus.Self)
     return (
       <Button
         color="blue"
         onClick={() =>
           createConnection({
             variables: { input: { username: props.username } },
-          })
+          }).then(() => setStatus(ConnectionStatus.Waiting))
         }
       >
         Add Friend
