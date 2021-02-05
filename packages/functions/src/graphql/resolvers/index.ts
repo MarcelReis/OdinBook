@@ -6,8 +6,9 @@ import userResolver from "./query/user";
 import usersResolver from "./query/users";
 
 import createUserMutation from "./mutation/createUser";
-import createFriendConnectionMutation from "./mutation/createFriendConnection";
-import updateFriendConnectionMutation from "./mutation/updateFriendConnection";
+import createUserConnectionMutation from "./mutation/createUserConnection";
+import updateFriendConnectionMutation from "./mutation/updateUserConnection";
+import removeUserConnectionMutation from "./mutation/removeUserConnection";
 
 import { ConnectionsObject } from "../models/Connection";
 import { FriendConnection } from "../../generated/graphql";
@@ -21,8 +22,9 @@ export const resolvers: IResolvers<void, TContext> = {
   },
   Mutation: {
     createUser: createUserMutation,
-    createFriendConnection: createFriendConnectionMutation,
-    updateFriendConnection: updateFriendConnectionMutation,
+    createUserConnection: createUserConnectionMutation,
+    updateUserConnection: updateFriendConnectionMutation,
+    removeUserconnection: removeUserConnectionMutation,
   },
   User: {
     __resolveType(user: any) {

@@ -57,15 +57,6 @@ export enum ConnectionStatus {
   Waiting = 'WAITING'
 }
 
-export type CreateFriendConnectionInput = {
-  username: Scalars['String'];
-};
-
-export type UpdateFriendConnectionInput = {
-  id: Scalars['String'];
-  accept: Scalars['Boolean'];
-};
-
 export type FriendConnection = {
   __typename?: 'FriendConnection';
   id: Scalars['ID'];
@@ -78,8 +69,9 @@ export type FriendConnection = {
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: User_Full;
-  createFriendConnection: User_Full;
-  updateFriendConnection: User_Full;
+  createUserConnection: User_Full;
+  updateUserConnection: User_Full;
+  removeUserConnection: User_Full;
 };
 
 
@@ -88,13 +80,19 @@ export type MutationCreateUserArgs = {
 };
 
 
-export type MutationCreateFriendConnectionArgs = {
-  input: CreateFriendConnectionInput;
+export type MutationCreateUserConnectionArgs = {
+  username: Scalars['String'];
 };
 
 
-export type MutationUpdateFriendConnectionArgs = {
-  input: UpdateFriendConnectionInput;
+export type MutationUpdateUserConnectionArgs = {
+  username: Scalars['String'];
+  status: ConnectionStatus;
+};
+
+
+export type MutationRemoveUserConnectionArgs = {
+  username: Scalars['String'];
 };
 
 export type Query = {
@@ -110,13 +108,13 @@ export type QueryUserArgs = {
 };
 
 export type CreateFriendConnectionMutationVariables = Exact<{
-  input: CreateFriendConnectionInput;
+  username: Scalars['String'];
 }>;
 
 
 export type CreateFriendConnectionMutation = (
   { __typename?: 'Mutation' }
-  & { createFriendConnection: (
+  & { createUserConnection: (
     { __typename?: 'User_Full' }
     & Pick<User_Full, 'id' | 'username'>
     & { connections: Array<(

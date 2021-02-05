@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Post from "../../marvieUI/organisms/Post";
 import { Container } from "../../marvieUI/atoms/Container";
@@ -11,6 +12,7 @@ const FeedPage = () => {
     <Container>
       <NewPost />
       <Post />
+      <Link to="/users">Users</Link>
     </Container>
   );
 };

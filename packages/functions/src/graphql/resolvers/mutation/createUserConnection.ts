@@ -3,19 +3,19 @@ import { TContext } from "../..";
 
 import {
   Mutation,
-  CreateFriendConnectionInput,
   ConnectionStatus,
+  MutationCreateUserConnectionArgs,
 } from "../../../generated/graphql";
 import { ConnectionObject } from "../../models/Connection";
 
 import { getUserFromToken, getUserFromUsername } from "../../helpers/getUser";
 import { friendConnectionsToGraph } from "../../helpers/transformToGraph";
 
-async function createFriendConnectionMutation(
+async function createUserConnectionMutation(
   _: any,
-  { input }: { input: CreateFriendConnectionInput },
+  { username }: MutationCreateUserConnectionArgs,
   { database, auth, tokenID }: TContext
-): Promise<Mutation["createFriendConnection"]> {
+): Promise<Mutation["createUserConnection"]> {
   if (!tokenID) {
     throw new ApolloError("Invalid authorization header");
   }
@@ -23,7 +23,7 @@ async function createFriendConnectionMutation(
   const [ownUser, reqUser] = [
     await getUserFromToken({ tokenID, database, auth }),
     await getUserFromUsername({
-      username: input.username,
+      username,
       database,
     }),
   ];
@@ -71,4 +71,4 @@ async function createFriendConnectionMutation(
   } as any;
 }
 
-export default createFriendConnectionMutation;
+export default createUserConnectionMutation;

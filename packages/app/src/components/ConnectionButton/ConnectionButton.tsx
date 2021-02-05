@@ -67,7 +67,7 @@ function ConnectionButton(props: PropsType) {
         color="blue"
         onClick={() =>
           createConnection({
-            variables: { input: { username: props.username } },
+            variables: { username: props.username },
           }).then(() => setStatus(ConnectionStatus.Waiting))
         }
       >

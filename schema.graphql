@@ -39,15 +39,6 @@ enum ConnectionStatus {
   BLOCKED
 }
 
-input CreateFriendConnectionInput {
-  username: String!
-}
-
-input UpdateFriendConnectionInput {
-  id: String!
-  accept: Boolean!
-}
-
 type FriendConnection {
   id: ID!
   user: User_Basic!
@@ -59,8 +50,9 @@ type FriendConnection {
 type Mutation {
   createUser(input: CreateUserInput!): User_Full!
 
-  createFriendConnection(input: CreateFriendConnectionInput!): User_Full!
-  updateFriendConnection(input: UpdateFriendConnectionInput!): User_Full!
+  createUserConnection(username: String!): User_Full!
+  updateUserConnection(username: String!, status: ConnectionStatus!): User_Full!
+  removeUserConnection(username: String!): User_Full!
 }
 
 type Query {

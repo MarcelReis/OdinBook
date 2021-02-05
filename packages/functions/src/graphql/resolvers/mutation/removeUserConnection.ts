@@ -2,14 +2,14 @@ import { ApolloError } from "apollo-server-cloud-functions";
 import { TContext } from "../..";
 import {
   Mutation,
-  UpdateFriendConnectionInput,
+  MutationUpdateUserConnectionArgs,
 } from "../../../generated/graphql";
 
-async function updateFriendConnectionMutation(
+async function removeUserConnectionMutation(
   _: any,
-  args: { input: UpdateFriendConnectionInput },
+  args: MutationUpdateUserConnectionArgs,
   { firestore, database, auth, req }: TContext
-): Promise<Mutation["updateFriendConnection"]> {
+): Promise<Mutation["updateUserConnection"]> {
   const tokenId = req.get("Authorization")?.split("Bearer ")[1];
 
   if (!tokenId) {
@@ -24,4 +24,4 @@ async function updateFriendConnectionMutation(
   return {} as any;
 }
 
-export default updateFriendConnectionMutation;
+export default removeUserConnectionMutation;
