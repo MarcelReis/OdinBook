@@ -14,7 +14,7 @@ export type Scalars = {
 export type User = {
   __typename?: 'User';
   connectionStatus?: Maybe<ConnectionStatus>;
-  connections?: Maybe<Array<FriendConnection>>;
+  connections?: Maybe<Array<UserConnection>>;
   email?: Maybe<Scalars['String']>;
   firstname: Scalars['String'];
   id: Scalars['ID'];
@@ -38,8 +38,8 @@ export enum ConnectionStatus {
   Waiting = 'WAITING'
 }
 
-export type FriendConnection = {
-  __typename?: 'FriendConnection';
+export type UserConnection = {
+  __typename?: 'UserConnection';
   id: Scalars['ID'];
   user: User;
   createdAt: Scalars['String'];
@@ -88,19 +88,19 @@ export type QueryUserArgs = {
   username?: Maybe<Scalars['String']>;
 };
 
-export type CreateFriendConnectionMutationVariables = Exact<{
+export type CreateUserConnectionMutationVariables = Exact<{
   username: Scalars['String'];
 }>;
 
 
-export type CreateFriendConnectionMutation = (
+export type CreateUserConnectionMutation = (
   { __typename?: 'Mutation' }
   & { createUserConnection: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username'>
     & { connections?: Maybe<Array<(
-      { __typename?: 'FriendConnection' }
-      & Pick<FriendConnection, 'id' | 'status'>
+      { __typename?: 'UserConnection' }
+      & Pick<UserConnection, 'id' | 'status'>
     )>> }
   ) }
 );
@@ -114,8 +114,8 @@ export type GetCurrentUserQuery = (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
     & { connections?: Maybe<Array<(
-      { __typename?: 'FriendConnection' }
-      & Pick<FriendConnection, 'id' | 'status'>
+      { __typename?: 'UserConnection' }
+      & Pick<UserConnection, 'id' | 'status'>
       & { user: (
         { __typename?: 'User' }
         & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>
@@ -143,8 +143,8 @@ export type FinishRegistrationMutation = (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
     & { connections?: Maybe<Array<(
-      { __typename?: 'FriendConnection' }
-      & Pick<FriendConnection, 'id' | 'status'>
+      { __typename?: 'UserConnection' }
+      & Pick<UserConnection, 'id' | 'status'>
       & { user: (
         { __typename?: 'User' }
         & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>
@@ -164,8 +164,8 @@ export type UserPageQuery = (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'name' | 'thumb' | 'username' | 'connectionStatus'>
     & { connections?: Maybe<Array<(
-      { __typename?: 'FriendConnection' }
-      & Pick<FriendConnection, 'id' | 'status'>
+      { __typename?: 'UserConnection' }
+      & Pick<UserConnection, 'id' | 'status'>
       & { user: (
         { __typename?: 'User' }
         & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>

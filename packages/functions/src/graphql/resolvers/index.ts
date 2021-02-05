@@ -7,12 +7,12 @@ import usersResolver from "./query/users";
 
 import createUserMutation from "./mutation/createUser";
 import createUserConnectionMutation from "./mutation/createUserConnection";
-import updateFriendConnectionMutation from "./mutation/updateUserConnection";
+import updateUserConnectionMutation from "./mutation/updateUserConnection";
 import removeUserConnectionMutation from "./mutation/removeUserConnection";
 
 import { ConnectionsObject } from "../models/Connection";
-import { FriendConnection } from "../../generated/graphql";
-import { friendConnectionsToGraph } from "../helpers/transformToGraph";
+import { UserConnection } from "../../generated/graphql";
+import { userConnectionsToGraph } from "../helpers/transformToGraph";
 
 export const resolvers: IResolvers<void, TContext> = {
   Query: {
@@ -23,11 +23,11 @@ export const resolvers: IResolvers<void, TContext> = {
   Mutation: {
     createUser: createUserMutation,
     createUserConnection: createUserConnectionMutation,
-    updateUserConnection: updateFriendConnectionMutation,
-    removeUserconnection: removeUserConnectionMutation,
+    updateUserConnection: updateUserConnectionMutation,
+    removeUserConnection: removeUserConnectionMutation,
   },
   User: {
-    async connections(parent: any, _, ctx): Promise<FriendConnection[]> {
+    async connections(parent: any, _, ctx): Promise<UserConnection[]> {
       const snapshot = await ctx.database
         .ref(`/connections/${parent.username}`)
         .get();
@@ -38,7 +38,7 @@ export const resolvers: IResolvers<void, TContext> = {
         return [];
       }
 
-      return friendConnectionsToGraph(data, parent.username);
+      return userConnectionsToGraph(data, parent.username);
     },
   },
 };

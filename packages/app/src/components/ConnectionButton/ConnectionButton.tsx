@@ -3,8 +3,8 @@ import { loader } from "graphql.macro";
 import React, { useState } from "react";
 import {
   ConnectionStatus,
-  CreateFriendConnectionMutation,
-  CreateFriendConnectionMutationVariables,
+  CreateUserConnectionMutation,
+  CreateUserConnectionMutationVariables,
 } from "../../generated/graphql";
 
 import { Clear } from "@styled-icons/material/Clear";
@@ -21,8 +21,8 @@ type PropsType = {
 
 function ConnectionButton(props: PropsType) {
   const [createConnection] = useMutation<
-    CreateFriendConnectionMutation,
-    CreateFriendConnectionMutationVariables
+    CreateUserConnectionMutation,
+    CreateUserConnectionMutationVariables
   >(createConnectionMutation);
   const [status, setStatus] = useState(props.status);
 

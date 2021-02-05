@@ -1,10 +1,10 @@
-import { FriendConnection } from "../../generated/graphql";
+import { UserConnection } from "../../generated/graphql";
 import { ConnectionsObject } from "../models/Connection";
 
-export const friendConnectionsToGraph = (
+export const userConnectionsToGraph = (
   doc: ConnectionsObject,
   parentUsername: string
-): FriendConnection[] => {
+): UserConnection[] => {
   return Object.entries(doc).map(([username, data]) => ({
     id: `UC-${parentUsername}#${username}`,
     user: {

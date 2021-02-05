@@ -9,7 +9,7 @@ import {
 import { ConnectionObject } from "../../models/Connection";
 
 import { getUserFromToken, getUserFromUsername } from "../../helpers/getUser";
-import { friendConnectionsToGraph } from "../../helpers/transformToGraph";
+import { userConnectionsToGraph } from "../../helpers/transformToGraph";
 
 async function createUserConnectionMutation(
   _: any,
@@ -57,7 +57,7 @@ async function createUserConnectionMutation(
     [ownUser.username]: ownConnection,
   });
 
-  const connections = friendConnectionsToGraph(
+  const connections = userConnectionsToGraph(
     { [reqUser.username]: reqConnection },
     ownUser.username
   );

@@ -1,4 +1,4 @@
-interface User {
+type User {
   id: ID!
   username: String!
   firstname: String!
@@ -6,7 +6,7 @@ interface User {
 
   thumb: String
   email: String
-  connections: [FriendConnection!]
+  connections: [UserConnection!]
 }
 
 input CreateUserInput {
@@ -22,7 +22,7 @@ enum ConnectionStatus {
   BLOCKED
 }
 
-type FriendConnection {
+type UserConnection {
   id: ID!
   user: User!
   createdAt: String!

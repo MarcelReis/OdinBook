@@ -1,4 +1,4 @@
-mutation CreateFriendConnection($username: String!) {
+mutation CreateUserConnection($username: String!) {
   createUserConnection(username: $username) {
     id
     username

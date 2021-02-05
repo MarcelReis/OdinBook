@@ -12,13 +12,14 @@ export type Scalars = {
 };
 
 export type User = {
+  __typename?: 'User';
   id: Scalars['ID'];
   username: Scalars['String'];
   firstname: Scalars['String'];
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
-  connections?: Maybe<Array<FriendConnection>>;
+  connections?: Maybe<Array<UserConnection>>;
 };
 
 export type CreateUserInput = {
@@ -34,8 +35,8 @@ export const enum ConnectionStatus {
   Blocked = 'BLOCKED'
 };
 
-export type FriendConnection = {
-  __typename?: 'FriendConnection';
+export type UserConnection = {
+  __typename?: 'UserConnection';
   id: Scalars['ID'];
   user: User;
   createdAt: Scalars['String'];
