@@ -68,7 +68,7 @@ async function createUserConnectionMutation(
     firstname: ownUser.firstname,
     surname: ownUser.surname,
     connections,
-  } as any;
+  };
 }
 
 export default createUserConnectionMutation;

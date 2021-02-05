@@ -3,27 +3,10 @@ interface User {
   username: String!
   firstname: String!
   surname: String!
-  thumb: String
-}
 
-type User_Basic implements User {
-  id: ID!
-  username: String!
-  firstname: String!
-  surname: String!
   thumb: String
-}
-
-type User_Full implements User {
-  id: ID!
-  username: String!
-  name: String!
-  firstname: String!
-  surname: String!
-  thumb: String
-  email: String!
-
-  connections: [FriendConnection!]!
+  email: String
+  connections: [FriendConnection!]
 }
 
 input CreateUserInput {
@@ -41,22 +24,22 @@ enum ConnectionStatus {
 
 type FriendConnection {
   id: ID!
-  user: User_Basic!
+  user: User!
   createdAt: String!
   acceptedAt: String
   status: ConnectionStatus
 }
 
 type Mutation {
-  createUser(input: CreateUserInput!): User_Full!
+  createUser(input: CreateUserInput!): User!
 
-  createUserConnection(username: String!): User_Full!
-  updateUserConnection(username: String!, status: ConnectionStatus!): User_Full!
-  removeUserConnection(username: String!): User_Full!
+  createUserConnection(username: String!): User!
+  updateUserConnection(username: String!, status: ConnectionStatus!): User!
+  removeUserConnection(username: String!): User!
 }
 
 type Query {
-  user(username: String): User_Full!
-  users: [User_Basic!]!
+  user(username: String): User!
+  users: [User!]!
   hello: String!
 }

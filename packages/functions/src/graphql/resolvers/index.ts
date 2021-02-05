@@ -27,15 +27,6 @@ export const resolvers: IResolvers<void, TContext> = {
     removeUserconnection: removeUserConnectionMutation,
   },
   User: {
-    __resolveType(user: any) {
-      if (user.name) {
-        return "User_Full";
-      }
-
-      return "User_Basic";
-    },
-  },
-  User_Full: {
     async connections(parent: any, _, ctx): Promise<FriendConnection[]> {
       const snapshot = await ctx.database
         .ref(`/connections/${parent.username}`)

@@ -1,13 +1,6 @@
-interface User {
+type User {
   connectionStatus: ConnectionStatus @client
-}
-
-type User_Basic implements User {
-  connectionStatus: ConnectionStatus @client
-}
-
-type User_Full implements User {
-  connectionStatus: ConnectionStatus @client
+  name: String @client
 }
 
 enum ConnectionStatus {

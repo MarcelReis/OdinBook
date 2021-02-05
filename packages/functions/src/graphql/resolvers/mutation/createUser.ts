@@ -58,7 +58,6 @@ async function createUserMutation(
   return {
     id: full_data.id,
     username: full_data.username,
-    name: full_data.firstname + " " + full_data.surname,
     firstname: full_data.firstname,
     surname: full_data.surname,
     thumb: full_data.thumb,

@@ -12,32 +12,13 @@ export type Scalars = {
 };
 
 export type User = {
+  __typename?: 'User';
   connectionStatus?: Maybe<ConnectionStatus>;
+  connections?: Maybe<Array<FriendConnection>>;
+  email?: Maybe<Scalars['String']>;
   firstname: Scalars['String'];
   id: Scalars['ID'];
-  surname: Scalars['String'];
-  thumb?: Maybe<Scalars['String']>;
-  username: Scalars['String'];
-};
-
-export type User_Basic = User & {
-  __typename?: 'User_Basic';
-  connectionStatus?: Maybe<ConnectionStatus>;
-  firstname: Scalars['String'];
-  id: Scalars['ID'];
-  surname: Scalars['String'];
-  thumb?: Maybe<Scalars['String']>;
-  username: Scalars['String'];
-};
-
-export type User_Full = User & {
-  __typename?: 'User_Full';
-  connectionStatus?: Maybe<ConnectionStatus>;
-  connections: Array<FriendConnection>;
-  email: Scalars['String'];
-  firstname: Scalars['String'];
-  id: Scalars['ID'];
-  name: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
   username: Scalars['String'];
@@ -60,7 +41,7 @@ export enum ConnectionStatus {
 export type FriendConnection = {
   __typename?: 'FriendConnection';
   id: Scalars['ID'];
-  user: User_Basic;
+  user: User;
   createdAt: Scalars['String'];
   acceptedAt?: Maybe<Scalars['String']>;
   status?: Maybe<ConnectionStatus>;
@@ -68,10 +49,10 @@ export type FriendConnection = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createUser: User_Full;
-  createUserConnection: User_Full;
-  updateUserConnection: User_Full;
-  removeUserConnection: User_Full;
+  createUser: User;
+  createUserConnection: User;
+  updateUserConnection: User;
+  removeUserConnection: User;
 };
 
 
@@ -97,8 +78,8 @@ export type MutationRemoveUserConnectionArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  user: User_Full;
-  users: Array<User_Basic>;
+  user: User;
+  users: Array<User>;
   hello: Scalars['String'];
 };
 
@@ -115,12 +96,12 @@ export type CreateFriendConnectionMutationVariables = Exact<{
 export type CreateFriendConnectionMutation = (
   { __typename?: 'Mutation' }
   & { createUserConnection: (
-    { __typename?: 'User_Full' }
-    & Pick<User_Full, 'id' | 'username'>
-    & { connections: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username'>
+    & { connections?: Maybe<Array<(
       { __typename?: 'FriendConnection' }
       & Pick<FriendConnection, 'id' | 'status'>
-    )> }
+    )>> }
   ) }
 );
 
@@ -130,16 +111,16 @@ export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetCurrentUserQuery = (
   { __typename?: 'Query' }
   & { user: (
-    { __typename?: 'User_Full' }
-    & Pick<User_Full, 'id' | 'username' | 'firstname' | 'thumb'>
-    & { connections: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
+    & { connections?: Maybe<Array<(
       { __typename?: 'FriendConnection' }
       & Pick<FriendConnection, 'id' | 'status'>
       & { user: (
-        { __typename?: 'User_Basic' }
-        & Pick<User_Basic, 'id' | 'firstname' | 'surname' | 'username'>
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>
       ) }
-    )> }
+    )>> }
   ) }
 );
 
@@ -159,16 +140,16 @@ export type FinishRegistrationMutationVariables = Exact<{
 export type FinishRegistrationMutation = (
   { __typename?: 'Mutation' }
   & { createUser: (
-    { __typename?: 'User_Full' }
-    & Pick<User_Full, 'id' | 'username' | 'firstname' | 'thumb'>
-    & { connections: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
+    & { connections?: Maybe<Array<(
       { __typename?: 'FriendConnection' }
       & Pick<FriendConnection, 'id' | 'status'>
       & { user: (
-        { __typename?: 'User_Basic' }
-        & Pick<User_Basic, 'id' | 'firstname' | 'surname' | 'username'>
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>
       ) }
-    )> }
+    )>> }
   ) }
 );
 
@@ -180,16 +161,16 @@ export type UserPageQueryVariables = Exact<{
 export type UserPageQuery = (
   { __typename?: 'Query' }
   & { user: (
-    { __typename?: 'User_Full' }
-    & Pick<User_Full, 'id' | 'name' | 'thumb' | 'username' | 'connectionStatus'>
-    & { connections: Array<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'name' | 'thumb' | 'username' | 'connectionStatus'>
+    & { connections?: Maybe<Array<(
       { __typename?: 'FriendConnection' }
       & Pick<FriendConnection, 'id' | 'status'>
       & { user: (
-        { __typename?: 'User_Basic' }
-        & Pick<User_Basic, 'id' | 'firstname' | 'surname' | 'username'>
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>
       ) }
-    )> }
+    )>> }
   ) }
 );
 
@@ -199,7 +180,7 @@ export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetUsersQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
-    { __typename?: 'User_Basic' }
-    & Pick<User_Basic, 'thumb' | 'firstname' | 'surname' | 'username' | 'connectionStatus'>
+    { __typename?: 'User' }
+    & Pick<User, 'thumb' | 'firstname' | 'surname' | 'username' | 'connectionStatus'>
   )> }
 );

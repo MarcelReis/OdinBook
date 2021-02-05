@@ -28,9 +28,10 @@ const UserPage = () => {
     return <div>Error!</div>;
   }
 
-  const acceptedConnections = data.user.connections.filter(
-    ({ status }) => status === ConnectionStatus.Connected
-  );
+  const acceptedConnections =
+    data.user.connections?.filter(
+      ({ status }) => status === ConnectionStatus.Connected
+    ) ?? [];
 
   return (
     <div>

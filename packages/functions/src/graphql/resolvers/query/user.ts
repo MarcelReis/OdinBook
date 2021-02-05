@@ -44,7 +44,6 @@ async function userResolver(
   return {
     id: data.id,
     username: data.username,
-    name: data.firstname + " " + data.surname,
     firstname: data.firstname,
     surname: data.surname,
     thumb: data.thumb,

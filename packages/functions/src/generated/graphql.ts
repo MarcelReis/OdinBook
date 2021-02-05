@@ -17,27 +17,8 @@ export type User = {
   firstname: Scalars['String'];
   surname: Scalars['String'];
   thumb?: Maybe<Scalars['String']>;
-};
-
-export type User_Basic = User & {
-  __typename?: 'User_Basic';
-  id: Scalars['ID'];
-  username: Scalars['String'];
-  firstname: Scalars['String'];
-  surname: Scalars['String'];
-  thumb?: Maybe<Scalars['String']>;
-};
-
-export type User_Full = User & {
-  __typename?: 'User_Full';
-  id: Scalars['ID'];
-  username: Scalars['String'];
-  name: Scalars['String'];
-  firstname: Scalars['String'];
-  surname: Scalars['String'];
-  thumb?: Maybe<Scalars['String']>;
-  email: Scalars['String'];
-  connections: Array<FriendConnection>;
+  email?: Maybe<Scalars['String']>;
+  connections?: Maybe<Array<FriendConnection>>;
 };
 
 export type CreateUserInput = {
@@ -56,7 +37,7 @@ export const enum ConnectionStatus {
 export type FriendConnection = {
   __typename?: 'FriendConnection';
   id: Scalars['ID'];
-  user: User_Basic;
+  user: User;
   createdAt: Scalars['String'];
   acceptedAt?: Maybe<Scalars['String']>;
   status?: Maybe<ConnectionStatus>;
@@ -64,10 +45,10 @@ export type FriendConnection = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createUser: User_Full;
-  createUserConnection: User_Full;
-  updateUserConnection: User_Full;
-  removeUserConnection: User_Full;
+  createUser: User;
+  createUserConnection: User;
+  updateUserConnection: User;
+  removeUserConnection: User;
 };
 
 
@@ -93,8 +74,8 @@ export type MutationRemoveUserConnectionArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  user: User_Full;
-  users: Array<User_Basic>;
+  user: User;
+  users: Array<User>;
   hello: Scalars['String'];
 };
 
