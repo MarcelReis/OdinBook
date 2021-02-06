@@ -10,7 +10,7 @@ import createUserConnectionMutation from "./mutation/createUserConnection";
 import updateUserConnectionMutation from "./mutation/updateUserConnection";
 import removeUserConnectionMutation from "./mutation/removeUserConnection";
 
-import { ConnectionsObject } from "../models/Connection";
+import { ConnectionsObject } from "../models/UserConnection";
 import { UserConnection } from "../../generated/graphql";
 import { userConnectionsToGraph } from "../helpers/transformToGraph";
 

@@ -88,6 +88,23 @@ export type QueryUserArgs = {
   username?: Maybe<Scalars['String']>;
 };
 
+export type AcceptUserConnectionMutationVariables = Exact<{
+  username: Scalars['String'];
+}>;
+
+
+export type AcceptUserConnectionMutation = (
+  { __typename?: 'Mutation' }
+  & { updateUserConnection: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username'>
+    & { connections?: Maybe<Array<(
+      { __typename?: 'UserConnection' }
+      & Pick<UserConnection, 'id' | 'status'>
+    )>> }
+  ) }
+);
+
 export type CreateUserConnectionMutationVariables = Exact<{
   username: Scalars['String'];
 }>;
@@ -162,7 +179,7 @@ export type UserPageQuery = (
   { __typename?: 'Query' }
   & { user: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'thumb' | 'username' | 'connectionStatus'>
+    & Pick<User, 'id' | 'name' | 'firstname' | 'surname' | 'thumb' | 'username' | 'connectionStatus'>
     & { connections?: Maybe<Array<(
       { __typename?: 'UserConnection' }
       & Pick<UserConnection, 'id' | 'status'>

@@ -1,27 +1,52 @@
 import { ApolloError } from "apollo-server-cloud-functions";
 import { TContext } from "../..";
 import {
+  ConnectionStatus,
   Mutation,
   MutationUpdateUserConnectionArgs,
 } from "../../../generated/graphql";
 
-async function updateUserConnectionMutation(
-  _: any,
-  args: MutationUpdateUserConnectionArgs,
-  { firestore, database, auth, req }: TContext
-): Promise<Mutation["updateUserConnection"]> {
-  const tokenId = req.get("Authorization")?.split("Bearer ")[1];
+import { getUserFromToken, getUserFromUsername } from "../../helpers/getUser";
 
-  if (!tokenId) {
+async function updateUserConnectionMutation(
+  _: unknown,
+  args: MutationUpdateUserConnectionArgs,
+  { database, auth, tokenID }: TContext
+): Promise<Mutation["updateUserConnection"]> {
+  if (!tokenID) {
     throw new ApolloError("Invalid authorization header");
   }
 
-  const { uid } = await auth.verifyIdToken(tokenId);
-  const usernameSnap = await database.ref(`/usernames/${uid}`).get();
+  const [ownUser, connectionUser] = [
+    await getUserFromToken({ database, auth, tokenID }),
+    await getUserFromUsername({
+      username: args.username,
+      database,
+    }),
+  ];
 
-  console.log("usernameSnap()", usernameSnap.val());
+  if (args.status === ConnectionStatus.Connected) {
+    const connection = {
+      status: ConnectionStatus.Connected,
+      acceptedAt: new Date().toISOString(),
+    };
 
-  return {} as any;
+    Promise.all([
+      await database
+        .ref(`/connections/${ownUser.username}/${connectionUser.username}`)
+        .update(connection),
+      await database
+        .ref(`/connections/${connectionUser.username}/${ownUser.username}`)
+        .update(connection),
+    ]);
+  }
+
+  return {
+    id: ownUser.id,
+    username: ownUser.username,
+    firstname: ownUser.firstname,
+    surname: ownUser.surname,
+  };
 }
 
 export default updateUserConnectionMutation;

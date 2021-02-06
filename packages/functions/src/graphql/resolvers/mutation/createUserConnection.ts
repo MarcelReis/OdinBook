@@ -6,13 +6,12 @@ import {
   ConnectionStatus,
   MutationCreateUserConnectionArgs,
 } from "../../../generated/graphql";
-import { ConnectionObject } from "../../models/Connection";
+import { ConnectionObject } from "../../models/UserConnection";
 
 import { getUserFromToken, getUserFromUsername } from "../../helpers/getUser";
-import { userConnectionsToGraph } from "../../helpers/transformToGraph";
 
 async function createUserConnectionMutation(
-  _: any,
+  _: unknown,
   { username }: MutationCreateUserConnectionArgs,
   { database, auth, tokenID }: TContext
 ): Promise<Mutation["createUserConnection"]> {
@@ -49,25 +48,20 @@ async function createUserConnectionMutation(
     surname: reqUser.surname,
   };
 
-  database.ref(`/connections/${ownUser.username}`).update({
-    [reqUser.username]: reqConnection,
-  });
-
-  database.ref(`/connections/${reqUser.username}`).update({
-    [ownUser.username]: ownConnection,
-  });
-
-  const connections = userConnectionsToGraph(
-    { [reqUser.username]: reqConnection },
-    ownUser.username
-  );
+  await Promise.all([
+    database.ref(`/connections/${ownUser.username}`).update({
+      [reqUser.username]: reqConnection,
+    }),
+    database.ref(`/connections/${reqUser.username}`).update({
+      [ownUser.username]: ownConnection,
+    }),
+  ]);
 
   return {
     id: ownUser.id,
     username: ownUser.username,
     firstname: ownUser.firstname,
     surname: ownUser.surname,
-    connections,
   };
 }
 

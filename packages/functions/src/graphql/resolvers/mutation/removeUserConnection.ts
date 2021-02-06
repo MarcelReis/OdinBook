@@ -5,21 +5,19 @@ import {
   MutationUpdateUserConnectionArgs,
 } from "../../../generated/graphql";
 
-async function removeUserConnectionMutation(
-  _: any,
-  args: MutationUpdateUserConnectionArgs,
-  { firestore, database, auth, req }: TContext
-): Promise<Mutation["updateUserConnection"]> {
-  const tokenId = req.get("Authorization")?.split("Bearer ")[1];
+import { getUserFromToken } from "../../helpers/getUser";
 
-  if (!tokenId) {
+async function removeUserConnectionMutation(
+  _: unknown,
+  args: MutationUpdateUserConnectionArgs,
+  { database, auth, tokenID }: TContext
+): Promise<Mutation["updateUserConnection"]> {
+  if (!tokenID) {
     throw new ApolloError("Invalid authorization header");
   }
 
-  const { uid } = await auth.verifyIdToken(tokenId);
-  const usernameSnap = await database.ref(`/usernames/${uid}`).get();
-
-  console.log("usernameSnap()", usernameSnap.val());
+  const currentUser = await getUserFromToken({ database, auth, tokenID });
+  console.log("currentUser", currentUser);
 
   return {} as any;
 }

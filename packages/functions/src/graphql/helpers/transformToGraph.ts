@@ -1,5 +1,5 @@
 import { UserConnection } from "../../generated/graphql";
-import { ConnectionsObject } from "../models/Connection";
+import { ConnectionsObject } from "../models/UserConnection";
 
 export const userConnectionsToGraph = (
   doc: ConnectionsObject,

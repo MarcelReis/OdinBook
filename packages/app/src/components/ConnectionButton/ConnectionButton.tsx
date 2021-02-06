@@ -2,6 +2,8 @@ import { useMutation } from "@apollo/client";
 import { loader } from "graphql.macro";
 import React, { useState } from "react";
 import {
+  AcceptUserConnectionMutation,
+  AcceptUserConnectionMutationVariables,
   ConnectionStatus,
   CreateUserConnectionMutation,
   CreateUserConnectionMutationVariables,
@@ -12,7 +14,8 @@ import { Check } from "@styled-icons/material/Check";
 
 import Button from "../../marvieUI/atoms/Button";
 
-const createConnectionMutation = loader("./CreateFriendConnection.graphql");
+const createConnectionMutation = loader("./CreateUserConnection.graphql");
+const acceptConnectionMutation = loader("./AcceptUserConnection.graphql");
 
 type PropsType = {
   status?: ConnectionStatus | null | undefined;
@@ -24,6 +27,11 @@ function ConnectionButton(props: PropsType) {
     CreateUserConnectionMutation,
     CreateUserConnectionMutationVariables
   >(createConnectionMutation);
+  const [acceptConnection] = useMutation<
+    AcceptUserConnectionMutation,
+    AcceptUserConnectionMutationVariables
+  >(acceptConnectionMutation);
+
   const [status, setStatus] = useState(props.status);
 
   if (status === ConnectionStatus.Connected) {
@@ -31,7 +39,7 @@ function ConnectionButton(props: PropsType) {
   }
 
   if (status === ConnectionStatus.Waiting) {
-    return <div>Pending</div>;
+    return <div>Requested</div>;
   }
 
   if (status === ConnectionStatus.Pending) {
@@ -41,7 +49,11 @@ function ConnectionButton(props: PropsType) {
           square
           color="green"
           variant="primary"
-          onClick={() => alert("In development")}
+          onClick={() =>
+            acceptConnection({
+              variables: { username: props.username },
+            }).then(() => setStatus(ConnectionStatus.Connected))
+          }
           title="Accept"
         >
           <Check />

@@ -1,13 +1,3 @@
-type UserFriend = {
-  string: string;
-  username: string;
-};
-
-type FriendRequest = {
-  username: string;
-  date: Date;
-};
-
 export type UserDocBasicInfo = {
   id: string;
   username: string;
@@ -24,9 +14,9 @@ export type UserDoc = {
   thumb: string;
   email: string;
 
-  friends: UserFriend[];
+  friends: [];
   friendRequests?: {
-    incoming: FriendRequest[];
-    outgoing: FriendRequest[];
+    incoming: [];
+    outgoing: [];
   };
 };

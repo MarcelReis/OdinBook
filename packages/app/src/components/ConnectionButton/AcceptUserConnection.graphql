@@ -1,0 +1,10 @@
+mutation AcceptUserConnection($username: String!) {
+  updateUserConnection(username: $username, status: CONNECTED) {
+    id
+    username
+    connections {
+      id
+      status
+    }
+  }
+}
