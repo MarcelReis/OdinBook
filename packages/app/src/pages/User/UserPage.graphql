@@ -1,7 +1,9 @@
 query UserPage($username: String!) {
   user(username: $username) {
     id
-    name
+    name @client
+    firstname
+    surname
     thumb
     username
 
