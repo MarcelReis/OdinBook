@@ -2,13 +2,13 @@ import { Query, QueryUserArgs } from "../../../generated/graphql";
 import { ApolloError } from "apollo-server-cloud-functions";
 
 import { TContext } from "../..";
-import { UserDoc } from "../../models/userDoc";
+import { UserDoc } from "../../models/User";
 
 async function userResolver(
   _: any,
   args: QueryUserArgs,
   { firestore, auth, req }: TContext
-): Promise<Omit<Query["user"], "connections">> {
+): Promise<Query["user"]> {
   let doc: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>;
 
   if (!args.username) {

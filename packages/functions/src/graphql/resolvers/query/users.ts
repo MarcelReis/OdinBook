@@ -1,7 +1,7 @@
 import { Query, QueryUserArgs } from "../../../generated/graphql";
 
 import { TContext } from "../..";
-import { UserDocBasicInfo } from "../../models/userDoc";
+import { UserDocBasicInfo } from "../../models/User";
 
 async function usersResolver(
   _: any,

@@ -1,5 +1,5 @@
 import { auth, database } from "firebase-admin";
-import { UserDocBasicInfo } from "../models/userDoc";
+import { UserDocBasicInfo } from "../models/User";
 
 export const getUserFromToken = async ({
   auth,

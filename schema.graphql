@@ -7,6 +7,23 @@ type User {
   thumb: String
   email: String
   connections: [UserConnection!]
+  posts: [Post!]
+}
+
+type Post {
+  id: ID!
+  user: User!
+  createdAt: String!
+  content: String!
+  likes: [String!]!
+  comments: [PostComment!]!
+}
+
+type PostComment {
+  id: ID!
+  user: User!
+  createdAt: String!
+  content: String!
 }
 
 input CreateUserInput {
@@ -36,10 +53,13 @@ type Mutation {
   createUserConnection(username: String!): User!
   updateUserConnection(username: String!, status: ConnectionStatus!): User!
   removeUserConnection(username: String!): User!
+
+  createPost(content: String!): User!
 }
 
 type Query {
   user(username: String): User!
   users: [User!]!
   hello: String!
+  posts: [Post!]!
 }

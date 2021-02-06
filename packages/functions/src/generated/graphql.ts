@@ -20,6 +20,25 @@ export type User = {
   thumb?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   connections?: Maybe<Array<UserConnection>>;
+  posts?: Maybe<Array<Post>>;
+};
+
+export type Post = {
+  __typename?: 'Post';
+  id: Scalars['ID'];
+  user: User;
+  createdAt: Scalars['String'];
+  content: Scalars['String'];
+  likes: Array<Scalars['String']>;
+  comments: Array<PostComment>;
+};
+
+export type PostComment = {
+  __typename?: 'PostComment';
+  id: Scalars['ID'];
+  user: User;
+  createdAt: Scalars['String'];
+  content: Scalars['String'];
 };
 
 export type CreateUserInput = {
@@ -50,6 +69,7 @@ export type Mutation = {
   createUserConnection: User;
   updateUserConnection: User;
   removeUserConnection: User;
+  createPost: User;
 };
 
 
@@ -73,11 +93,17 @@ export type MutationRemoveUserConnectionArgs = {
   username: Scalars['String'];
 };
 
+
+export type MutationCreatePostArgs = {
+  content: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   user: User;
   users: Array<User>;
   hello: Scalars['String'];
+  posts: Array<Post>;
 };
 
 
