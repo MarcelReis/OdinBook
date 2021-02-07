@@ -167,6 +167,26 @@ export type GetCurrentUserQuery = (
   ) }
 );
 
+export type CreatePostMutationVariables = Exact<{
+  content: Scalars['String'];
+}>;
+
+
+export type CreatePostMutation = (
+  { __typename?: 'Mutation' }
+  & { createPost: (
+    { __typename?: 'User' }
+    & { posts?: Maybe<Array<(
+      { __typename?: 'Post' }
+      & Pick<Post, 'id' | 'content' | 'createdAt'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'firstname' | 'surname' | 'username'>
+      ) }
+    )>> }
+  ) }
+);
+
 export type FeedPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 

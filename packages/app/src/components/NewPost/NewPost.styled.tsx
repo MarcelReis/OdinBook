@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import IconButton from "../../atoms/IconButton";
+import IconButton from "../../marvieUI/atoms/IconButton";
 
 export const Container = styled.div`
   position: relative;

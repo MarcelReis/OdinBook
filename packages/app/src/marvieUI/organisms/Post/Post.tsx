@@ -35,11 +35,7 @@ const Post = (props: PropsType) => {
         </S.HeaderText>
       </S.Header>
 
-      <S.Content>
-        We’re interested in your ideas and would be glad to build something
-        bigger out of it. Share your ideas about features/design and we’ll bring
-        them on to our full case of this product design.
-      </S.Content>
+      <S.Content>{props.content}</S.Content>
 
       <S.Interactions>
         <S.Interaction>
