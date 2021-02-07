@@ -1,3 +1,14 @@
 query FeedPage {
-  hello
+  posts {
+    id
+    content
+    createdAt
+    user {
+      id
+      name @client
+      firstname
+      surname
+      username
+    }
+  }
 }

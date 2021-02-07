@@ -172,7 +172,14 @@ export type FeedPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FeedPageQuery = (
   { __typename?: 'Query' }
-  & Pick<Query, 'hello'>
+  & { posts: Array<(
+    { __typename?: 'Post' }
+    & Pick<Post, 'id' | 'content' | 'createdAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'firstname' | 'surname' | 'username'>
+    ) }
+  )> }
 );
 
 export type FinishRegistrationMutationVariables = Exact<{

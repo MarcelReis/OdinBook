@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { User } from "../../../generated/graphql";
 
 import * as S from "./Post.styled";
 import Avatar from "../../Avatar";
@@ -10,40 +9,29 @@ import { Comment } from "@styled-icons/material/Comment";
 import { Favorite } from "@styled-icons/material/Favorite";
 import { FavoriteBorder } from "@styled-icons/material/FavoriteBorder";
 
-export type PostProps = {
-  user: Pick<User, "name" | "thumb" | "username">;
-  liked: boolean;
-  datetime: string;
+export type PropsType = {
+  author: {
+    name: string;
+    username: string;
+    thumb: string;
+  };
+  createdAt: string;
   content: string;
-  likes: number;
-  comments: any;
+  comments: unknown[];
 };
 
-export const fakeProps: PostProps = {
-  user: {
-    name: "Marcelo Reis",
-    thumb: "https://placekitten.com/41/",
-    username: "marcelreis",
-  },
-  liked: false,
-  datetime: "20 April at 4:20 PM",
-  content: "hello world",
-  likes: 3,
-  comments: [],
-};
-
-const Post = () => {
-  const props = fakeProps;
+const Post = (props: PropsType) => {
+  const [liked, setLiked] = useState(false);
 
   return (
     <S.Container>
       <S.Header>
-        <Avatar src={props.user.thumb ?? ""} alt="" />
+        <Avatar src={props.author.thumb} alt="" />
         <S.HeaderText>
           <S.Name>
-            <Link to={`/${props.user.username}`}>{props.user.name}</Link>
+            <Link to={`/${props.author.username}`}>{props.author.name}</Link>
           </S.Name>
-          <S.Datetime>{props.datetime}</S.Datetime>
+          <S.Datetime>{new Date(props.createdAt).toLocaleString()}</S.Datetime>
         </S.HeaderText>
       </S.Header>
 
@@ -58,12 +46,11 @@ const Post = () => {
           <Comment size={"24px"} /> {props.comments.length} Comments
         </S.Interaction>
         <S.Interaction>
-          {props.liked ? (
-            <Favorite size={"24px"} />
+          {liked ? (
+            <Favorite size={"24px"} onClick={() => setLiked((s) => !s)} />
           ) : (
-            <FavoriteBorder size={"24px"} />
+            <FavoriteBorder size={"24px"} onClick={() => setLiked((s) => !s)} />
           )}
-          {props.likes} Likes
         </S.Interaction>
       </S.Interactions>
 
