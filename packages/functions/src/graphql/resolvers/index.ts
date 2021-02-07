@@ -1,6 +1,7 @@
 import { IResolvers } from "apollo-server-cloud-functions";
 import { TContext } from "..";
 
+import postsResolver from "./query/posts";
 import helloResolver from "./query/hello";
 import userResolver from "./query/user";
 import usersResolver from "./query/users";
@@ -20,6 +21,7 @@ export const resolvers: IResolvers<any, TContext> = {
     hello: helloResolver,
     user: userResolver,
     users: usersResolver,
+    posts: postsResolver,
   },
   Mutation: {
     createUser: createUserMutation,

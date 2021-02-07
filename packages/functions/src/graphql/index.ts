@@ -6,7 +6,10 @@ import { ApolloServer, gql } from "apollo-server-cloud-functions";
 
 import { resolvers } from "./resolvers";
 
-admin.initializeApp();
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  databaseURL: "https://odinbook-30f97-default-rtdb.firebaseio.com/",
+});
 
 const schemaString = fs
   .readFileSync(path.join(__dirname, "../../../../schema.graphql"), "utf-8")
@@ -15,6 +18,7 @@ const schemaString = fs
 const typeDefs = gql(schemaString);
 
 const database = admin.database();
+admin.securityRules();
 
 export type TContext = {
   firestore: FirebaseFirestore.Firestore;
