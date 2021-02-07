@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: "12"
       - name: Install dependencies
-        run: npx lerna exec yarn && npx lerna build
+        run: npx lerna bootstrap && npx lerna build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
