@@ -1,5 +1,5 @@
 overwrite: true
-schema: "../../schema.graphql"
+schema: "./lib/graphql/schema.graphql"
 generates:
   src/generated/graphql.ts:
     plugins:

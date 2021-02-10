@@ -5,7 +5,7 @@ const httpLink = createHttpLink({
   uri:
     process.env.NODE_ENV === "development"
       ? "http://localhost:5001/odinbook-30f97/us-central1/graphql"
-      : "",
+      : "https://us-central1-odinbook-30f97.cloudfunctions.net/graphql",
   credentials: "same-origin",
 });
 

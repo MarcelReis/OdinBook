@@ -12,7 +12,7 @@ admin.initializeApp({
 });
 
 const schemaString = fs
-  .readFileSync(path.join(__dirname, "../../../../schema.graphql"), "utf-8")
+  .readFileSync(path.join(__dirname, "./schema.graphql"), "utf-8")
   .toString();
 
 const typeDefs = gql(schemaString);
@@ -32,8 +32,8 @@ export type TContext = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  playground: true,
-  introspection: true,
+  playground: process.env.FUNCTIONS_EMULATOR ? true : false,
+  introspection: process.env.FUNCTIONS_EMULATOR ? true : false,
   context: ({
     req,
     res,
