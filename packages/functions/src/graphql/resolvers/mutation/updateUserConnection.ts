@@ -25,6 +25,10 @@ async function updateUserConnectionMutation(
     }),
   ];
 
+  if (!ownUser || !connectionUser) {
+    throw new ApolloError("Missing some user register");
+  }
+
   if (args.status === ConnectionStatus.Connected) {
     const connection = {
       status: ConnectionStatus.Connected,

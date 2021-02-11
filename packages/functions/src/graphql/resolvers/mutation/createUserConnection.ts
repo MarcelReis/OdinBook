@@ -27,6 +27,10 @@ async function createUserConnectionMutation(
     }),
   ];
 
+  if (!ownUser || !reqUser) {
+    throw new ApolloError("Missing some user register");
+  }
+
   const newConnection: Pick<ConnectionObject, "createdAt" | "acceptedAt"> = {
     createdAt: new Date().toISOString(),
     acceptedAt: null,

@@ -8,7 +8,9 @@ import { resolvers } from "./resolvers";
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
-  databaseURL: "https://odinbook-30f97-default-rtdb.firebaseio.com/",
+  databaseURL: process.env.FUNCTIONS_EMULATOR
+    ? "http://localhost:9000/?ns=odinbook-30f97-default-rtdb"
+    : "https://odinbook-30f97-default-rtdb.firebaseio.com/",
 });
 
 const schemaString = fs
