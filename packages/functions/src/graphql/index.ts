@@ -6,12 +6,7 @@ import { ApolloServer, gql } from "apollo-server-cloud-functions";
 
 import { resolvers } from "./resolvers";
 
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  databaseURL: process.env.FUNCTIONS_EMULATOR
-    ? "http://localhost:9000/?ns=odinbook-30f97-default-rtdb"
-    : "https://odinbook-30f97-default-rtdb.firebaseio.com/",
-});
+admin.initializeApp();
 
 const schemaString = fs
   .readFileSync(path.join(__dirname, "./schema.graphql"), "utf-8")
