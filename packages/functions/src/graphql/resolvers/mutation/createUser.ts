@@ -15,7 +15,7 @@ async function createUserMutation(
 
   const databaseRef = database.ref("/");
 
-  const user = getUserFromToken({ auth, database, tokenID });
+  const user = await getUserFromToken({ auth, database, tokenID });
   if (user) {
     throw new ApolloError("User already exists");
   }

@@ -3,7 +3,7 @@
     ".read": false,
     ".write": false,
     "posts": {
-      ".indexOn": "createdAt"
+      ".indexOn": ["createdAt"]
     }
   }
 }
