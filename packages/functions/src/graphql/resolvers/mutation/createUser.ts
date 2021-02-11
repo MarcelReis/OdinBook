@@ -1,32 +1,26 @@
 import { ApolloError } from "apollo-server-cloud-functions";
 import { TContext } from "../..";
 import { Mutation, MutationCreateUserArgs } from "../../../generated/graphql";
+import { getUserFromToken } from "../../helpers/getUser";
 import { UserDoc, UserDocBasicInfo } from "../../models/User";
 
 async function createUserMutation(
   _: any,
   args: MutationCreateUserArgs,
-  { firestore, database, auth, tokenID }: TContext
+  { database, auth, tokenID }: TContext
 ): Promise<Mutation["createUser"]> {
-  const databaseRef = database.ref("/");
-
   if (!tokenID) {
     throw new ApolloError("Invalid authorization header");
   }
 
-  const { uid, email } = await auth.verifyIdToken(tokenID);
+  const databaseRef = database.ref("/");
 
-  const userCollection = firestore.collection("user");
-
-  const querySnapshot = await userCollection
-    .where("id", "==", uid)
-    .limit(1)
-    .get();
-
-  const doc = querySnapshot.docs[0];
-  if (doc) {
+  const user = getUserFromToken({ auth, database, tokenID });
+  if (user) {
     throw new ApolloError("User already exists");
   }
+
+  const { uid, email } = await auth.verifyIdToken(tokenID);
 
   const basic_data: UserDocBasicInfo = {
     id: uid,
@@ -46,8 +40,6 @@ async function createUserMutation(
     },
   };
 
-  await userCollection.doc(args.input.username).set(full_data);
-
   const usersRef = databaseRef.child("users");
   await usersRef.update({ [basic_data.username]: { ...basic_data } });
 
@@ -59,8 +51,6 @@ async function createUserMutation(
     username: full_data.username,
     firstname: full_data.firstname,
     surname: full_data.surname,
-    thumb: full_data.thumb,
-    email: full_data.email ?? "",
     connections: [],
   };
 }

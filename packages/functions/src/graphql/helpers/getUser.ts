@@ -9,7 +9,7 @@ export const getUserFromToken = async ({
   auth: auth.Auth;
   database: database.Database;
   tokenID: string;
-}): Promise<UserDocBasicInfo> => {
+}): Promise<UserDocBasicInfo | null> => {
   const { uid } = await auth.verifyIdToken(tokenID);
 
   const username = (await database.ref(`/usernames/${uid}`).get()).val();
@@ -23,8 +23,12 @@ export const getUserFromUsername = async ({
 }: {
   username: string;
   database: database.Database;
-}): Promise<UserDocBasicInfo> => {
+}): Promise<UserDocBasicInfo | null> => {
   const snapshot = await database.ref(`/users/${username}`).get();
+
+  if (!snapshot.exists()) {
+    return null;
+  }
 
   return snapshot.val();
 };

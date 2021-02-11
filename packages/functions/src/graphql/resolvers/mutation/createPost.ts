@@ -14,6 +14,9 @@ async function createPostMutation(
   }
 
   const ownUser = await getUserFromToken({ auth, database, tokenID });
+  if (!ownUser) {
+    throw new ApolloError("Error creating post");
+  }
 
   const post: PostDoc = {
     user: ownUser,
