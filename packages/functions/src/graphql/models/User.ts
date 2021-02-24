@@ -3,7 +3,7 @@ export type UserDocBasicInfo = {
   username: string;
   firstname: string;
   surname: string;
-  thumb: string;
+  thumb?: string;
 };
 
 export type UserDoc = {

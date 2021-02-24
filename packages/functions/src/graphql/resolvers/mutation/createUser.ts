@@ -2,7 +2,7 @@ import { ApolloError } from "apollo-server-cloud-functions";
 import { TContext } from "../..";
 import { Mutation, MutationCreateUserArgs } from "../../../generated/graphql";
 import { getUserFromToken } from "../../helpers/getUser";
-import { UserDoc, UserDocBasicInfo } from "../../models/User";
+import { UserDocBasicInfo } from "../../models/User";
 
 async function createUserMutation(
   _: any,
@@ -20,37 +20,28 @@ async function createUserMutation(
     throw new ApolloError("User already exists");
   }
 
-  const { uid, email } = await auth.verifyIdToken(tokenID);
+  const { uid, picture } = await auth.verifyIdToken(tokenID);
 
-  const basic_data: UserDocBasicInfo = {
+  const newUser: UserDocBasicInfo = {
     id: uid,
     username: args.input.username,
     firstname: args.input.firstname,
     surname: args.input.surname,
-    thumb: "",
+    thumb: picture,
   };
-
-  const full_data: UserDoc = {
-    ...basic_data,
-    email: email ?? "",
-    friends: [],
-    friendRequests: {
-      incoming: [],
-      outgoing: [],
-    },
-  };
-
-  const usersRef = databaseRef.child("users");
-  await usersRef.update({ [basic_data.username]: { ...basic_data } });
-
   const usernameRef = databaseRef.child("usernames");
-  await usernameRef.update({ [uid]: basic_data.username });
+  const usersRef = databaseRef.child("users");
+
+  await Promise.all([
+    usersRef.update({ [newUser.username]: { ...newUser } }),
+    usernameRef.update({ [uid]: newUser.username }),
+  ]);
 
   return {
-    id: full_data.id,
-    username: full_data.username,
-    firstname: full_data.firstname,
-    surname: full_data.surname,
+    id: newUser.id,
+    username: newUser.username,
+    firstname: newUser.firstname,
+    surname: newUser.surname,
     connections: [],
   };
 }
