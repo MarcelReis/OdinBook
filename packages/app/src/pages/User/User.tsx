@@ -35,19 +35,21 @@ const UserPage = () => {
 
   return (
     <div>
+      <img src={data.user.thumb || "https://placekitten.com/50/50"} alt="" />
+
       <h1>{data.user.name}</h1>
 
       {data.user.connectionStatus === ConnectionStatus.Connected && (
         <div>Friends</div>
       )}
+
       {data.user.connectionStatus === ConnectionStatus.Waiting && (
         <div>Friend request sent</div>
       )}
+
       {data.user.connectionStatus === ConnectionStatus.Pending && (
         <div>Pending friend request</div>
       )}
-
-      <img src={data.user.thumb || "https://placekitten.com/50/50"} alt="" />
 
       <div>
         <header>Friends: {acceptedConnections.length}</header>
