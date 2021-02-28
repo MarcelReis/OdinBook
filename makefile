@@ -9,7 +9,7 @@ deploy-functions:
 	firebase deploy --only functions
 
 run:
-	lerna run start --parallel
+	lerna run start --parallel --stream
 
 run-app:
 	lerna run start --scope=app --stream

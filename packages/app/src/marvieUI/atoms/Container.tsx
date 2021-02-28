@@ -8,9 +8,9 @@ export const Container = styled.div`
   flex-direction: column;
 
   ${media.lessThan("sm")} {
-    margin: 24px 16px;
+    margin: 0 16px;
   }
   ${media.greaterThan("sm")} {
-    margin: 24px auto;
+    margin: 0 auto;
   }
 `;

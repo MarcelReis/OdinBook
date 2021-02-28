@@ -13,6 +13,7 @@ query UserPage($username: String!) {
       user {
         id
         firstname
+        thumb
         surname
         username
       }

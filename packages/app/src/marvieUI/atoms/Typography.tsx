@@ -1,4 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+type TypographyProps = {
+  contrast?: 0 | 1 | 2 | 3;
+  scale?: Scale;
+  textAlign?: string;
+};
 
 type Scale =
   | "heading1"
@@ -14,11 +20,6 @@ type Scale =
   | "button"
   | "caption"
   | "overline";
-
-type TypographyProps = {
-  contrast?: 0 | 1 | 2 | 3;
-  scale?: Scale;
-};
 
 const fontSize: Record<Scale, number> = {
   heading1: 6,
@@ -68,11 +69,17 @@ const letterSpacing: Record<Scale, string> = {
   overline: "1.5px",
 };
 
+const textAlign = css<TypographyProps>`
+  text-align: ${(props) => props.textAlign};
+`;
+
 const Typography = styled.span<TypographyProps>`
   color: ${({ theme, contrast }) => theme.palette.text[contrast ?? 0]};
   font-size: ${({ scale }) => fontSize[scale ?? "body1"]}rem;
   font-weight: ${({ scale }) => fontWeight[scale ?? "body1"]};
   letter-spacing: ${({ scale }) => letterSpacing[scale ?? "body1"]};
+
+  ${(props) => (props.textAlign ? textAlign : "")}
 `;
 
 export default Typography;

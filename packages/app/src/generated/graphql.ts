@@ -238,7 +238,7 @@ export type UserPageQuery = (
       & Pick<UserConnection, 'id' | 'status'>
       & { user: (
         { __typename?: 'User' }
-        & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>
+        & Pick<User, 'id' | 'firstname' | 'thumb' | 'surname' | 'username'>
       ) }
     )>> }
   ) }
