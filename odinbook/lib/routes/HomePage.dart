@@ -1,4 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+
+String listPosts = """
+query {
+  posts {
+    id
+    content
+  }
+}
+""";
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -66,6 +76,26 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Query(
+              options: QueryOptions(
+                document: gql(listPosts),
+              ),
+              builder: (QueryResult result,
+                  {VoidCallback refetch, FetchMore fetchMore}) {
+                if (result.hasException) {
+                  return Text(result.exception.toString());
+                }
+
+                if (result.isLoading) {
+                  return Text('Loading');
+                }
+
+                // it can be either Map or List
+                String post = result.data['posts'][0]['content'];
+
+                return Text(post);
+              },
+            ),
             Text(
               'You have pushed the button this many times:',
             ),
@@ -77,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text("About"),
                 onPressed: () {
                   Navigator.pushNamed(context, '/about');
-                })
+                }),
           ],
         ),
       ),
