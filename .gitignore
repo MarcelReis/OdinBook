@@ -6,3 +6,5 @@
 
 # Firebase logs
 *.log
+
+node_modules
