@@ -114,36 +114,19 @@ export type QueryUserArgs = {
   username?: Maybe<Scalars['String']>;
 };
 
-export type AcceptUserConnectionMutationVariables = Exact<{
-  username: Scalars['String'];
+export type FinishSignUpMutationVariables = Exact<{
+  input: CreateUserInput;
 }>;
 
 
-export type AcceptUserConnectionMutation = (
+export type FinishSignUpMutation = (
   { __typename?: 'Mutation' }
-  & { updateUserConnection: (
+  & { createUser: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'username'>
+    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
     & { connections?: Maybe<Array<(
       { __typename?: 'UserConnection' }
-      & Pick<UserConnection, 'id' | 'status'>
-    )>> }
-  ) }
-);
-
-export type CreateUserConnectionMutationVariables = Exact<{
-  username: Scalars['String'];
-}>;
-
-
-export type CreateUserConnectionMutation = (
-  { __typename?: 'Mutation' }
-  & { createUserConnection: (
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username'>
-    & { connections?: Maybe<Array<(
-      { __typename?: 'UserConnection' }
-      & Pick<UserConnection, 'id' | 'status'>
+      & Pick<UserConnection, 'id'>
     )>> }
   ) }
 );
@@ -165,92 +148,4 @@ export type GetCurrentUserQuery = (
       ) }
     )>> }
   ) }
-);
-
-export type CreatePostMutationVariables = Exact<{
-  content: Scalars['String'];
-}>;
-
-
-export type CreatePostMutation = (
-  { __typename?: 'Mutation' }
-  & { createPost: (
-    { __typename?: 'User' }
-    & { posts?: Maybe<Array<(
-      { __typename?: 'Post' }
-      & Pick<Post, 'id' | 'content' | 'createdAt'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'firstname' | 'surname' | 'username'>
-      ) }
-    )>> }
-  ) }
-);
-
-export type FeedPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FeedPageQuery = (
-  { __typename?: 'Query' }
-  & { posts: Array<(
-    { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'content' | 'createdAt'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'firstname' | 'surname' | 'username'>
-    ) }
-  )> }
-);
-
-export type FinishRegistrationMutationVariables = Exact<{
-  input: CreateUserInput;
-}>;
-
-
-export type FinishRegistrationMutation = (
-  { __typename?: 'Mutation' }
-  & { createUser: (
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
-    & { connections?: Maybe<Array<(
-      { __typename?: 'UserConnection' }
-      & Pick<UserConnection, 'id' | 'status'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>
-      ) }
-    )>> }
-  ) }
-);
-
-export type UserPageQueryVariables = Exact<{
-  username: Scalars['String'];
-}>;
-
-
-export type UserPageQuery = (
-  { __typename?: 'Query' }
-  & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'firstname' | 'surname' | 'thumb' | 'username' | 'connectionStatus'>
-    & { connections?: Maybe<Array<(
-      { __typename?: 'UserConnection' }
-      & Pick<UserConnection, 'id' | 'status'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'firstname' | 'thumb' | 'surname' | 'username'>
-      ) }
-    )>> }
-  ) }
-);
-
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = (
-  { __typename?: 'Query' }
-  & { users: Array<(
-    { __typename?: 'User' }
-    & Pick<User, 'thumb' | 'firstname' | 'surname' | 'username' | 'connectionStatus'>
-  )> }
 );

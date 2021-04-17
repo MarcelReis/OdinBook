@@ -24,7 +24,7 @@ function Appbar() {
         >
           <Light />
         </Button>
-        <Button variant="negative" onPress={logout}>
+        <Button variant="negative" onPress={logout} aria-label="Logout">
           <LogOut />
         </Button>
       </Flex>

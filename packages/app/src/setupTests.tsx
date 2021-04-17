@@ -1,5 +1,7 @@
 import React from "react";
 import { render, RenderOptions } from "@testing-library/react";
+import { Provider } from "@react-spectrum/provider";
+import { defaultTheme } from "@adobe/react-spectrum";
 
 // jest-dom adds custom jest matchers for asserting on DOM nodes.
 // allows you to do things like:
@@ -7,11 +9,8 @@ import { render, RenderOptions } from "@testing-library/react";
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 
-import { ThemeProvider } from "styled-components";
-import { darkTheme } from "./theme";
-
 const AllProviders = ({ children }: { children?: React.ReactNode }) => (
-  <ThemeProvider theme={darkTheme}>{children}</ThemeProvider>
+  <Provider theme={defaultTheme}>{children}</Provider>
 );
 
 export * from "@testing-library/react";

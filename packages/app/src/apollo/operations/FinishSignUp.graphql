@@ -1,0 +1,12 @@
+mutation FinishSignUp($input: CreateUserInput!) {
+  createUser(input: $input) {
+    id
+    username
+    firstname
+    thumb
+
+    connections {
+      id
+    }
+  }
+}
