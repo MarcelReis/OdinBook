@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
+import { Provider, defaultTheme } from "@adobe/react-spectrum";
 
 import { client } from "./apollo";
 import { useRegistration } from "./lib/odinAuth";
@@ -40,9 +41,11 @@ function Routes() {
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Routes />
-      </Router>
+      <Provider theme={defaultTheme} colorScheme="dark">
+        <Router>
+          <Routes />
+        </Router>
+      </Provider>
     </ApolloProvider>
   );
 };

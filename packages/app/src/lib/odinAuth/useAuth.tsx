@@ -14,7 +14,7 @@ firebaseUserVar.onNextChange(async (user) => {
 
 const auth = firebase.auth();
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV !== "production") {
   auth.useEmulator("http://localhost:9099");
 }
 

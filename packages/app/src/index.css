@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+}
+
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
+}
+
+.firebase-emulator-warning {
+  display: none;
+}
