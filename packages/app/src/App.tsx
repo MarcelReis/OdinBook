@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider, makeVar, useReactiveVar } from "@apollo/client";
 import { Provider, defaultTheme } from "@adobe/react-spectrum";
+import { Helmet } from "react-helmet";
 
 import { client } from "./apollo";
 import { useRegistration } from "./lib/odinAuth";
@@ -54,6 +55,9 @@ const App = () => {
 
   return (
     <ApolloProvider client={client}>
+      <Helmet>
+        <title>OdinBook</title>
+      </Helmet>
       <Provider theme={defaultTheme} colorScheme={colorScheme}>
         <Router>
           <Routes />
