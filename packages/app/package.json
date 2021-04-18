@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "0.1.0",
+  "version": "0.0.1-alpha.0",
   "private": true,
   "dependencies": {
     "@adobe/react-spectrum": "^3.9.0",
@@ -58,6 +58,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {}
+  }
 }
