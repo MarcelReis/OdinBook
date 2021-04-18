@@ -1,20 +1,17 @@
 # OdinBook
 
-## Roadmap
- - [ ] Users must sign in to see anything except the sign in page.
- - [ ] Users should be able to sign in using their real facebook details.
- - [ ] Users can send friend requests to other users.
- - [ ] A user must accept the friend request to become friends.
- - [ ] Users can create posts.
- - [ ] Users can like posts.
- - [ ] Users can comment on posts.
- - [ ] Posts should always display with the post content, author, comments and likes.
- - [ ] Treat the Posts index page like the real Facebook’s “Timeline” feature – show all the recent posts from the current user and users she is friends with.
- - [ ] Users can create Profile with a photo (you can get this from the real facebook when you sign in using passport)
- - [ ] The User Show page contains their profile information, profile photo and posts.
- - [ ] The Users Index page lists all users and buttons for sending friend requests to those who are not already friends or who don’t already have a pending request.
+## Requirements
 
-Extra Credit
- - [ ] Make posts also allow images (either just via a url, or by uploading one.)
- - [ ] Allow Users to upload and update their own profile photo.
- - [ ] Make it pretty!
+lerna - https://lerna.js.org/
+firebase cli - https://firebase.google.com/docs/cli
+yarn 1.x - https://yarnpkg.com/
+node 14.x - https://nodejs.org/
+nvm - https://github.com/nvm-sh/nvm
+
+## Scripts
+
+`yarn run start`
+`yarn run format`
+`yarn run lint`
+`yarn run test`
+`yarn run build`

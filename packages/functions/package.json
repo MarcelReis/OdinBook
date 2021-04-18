@@ -1,12 +1,13 @@
 {
   "name": "functions",
   "scripts": {
-    "build": "tsc",
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "format": "prettier --write 'src/**/*.(js|ts)'",
-    "lint": "eslint src --ext ts,js,tsx,jsx",
-    "shell": "npm run build && firebase functions:shell",
     "start": "tsc --watch",
+    "build": "tsc",
+    "lint": "eslint src --ext ts,js,tsx,jsx",
+    "test": "echo 'Lacking tests!'",
+    "format": "prettier --write 'src/**/*.(js|ts)'",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "codegen": "graphql-codegen --config codegen.yml"

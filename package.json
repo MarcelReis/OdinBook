@@ -1,9 +1,16 @@
 {
-  "name": "root",
+  "name": "odinbook-monorepo",
   "private": true,
+  "author": "Marcelo Reis <marcelo.ag.reis@gmail.com>",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "lint": "lerna run lint",
-    "format": "lerna run format"
+    "start": "lerna run start --parallel",
+    "build": "lerna run build --parallel",
+    "lint": "lerna run lint --parallel",
+    "test": "lerna run test --parallel",
+    "format": "lerna run format --parallel"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",
