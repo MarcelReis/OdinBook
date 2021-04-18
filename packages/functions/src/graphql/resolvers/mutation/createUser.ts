@@ -27,7 +27,7 @@ async function createUserMutation(
     username: args.input.username,
     firstname: args.input.firstname,
     surname: args.input.surname,
-    thumb: picture,
+    thumb: picture ?? "https://placekitten.com/50",
   };
   const usernameRef = databaseRef.child("usernames");
   const usersRef = databaseRef.child("users");
