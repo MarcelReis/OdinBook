@@ -114,6 +114,25 @@ export type QueryUserArgs = {
   username?: Maybe<Scalars['String']>;
 };
 
+export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCurrentUserQuery = (
+  { __typename?: 'Query' }
+  & { user: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
+    & { connections?: Maybe<Array<(
+      { __typename?: 'UserConnection' }
+      & Pick<UserConnection, 'id' | 'status'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>
+      ) }
+    )>> }
+  ) }
+);
+
 export type FinishSignUpMutationVariables = Exact<{
   input: CreateUserInput;
 }>;
@@ -131,21 +150,15 @@ export type FinishSignUpMutation = (
   ) }
 );
 
-export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetUserQueryVariables = Exact<{
+  username: Scalars['String'];
+}>;
 
 
-export type GetCurrentUserQuery = (
+export type GetUserQuery = (
   { __typename?: 'Query' }
   & { user: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
-    & { connections?: Maybe<Array<(
-      { __typename?: 'UserConnection' }
-      & Pick<UserConnection, 'id' | 'status'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'firstname' | 'surname' | 'username'>
-      ) }
-    )>> }
+    & Pick<User, 'id' | 'firstname' | 'surname' | 'thumb'>
   ) }
 );

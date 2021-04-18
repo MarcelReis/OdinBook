@@ -12,6 +12,8 @@ import LoginPage from "./pages/Login";
 import SignUpPage from "./pages/SignUp";
 import FeedPage from "./pages/Feed";
 import Appbar from "./components/Appbar";
+import UserPage from "./pages/User";
+import NotFoundPage from "./pages/NotFound";
 
 function Routes() {
   const { isLoading, isLogged, isRegistered } = useRegistration();
@@ -43,6 +45,8 @@ function Routes() {
       <Appbar />
       <Switch>
         <Route exact path="/" component={FeedPage} />
+        <Route exact strict path="/user/:username/" component={UserPage} />
+        <NotFoundPage />
       </Switch>
     </>
   );
