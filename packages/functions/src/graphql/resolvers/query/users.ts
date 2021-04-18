@@ -5,7 +5,7 @@ import { UserDocBasicInfo } from "../../models/User";
 
 async function usersResolver(
   _: any,
-  args: QueryUserArgs,
+  _args: QueryUserArgs,
   { database }: TContext
 ): Promise<Query["users"]> {
   const databaseRef = database.ref("/");

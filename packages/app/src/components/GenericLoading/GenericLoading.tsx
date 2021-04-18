@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, View, ProgressCircle, Text } from "@adobe/react-spectrum";
 
 function GenericLoading() {

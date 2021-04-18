@@ -9,7 +9,7 @@ import { getUserFromToken } from "../../helpers/getUser";
 
 async function removeUserConnectionMutation(
   _: unknown,
-  args: MutationUpdateUserConnectionArgs,
+  _args: MutationUpdateUserConnectionArgs,
   { database, auth, tokenID }: TContext
 ): Promise<Mutation["updateUserConnection"]> {
   if (!tokenID) {

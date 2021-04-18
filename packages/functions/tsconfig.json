@@ -1,5 +1,7 @@
 {
+  "extends": "../tsconfig.settings.json",
   "compilerOptions": {
+    "composite": true,
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -7,7 +9,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2017",
-    "allowSyntheticDefaultImports": true
+    "esModuleInterop": true
   },
   "compileOnSave": true,
   "include": ["src"]

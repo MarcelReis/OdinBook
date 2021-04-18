@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex } from "@react-spectrum/layout";
 import { View } from "@react-spectrum/view";
 import { Button } from "@adobe/react-spectrum";

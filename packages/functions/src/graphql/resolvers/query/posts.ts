@@ -4,7 +4,7 @@ import { PostDoc } from "../../models/Post";
 
 async function postsResolver(
   _: any,
-  args: void,
+  _args: void,
   { database }: TContext
 ): Promise<Query["posts"] | undefined> {
   const postsSnapShot = await database

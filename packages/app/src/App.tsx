@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider, makeVar, useReactiveVar } from "@apollo/client";
 import { Provider, defaultTheme } from "@adobe/react-spectrum";

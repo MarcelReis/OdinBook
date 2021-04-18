@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, View, ProgressCircle } from "@adobe/react-spectrum";
 
 function LoadingPage() {

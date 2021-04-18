@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Button, Flex, Header, Heading, View } from "@adobe/react-spectrum";
 import { SiFacebook, SiGoogle, SiGithub } from "react-icons/si";
 import { useAuth } from "../lib/odinAuth";

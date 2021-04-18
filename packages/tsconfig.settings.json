@@ -2,6 +2,7 @@
   "compilerOptions": {
     "module": "CommonJS",
     "types": [],
+    "incremental": true,
     "sourceMap": true,
     "target": "ES2018",
     "strict": true,

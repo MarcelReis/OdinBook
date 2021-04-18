@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Flex, View, Image, Heading, Header } from "@adobe/react-spectrum";
 import { loader } from "graphql.macro";
-import React from "react";
 import { useParams } from "react-router";
 import GenericLoading from "../../components/GenericLoading";
 import { GetUserQuery, GetUserQueryVariables } from "../../generated/graphql";
