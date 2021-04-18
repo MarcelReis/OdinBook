@@ -18,7 +18,6 @@ const database = admin.database();
 admin.securityRules();
 
 export type TContext = {
-  firestore: FirebaseFirestore.Firestore;
   database: admin.database.Database;
   auth: admin.auth.Auth;
   req: functions.https.Request;
@@ -38,7 +37,6 @@ const server = new ApolloServer({
     req: functions.https.Request;
     res: functions.Response;
   }): TContext => ({
-    firestore: admin.firestore(),
     database,
     auth: admin.auth(),
     req,

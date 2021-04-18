@@ -1,5 +1,5 @@
 module.exports = {
-  extends: "../../.eslintrc.js",
+  extends: ["react-app", "../../.eslintrc.js"],
   parserOptions: {
     project: ["tsconfig.json"],
   },

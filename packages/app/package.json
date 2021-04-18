@@ -35,6 +35,8 @@
     "start": "HTTPS=true SSL_CRT_FILE=cert/localhost.pem SSL_KEY_FILE=cert/localhost-key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "format": "prettier --write 'src/**/*.(ts|tsx)'",
+    "lint": "eslint src --ext ts,js,tsx,jsx",
     "eject": "react-scripts eject",
     "init": "graphql-codegen init",
     "codegen": "graphql-codegen --config codegen.yml"
