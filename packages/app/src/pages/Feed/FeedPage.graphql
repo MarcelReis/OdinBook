@@ -1,0 +1,6 @@
+query FeedPage {
+  user {
+    id
+    thumb
+  }
+}
