@@ -2,7 +2,6 @@ import {
   Button,
   Flex,
   Form,
-  Image,
   ProgressCircle,
   Text,
   TextArea,
@@ -15,6 +14,8 @@ import { ComponentProps, useState } from "react";
 import GenericError from "../../components/GenericError";
 import GenericLoading from "../../components/GenericLoading";
 import Post from "../../components/Post";
+import Avatar from "../../components/Avatar";
+
 import {
   FeedPageQuery,
   CreatePostMutation,
@@ -90,17 +91,8 @@ function FeedPage() {
       >
         <Form isDisabled={result.loading}>
           <Flex alignItems="center" gap="size-150">
-            <View
-              borderRadius="large"
-              overflow="hidden"
-              height="size-500"
-              width="size-500"
-              flexGrow={0}
-              borderWidth="thick"
-              borderColor="gray-100"
-            >
-              <Image alt="" src={data.user.thumb!} width="100%" height="100%" />
-            </View>
+            <Avatar src={data.user.thumb!} />
+
             <TextArea
               aria-label="Create a post"
               label=""
@@ -139,7 +131,7 @@ function FeedPage() {
           </Flex>
         </Form>
       </View>
-      <Flex flex-direction="column" marginTop="size-150">
+      <Flex direction="column" marginTop="size-150" marginX="size-75">
         {createdPosts.map((props) => (
           <Post {...props} key={props.id} />
         ))}
