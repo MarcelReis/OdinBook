@@ -7,7 +7,7 @@ import {
 
 import { getUserFromToken } from "../../helpers/getUser";
 
-async function removeUserConnectionMutation(
+async function deleteUserConnectionMutation(
   _: unknown,
   _args: MutationUpdateUserConnectionArgs,
   { database, auth, tokenID }: TContext
@@ -22,4 +22,4 @@ async function removeUserConnectionMutation(
   return {} as any;
 }
 
-export default removeUserConnectionMutation;
+export default deleteUserConnectionMutation;

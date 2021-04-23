@@ -52,7 +52,7 @@ type Mutation {
 
   createUserConnection(username: String!): User!
   updateUserConnection(username: String!, status: ConnectionStatus!): User!
-  removeUserConnection(username: String!): User!
+  deleteUserConnection(username: String!): User!
 
   createPost(content: String!): User!
 }

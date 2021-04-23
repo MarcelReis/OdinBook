@@ -9,7 +9,7 @@ import usersResolver from "./query/users";
 import createUserMutation from "./mutation/createUser";
 import createUserConnectionMutation from "./mutation/createUserConnection";
 import updateUserConnectionMutation from "./mutation/updateUserConnection";
-import removeUserConnectionMutation from "./mutation/removeUserConnection";
+import deleteUserConnectionMutation from "./mutation/deleteUserConnection";
 import createPostMutation from "./mutation/createPost";
 
 import { ConnectionsObject } from "../models/UserConnection";
@@ -28,7 +28,7 @@ export const resolvers: IResolvers<any, TContext> = {
 
     createUserConnection: createUserConnectionMutation,
     updateUserConnection: updateUserConnectionMutation,
-    removeUserConnection: removeUserConnectionMutation,
+    deleteUserConnection: deleteUserConnectionMutation,
 
     createPost: createPostMutation,
   },
