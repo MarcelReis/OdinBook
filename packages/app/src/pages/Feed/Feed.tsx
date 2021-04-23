@@ -29,24 +29,26 @@ function FeedPage() {
   const [postText, setPostText] = useState("");
   const [createdPosts, setCreatedPosts] = useState<
     ComponentProps<typeof Post>[]
-  >([
-    {
-      id: "-MYeBIrp3m9kSYyJ72f6",
-      createdAt: "2021-04-19T12:53:18.987Z",
-      content: "This is another test post",
-      user: {
-        fullName: "Marcelo Reis",
-        thumb: "https://randomuser.me/api/portraits/men/17.jpg",
-        username: "_marcelreis",
-      },
-    },
-  ]);
+  >([]);
 
   const { data, loading, error } = useQuery<FeedPageQuery>(query);
   const [createPost, result] = useMutation<
     CreatePostMutation,
     CreatePostMutationVariables
   >(mutation);
+
+  const posts: ComponentProps<typeof Post>[] =
+    data?.posts.map((post) => ({
+      id: post.id,
+      content: post.content,
+      createdAt: post.createdAt,
+      user: {
+        id: post.user.id,
+        fullName: post.user.firstname + " " + post.user.surname,
+        thumb: post.user.thumb!,
+        username: post.user.username,
+      },
+    })) ?? [];
 
   const submit = async () => {
     const { data } = await createPost({ variables: { content: postText } });
@@ -69,7 +71,7 @@ function FeedPage() {
       },
     };
 
-    setCreatedPosts((s) => [...s, newPost]);
+    setCreatedPosts((s) => [newPost, ...s]);
   };
 
   if (loading) {
@@ -131,10 +133,22 @@ function FeedPage() {
           </Flex>
         </Form>
       </View>
-      <Flex direction="column" marginTop="size-150" marginX="size-75">
-        {createdPosts.map((props) => (
-          <Post {...props} key={props.id} />
-        ))}
+      <Flex
+        direction="column"
+        marginY="size-150"
+        marginX="size-75"
+        gap="size-150"
+      >
+        <>
+          {createdPosts.map((post) => (
+            <Post {...post} key={post.id} />
+          ))}
+        </>
+        <>
+          {posts.map((post) => (
+            <Post {...post} key={post.id} />
+          ))}
+        </>
       </Flex>
     </View>
   );

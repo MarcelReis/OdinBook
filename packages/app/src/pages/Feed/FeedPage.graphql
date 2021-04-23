@@ -3,4 +3,16 @@ query FeedPage {
     id
     thumb
   }
+  posts {
+    id
+    createdAt
+    content
+    user {
+      id
+      username
+      firstname
+      surname
+      thumb
+    }
+  }
 }

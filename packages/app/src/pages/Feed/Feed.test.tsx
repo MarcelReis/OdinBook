@@ -21,6 +21,20 @@ const mockFeedPageQuery: MockedResponse<FeedPageQuery> = {
         id: Math.random().toString(36),
         thumb: Math.random().toString(36),
       },
+      posts: [
+        {
+          id: "-MYbcL6QjbrTcsKA1MTL",
+          createdAt: "2021-04-19T00:56:56.541Z",
+          content: "This is my first post ever, I hope it works!",
+          user: {
+            id: "coYM9nbpolZKaZAg1Sygb05h5itA",
+            username: "_marcelreis",
+            firstname: "Marcelo",
+            surname: "Reis",
+            thumb: "https://randomuser.me/api/portraits/men/17.jpg",
+          },
+        },
+      ],
     },
   },
 };

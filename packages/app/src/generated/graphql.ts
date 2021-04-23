@@ -162,7 +162,14 @@ export type FeedPageQuery = (
   & { user: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'thumb'>
-  ) }
+  ), posts: Array<(
+    { __typename?: 'Post' }
+    & Pick<Post, 'id' | 'createdAt' | 'content'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'firstname' | 'surname' | 'thumb'>
+    ) }
+  )> }
 );
 
 export type FinishSignUpMutationVariables = Exact<{
