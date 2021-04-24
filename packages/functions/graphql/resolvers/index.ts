@@ -16,6 +16,7 @@ import deleteUserPostMutation from "./mutation/deleteUserPost";
 import { ConnectionsObject } from "../models/UserConnection";
 import { User } from "../../generated/graphql";
 import { userConnectionsToGraph } from "../helpers/transformToGraph";
+import { PostDoc } from "../models/Post";
 
 export const resolvers: IResolvers<any, TContext> = {
   Query: {
@@ -51,12 +52,35 @@ export const resolvers: IResolvers<any, TContext> = {
 
       return userConnectionsToGraph(data, parent.username);
     },
-    async posts(parent: User): Promise<User["posts"]> {
+    async posts(parent: User, _, ctx): Promise<User["posts"]> {
       if (parent.posts) {
         return parent.posts;
       }
 
-      return null;
+      const { uid } = ctx.tokenID
+        ? await ctx.auth.verifyIdToken(ctx.tokenID)
+        : ({} as any);
+
+      const postsIDs = Object.keys(
+        (await ctx.database.ref(`/user_posts/${parent.username}`).get()).val()
+      );
+
+      const postsPromises = postsIDs.map(async (postID) => ({
+        id: postID,
+        ...(await (await ctx.database.ref(`/posts/${postID}`).get()).val()),
+      })) as Promise<PostDoc & { id: string }>[];
+
+      const postsData = await Promise.all(postsPromises);
+
+      return postsData.reverse().map((data) => ({
+        id: data.id,
+        owner: data.user.id === uid,
+        user: data.user,
+        createdAt: data.createdAt,
+        content: data.content,
+        likes: [],
+        comments: [],
+      }));
     },
   },
 };

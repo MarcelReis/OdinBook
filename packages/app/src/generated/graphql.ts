@@ -219,5 +219,13 @@ export type GetUserQuery = (
   & { user: (
     { __typename?: 'User' }
     & Pick<User, 'id' | 'firstname' | 'surname' | 'thumb'>
+    & { posts?: Maybe<Array<(
+      { __typename?: 'Post' }
+      & Pick<Post, 'id' | 'owner' | 'createdAt' | 'content'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'username' | 'firstname' | 'surname' | 'thumb'>
+      ) }
+    )>> }
   ) }
 );

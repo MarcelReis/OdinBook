@@ -31,6 +31,11 @@ export const cache = new InMemoryCache({
             return `${readField("firstname")} ${readField("surname")}`;
           },
         },
+        posts: {
+          merge(existing = [], incoming: unknown[]) {
+            return [...incoming, ...existing];
+          },
+        },
       },
     },
   },

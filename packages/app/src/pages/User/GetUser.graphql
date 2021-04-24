@@ -4,5 +4,18 @@ query GetUser($username: String!) {
     firstname
     surname
     thumb
+    posts {
+      id
+      owner
+      createdAt
+      content
+      user {
+        id
+        username
+        firstname
+        surname
+        thumb
+      }
+    }
   }
 }
