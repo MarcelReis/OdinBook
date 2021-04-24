@@ -16,7 +16,7 @@ const LoginPage = () => {
       <Flex direction="column" gap="size-200" justifyContent="center">
         <Button
           variant="overBackground"
-          onPress={() => facebookLogin()}
+          onPress={() => googleLogin()}
           UNSAFE_style={{ background: "#DB4437" }}
         >
           <SiGoogle size={24} style={{ paddingRight: "8px" }} /> Continue with
@@ -28,7 +28,7 @@ const LoginPage = () => {
         </Button>
         <Button
           variant="overBackground"
-          onPress={() => googleLogin()}
+          onPress={() => facebookLogin()}
           UNSAFE_style={{ background: "#4267B2" }}
         >
           <SiFacebook size={24} style={{ paddingRight: "8px" }} /> Continue with
