@@ -1,4 +1,6 @@
 import { Flex, Heading, Text, View } from "@adobe/react-spectrum";
+import { Link } from "react-router-dom";
+
 import Avatar from "../Avatar";
 
 type PropsType = {
@@ -16,10 +18,15 @@ function Post(props: PropsType) {
   return (
     <View backgroundColor="gray-200" borderRadius="regular" overflow="hidden">
       <Flex gap="size-150" margin="size-75" alignItems="center">
-        <Avatar src={props.user.thumb} />
+        <Avatar src={props.user.thumb} username={props.user.username} />
         <Flex direction="column">
           <Heading level={3} margin={0}>
-            {props.user.fullName}
+            <Link
+              to={`/user/${props.user.username}/`}
+              style={{ textDecoration: "none" }}
+            >
+              {props.user.fullName}
+            </Link>
           </Heading>
           <Text>{props.createdAt}</Text>
         </Flex>

@@ -5,6 +5,7 @@ import { render, screen } from "../../setupTests";
 import { CreatePostMutation, FeedPageQuery } from "../../generated/graphql";
 import FeedPage from "./Feed";
 import { waitFor } from "@testing-library/dom";
+import { MemoryRouter } from "react-router";
 
 const query = loader("./FeedPage.graphql");
 const mutation = loader("./CreatePost.graphql");
@@ -70,12 +71,14 @@ const mockCreatePostMutation: MockedResponse<CreatePostMutation> = {
 describe("FeedPage", () => {
   it("Should be able to create posts", async () => {
     render(
-      <MockedProvider
-        mocks={[mockFeedPageQuery, mockCreatePostMutation]}
-        addTypename={true}
-      >
-        <FeedPage />
-      </MockedProvider>
+      <MemoryRouter>
+        <MockedProvider
+          mocks={[mockFeedPageQuery, mockCreatePostMutation]}
+          addTypename={true}
+        >
+          <FeedPage />
+        </MockedProvider>
+      </MemoryRouter>
     );
 
     userEvent.type(await screen.findByRole("textbox"), postText);
@@ -98,12 +101,14 @@ describe("FeedPage", () => {
 
   it("Should add new posts to the top of the page", async () => {
     render(
-      <MockedProvider
-        mocks={[mockFeedPageQuery, mockCreatePostMutation]}
-        addTypename={true}
-      >
-        <FeedPage />
-      </MockedProvider>
+      <MemoryRouter>
+        <MockedProvider
+          mocks={[mockFeedPageQuery, mockCreatePostMutation]}
+          addTypename={true}
+        >
+          <FeedPage />
+        </MockedProvider>
+      </MemoryRouter>
     );
 
     userEvent.type(await screen.findByRole("textbox"), postText);

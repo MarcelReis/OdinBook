@@ -1,7 +1,9 @@
 import { View, Image } from "@adobe/react-spectrum";
+import { Link } from "react-router-dom";
 
 type AvatarProps = {
   src: string;
+  username?: string;
 };
 
 function Avatar(props: AvatarProps) {
@@ -15,7 +17,16 @@ function Avatar(props: AvatarProps) {
       borderWidth="thick"
       borderColor="gray-100"
     >
-      <Image alt="" src={props.src} width="100%" height="100%" />
+      {props.username ? (
+        <Link
+          to={`/user/${props.username}/`}
+          style={{ textDecoration: "none" }}
+        >
+          <Image alt="" src={props.src} width="100%" height="100%" />
+        </Link>
+      ) : (
+        <Image alt="" src={props.src} width="100%" height="100%" />
+      )}
     </View>
   );
 }
