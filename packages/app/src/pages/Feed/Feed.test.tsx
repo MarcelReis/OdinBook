@@ -136,4 +136,31 @@ describe("FeedPage", () => {
       expect(screen.getByText(postText)).toBeInTheDocument();
     });
   });
+
+  it("Should block users from creating invalid posts", async () => {
+    render(
+      <MemoryRouter>
+        <MockedProvider mocks={[mockFeedPageQuery]} cache={cache}>
+          <FeedPage />
+        </MockedProvider>
+      </MemoryRouter>
+    );
+
+    userEvent.type(await screen.findByRole("textbox"), " ");
+
+    const button = screen.getByRole("button");
+    expect(button).toBeEnabled();
+    userEvent.click(button);
+
+    await waitFor(() => {
+      const button = screen.getByRole("button");
+      expect(button).toBeDisabled();
+      expect(screen.getByRole("textbox").textContent).toBe(" ");
+    });
+
+    userEvent.type(await screen.findByRole("textbox"), "valid text");
+    await waitFor(() => {
+      expect(button).toBeEnabled();
+    });
+  });
 });

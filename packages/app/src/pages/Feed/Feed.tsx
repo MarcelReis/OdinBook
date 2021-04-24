@@ -26,7 +26,10 @@ const query = loader("./FeedPage.graphql");
 const mutation = loader("./CreatePost.graphql");
 
 function FeedPage() {
-  const [postText, setPostText] = useState("");
+  const [newPost, setNewPost] = useState<{
+    value: string;
+    isInvalid?: boolean;
+  }>({ value: "", isInvalid: undefined });
 
   const { data, loading, error } = useQuery<FeedPageQuery>(query);
   const [createPost, result] = useMutation<
@@ -49,8 +52,12 @@ function FeedPage() {
     })) ?? [];
 
   const submit = async () => {
+    if (newPost.value.trim().length === 0) {
+      return setNewPost((s) => ({ ...s, isInvalid: true }));
+    }
+
     const { data } = await createPost({
-      variables: { content: postText },
+      variables: { content: newPost.value },
       update(cache, result) {
         cache.modify({
           id: cache.identify(makeReference("ROOT_QUERY")),
@@ -68,7 +75,7 @@ function FeedPage() {
     if (!data || !data.createPost.posts) {
       return;
     }
-    setPostText("");
+    setNewPost({ value: "", isInvalid: undefined });
   };
 
   if (loading) {
@@ -98,8 +105,16 @@ function FeedPage() {
               placeholder="Write something..."
               flexGrow={1}
               isQuiet
-              value={postText}
-              onChange={setPostText}
+              value={newPost.value}
+              onChange={(value) =>
+                setNewPost((newPost) => ({
+                  value,
+                  isInvalid:
+                    newPost.isInvalid === undefined
+                      ? undefined
+                      : value.trim().length === 0,
+                }))
+              }
             />
           </Flex>
           <Flex
@@ -124,7 +139,12 @@ function FeedPage() {
               <></>
             )}
 
-            <Button justifySelf="flex-end" variant="cta" onPress={submit}>
+            <Button
+              justifySelf="flex-end"
+              variant="cta"
+              onPress={submit}
+              isDisabled={newPost.isInvalid === true}
+            >
               Post
             </Button>
           </Flex>

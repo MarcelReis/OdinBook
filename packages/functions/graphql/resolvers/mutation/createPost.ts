@@ -14,7 +14,7 @@ async function createPostMutation(
   }
 
   const ownUser = await getUserFromToken({ auth, database, tokenID });
-  if (!ownUser) {
+  if (!ownUser || args.content.trim().length === 0) {
     throw new ApolloError("Error creating post");
   }
 
