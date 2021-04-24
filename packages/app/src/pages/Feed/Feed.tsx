@@ -7,7 +7,7 @@ import {
   TextArea,
   View,
 } from "@adobe/react-spectrum";
-import { useMutation, useQuery } from "@apollo/client";
+import { makeReference, useMutation, useQuery } from "@apollo/client";
 import { loader } from "graphql.macro";
 import { ComponentProps, useState } from "react";
 
@@ -27,9 +27,6 @@ const mutation = loader("./CreatePost.graphql");
 
 function FeedPage() {
   const [postText, setPostText] = useState("");
-  const [createdPosts, setCreatedPosts] = useState<
-    ComponentProps<typeof Post>[]
-  >([]);
 
   const { data, loading, error } = useQuery<FeedPageQuery>(query);
   const [createPost, result] = useMutation<
@@ -42,6 +39,7 @@ function FeedPage() {
       id: post.id,
       content: post.content,
       createdAt: post.createdAt,
+      deletable: !!post.owner,
       user: {
         id: post.user.id,
         fullName: post.user.firstname + " " + post.user.surname,
@@ -51,27 +49,26 @@ function FeedPage() {
     })) ?? [];
 
   const submit = async () => {
-    const { data } = await createPost({ variables: { content: postText } });
+    const { data } = await createPost({
+      variables: { content: postText },
+      update(cache, result) {
+        cache.modify({
+          id: cache.identify(makeReference("ROOT_QUERY")),
+          fields: {
+            posts(currentRefs) {
+              const post = result.data?.createPost.posts![0]!;
+              const newRef = { __ref: `Post:${post.id}` };
+
+              return [newRef, ...currentRefs];
+            },
+          },
+        });
+      },
+    });
     if (!data || !data.createPost.posts) {
       return;
     }
     setPostText("");
-
-    const newPost: ComponentProps<typeof Post> = {
-      id: data.createPost.posts[0].id,
-      createdAt: data.createPost.posts[0].createdAt,
-      content: data.createPost.posts[0].content,
-      user: {
-        fullName:
-          data.createPost.posts[0].user.firstname +
-          " " +
-          data.createPost.posts[0].user.surname,
-        thumb: data.createPost.posts[0].user.thumb!,
-        username: "",
-      },
-    };
-
-    setCreatedPosts((s) => [newPost, ...s]);
   };
 
   if (loading) {
@@ -139,16 +136,9 @@ function FeedPage() {
         marginX="size-75"
         gap="size-150"
       >
-        <>
-          {createdPosts.map((post) => (
-            <Post {...post} key={post.id} />
-          ))}
-        </>
-        <>
-          {posts.map((post) => (
-            <Post {...post} key={post.id} />
-          ))}
-        </>
+        {posts.map((post) => (
+          <Post {...post} key={post.id} />
+        ))}
       </Flex>
     </View>
   );

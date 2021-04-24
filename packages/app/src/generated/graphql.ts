@@ -69,6 +69,7 @@ export type MutationDeleteUserPostArgs = {
 export type Post = {
   __typename?: 'Post';
   id: Scalars['ID'];
+  owner?: Maybe<Scalars['Boolean']>;
   user: User;
   createdAt: Scalars['String'];
   content: Scalars['String'];
@@ -120,6 +121,19 @@ export type UserConnection = {
   status?: Maybe<ConnectionStatus>;
 };
 
+export type DeleteUserPostMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteUserPostMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteUserPost: (
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+  ) }
+);
+
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -151,7 +165,7 @@ export type CreatePostMutation = (
     & Pick<User, 'id'>
     & { posts?: Maybe<Array<(
       { __typename?: 'Post' }
-      & Pick<Post, 'id' | 'createdAt' | 'content'>
+      & Pick<Post, 'id' | 'owner' | 'createdAt' | 'content'>
       & { user: (
         { __typename?: 'User' }
         & Pick<User, 'id' | 'firstname' | 'surname' | 'username' | 'thumb'>
@@ -170,7 +184,7 @@ export type FeedPageQuery = (
     & Pick<User, 'id' | 'thumb'>
   ), posts: Array<(
     { __typename?: 'Post' }
-    & Pick<Post, 'id' | 'createdAt' | 'content'>
+    & Pick<Post, 'id' | 'owner' | 'createdAt' | 'content'>
     & { user: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'firstname' | 'surname' | 'thumb'>

@@ -68,6 +68,7 @@ export type MutationDeleteUserPostArgs = {
 export type Post = {
   __typename?: 'Post';
   id: Scalars['ID'];
+  owner?: Maybe<Scalars['Boolean']>;
   user: User;
   createdAt: Scalars['String'];
   content: Scalars['String'];

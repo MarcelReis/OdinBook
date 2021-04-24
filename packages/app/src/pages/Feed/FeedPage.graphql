@@ -5,6 +5,7 @@ query FeedPage {
   }
   posts {
     id
+    owner
     createdAt
     content
     user {

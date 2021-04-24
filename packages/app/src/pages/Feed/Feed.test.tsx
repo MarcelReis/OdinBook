@@ -6,6 +6,7 @@ import { CreatePostMutation, FeedPageQuery } from "../../generated/graphql";
 import FeedPage from "./Feed";
 import { waitFor } from "@testing-library/dom";
 import { MemoryRouter } from "react-router";
+import { cache } from "../../apollo/cache";
 
 const query = loader("./FeedPage.graphql");
 const mutation = loader("./CreatePost.graphql");
@@ -21,10 +22,12 @@ const mockFeedPageQuery: MockedResponse<FeedPageQuery> = {
       user: {
         id: Math.random().toString(36),
         thumb: Math.random().toString(36),
+        __typename: "User",
       },
       posts: [
         {
           id: "-MYbcL6QjbrTcsKA1MTL",
+          owner: false,
           createdAt: "2021-04-19T00:56:56.541Z",
           content: "This is my first post ever, I hope it works!",
           user: {
@@ -33,7 +36,9 @@ const mockFeedPageQuery: MockedResponse<FeedPageQuery> = {
             firstname: "Marcelo",
             surname: "Reis",
             thumb: "https://randomuser.me/api/portraits/men/17.jpg",
+            __typename: "User",
           },
+          __typename: "Post",
         },
       ],
     },
@@ -52,6 +57,7 @@ const mockCreatePostMutation: MockedResponse<CreatePostMutation> = {
         posts: [
           {
             id: Math.random().toString(36),
+            owner: true,
             content: postText,
             createdAt: new Date().toISOString(),
             user: {
@@ -60,9 +66,12 @@ const mockCreatePostMutation: MockedResponse<CreatePostMutation> = {
               surname: "Reis",
               username: "_marcelreis",
               thumb: "https://placekitten.com/50",
+              __typename: "User",
             },
+            __typename: "Post",
           },
         ],
+        __typename: "User",
       },
     },
   },
@@ -74,7 +83,7 @@ describe("FeedPage", () => {
       <MemoryRouter>
         <MockedProvider
           mocks={[mockFeedPageQuery, mockCreatePostMutation]}
-          addTypename={true}
+          cache={cache}
         >
           <FeedPage />
         </MockedProvider>
@@ -104,7 +113,7 @@ describe("FeedPage", () => {
       <MemoryRouter>
         <MockedProvider
           mocks={[mockFeedPageQuery, mockCreatePostMutation]}
-          addTypename={true}
+          cache={cache}
         >
           <FeedPage />
         </MockedProvider>
@@ -122,7 +131,9 @@ describe("FeedPage", () => {
       expect(screen.queryByText("Posting...")).not.toBeInTheDocument();
     });
 
-    expect(screen.getByRole("textbox").textContent).toBe("");
-    expect(await screen.findByText(postText)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole("textbox").textContent).toBe("");
+      expect(screen.getByText(postText)).toBeInTheDocument();
+    });
   });
 });

@@ -38,6 +38,7 @@ async function createPostMutation(
     posts: [
       {
         id: postSnapShot.key!,
+        owner: true,
         user: ownUser,
         content: post.content,
         comments: [],

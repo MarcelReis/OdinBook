@@ -3,6 +3,7 @@ mutation CreatePost($content: String!) {
     id
     posts {
       id
+      owner
       createdAt
       content
       user {
