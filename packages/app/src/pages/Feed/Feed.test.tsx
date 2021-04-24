@@ -9,6 +9,7 @@ import { MemoryRouter } from "react-router";
 import { cache } from "../../apollo/cache";
 
 const query = loader("./FeedPage.graphql");
+console.log("query :>> ", query);
 const mutation = loader("./CreatePost.graphql");
 
 const postText = "This is an awesome post";
@@ -58,8 +59,8 @@ const mockCreatePostMutation: MockedResponse<CreatePostMutation> = {
           {
             id: Math.random().toString(36),
             owner: true,
-            content: postText,
             createdAt: new Date().toISOString(),
+            content: postText,
             user: {
               id: Math.random().toString(36),
               firstname: "Marcelo",

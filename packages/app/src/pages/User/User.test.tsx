@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { Route } from "react-router-dom";
@@ -22,6 +21,7 @@ const getUserSucceeded: MockedResponse<GetUserQuery> = {
         firstname: "Marcelo",
         surname: "Reis",
         thumb: "https://placekitten.com/50",
+        posts: [],
       },
     },
   },
