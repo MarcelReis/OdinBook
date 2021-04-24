@@ -14,9 +14,13 @@ import {
   Image,
 } from "@adobe/react-spectrum";
 import { useReactiveVar } from "@apollo/client";
+
 import Light from "@spectrum-icons/workflow/Light";
 import LogOut from "@spectrum-icons/workflow/LogOut";
 import ShowMenu from "@spectrum-icons/workflow/ShowMenu";
+import RealTimeCustomerProfile from "@spectrum-icons/workflow/RealTimeCustomerProfile";
+import Settings from "@spectrum-icons/workflow/Settings";
+import Branch2 from "@spectrum-icons/workflow/Branch2";
 
 import { Link } from "react-router-dom";
 
@@ -76,7 +80,11 @@ function Appbar() {
               <Dialog>
                 <Heading>
                   <View>
-                    <Flex gap="size-150" alignItems="center">
+                    <Flex
+                      gap="size-150"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
                       <Avatar src={user.thumb!} />
                       <Heading level={1} margin="0">
                         {`${user.firstname} ${user.surname}`}
@@ -87,9 +95,58 @@ function Appbar() {
                 <Divider />
 
                 <Content>
-                  <Link to={`/user/${user.username}/`} onClick={close}>
-                    My Profile
-                  </Link>
+                  <Flex
+                    direction="column"
+                    maxWidth="size-4600"
+                    margin="auto"
+                    marginTop="size-300"
+                    gap="size-100"
+                  >
+                    <Link
+                      to={`/user/${user.username}/`}
+                      onClick={close}
+                      style={{
+                        color: "var(--spectrum-global-color-gray-900)",
+                        textDecoration: "none",
+                        display: "block",
+                      }}
+                    >
+                      <Button variant="overBackground" isQuiet width="100%">
+                        <RealTimeCustomerProfile />
+                        <Text marginStart="size-150">My Profile</Text>
+                      </Button>
+                    </Link>
+
+                    <Link
+                      to={"/settings/"}
+                      onClick={close}
+                      style={{
+                        color: "var(--spectrum-global-color-gray-900)",
+                        textDecoration: "none",
+                        display: "block",
+                      }}
+                    >
+                      <Button variant="overBackground" isQuiet width="100%">
+                        <Branch2 />
+                        <Text marginStart="size-150">Connections</Text>
+                      </Button>
+                    </Link>
+
+                    <Link
+                      to={"/settings/"}
+                      onClick={close}
+                      style={{
+                        color: "var(--spectrum-global-color-gray-900)",
+                        textDecoration: "none",
+                        display: "block",
+                      }}
+                    >
+                      <Button variant="overBackground" isQuiet width="100%">
+                        <Settings />
+                        <Text marginStart="size-150">Settings</Text>
+                      </Button>
+                    </Link>
+                  </Flex>
                 </Content>
 
                 <Footer>
