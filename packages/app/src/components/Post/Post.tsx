@@ -2,6 +2,7 @@ import { ActionButton, Flex, Heading, Text, View } from "@adobe/react-spectrum";
 import { Link } from "react-router-dom";
 import Delete from "@spectrum-icons/workflow/Delete";
 import { loader } from "graphql.macro";
+import moment from "moment";
 
 import Avatar from "../Avatar";
 import { useMutation } from "@apollo/client";
@@ -52,7 +53,7 @@ function Post(props: PostProps) {
               {props.user.fullName}
             </Link>
           </Heading>
-          <Text>{props.createdAt}</Text>
+          <Text>{moment(props.createdAt).fromNow()}</Text>
         </Flex>
         {props.deletable ? (
           <ActionButton
