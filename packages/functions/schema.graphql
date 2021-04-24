@@ -55,6 +55,7 @@ type Mutation {
   deleteUserConnection(username: String!): User!
 
   createPost(content: String!): User!
+  deleteUserPost(content: String!): User!
 }
 
 type Query {

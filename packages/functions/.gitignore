@@ -1,5 +1,5 @@
 # Compiled JavaScript files
-lib/
+dist/
 
 # Except the ESLint config file
 !.eslintrc.js

@@ -5,7 +5,7 @@ import { getUserFromToken } from "../../helpers/getUser";
 import { PostDoc } from "../../models/Post";
 
 async function createPostMutation(
-  _: any,
+  _: unknown,
   args: MutationCreatePostArgs,
   { database, auth, tokenID }: TContext
 ): Promise<Mutation["createUser"]> {

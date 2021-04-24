@@ -9,7 +9,7 @@ import { resolvers } from "./resolvers";
 admin.initializeApp();
 
 const schemaString = fs
-  .readFileSync(path.join(__dirname, "./schema.graphql"), "utf-8")
+  .readFileSync(path.join(__dirname, "../../schema.graphql"), "utf-8")
   .toString();
 
 const typeDefs = gql(schemaString);

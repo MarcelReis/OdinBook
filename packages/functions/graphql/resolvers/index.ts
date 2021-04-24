@@ -11,6 +11,7 @@ import createUserConnectionMutation from "./mutation/createUserConnection";
 import updateUserConnectionMutation from "./mutation/updateUserConnection";
 import deleteUserConnectionMutation from "./mutation/deleteUserConnection";
 import createPostMutation from "./mutation/createPost";
+import deleteUserPostMutation from "./mutation/deleteUserPost";
 
 import { ConnectionsObject } from "../models/UserConnection";
 import { User } from "../../generated/graphql";
@@ -31,6 +32,7 @@ export const resolvers: IResolvers<any, TContext> = {
     deleteUserConnection: deleteUserConnectionMutation,
 
     createPost: createPostMutation,
+    deleteUserPost: deleteUserPostMutation,
   },
   User: {
     async connections(parent: User, _, ctx): Promise<User["connections"]> {

@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - "../functions/lib/graphql/schema.graphql"
+  - "../functions/schema.graphql"
   - "./client-schema.graphql"
 documents: "src/**/*.graphql"
 generates:
