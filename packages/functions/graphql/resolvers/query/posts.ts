@@ -12,6 +12,10 @@ async function postsResolver(
     .orderByChild("createdAt")
     .get();
 
+  if (!postsSnapShot.exists()) {
+    return [];
+  }
+
   const { uid } = tokenID ? await auth.verifyIdToken(tokenID) : ({} as any);
 
   const data = postsSnapShot.val() as Record<string, PostDoc>;
