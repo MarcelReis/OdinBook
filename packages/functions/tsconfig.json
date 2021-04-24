@@ -6,7 +6,7 @@
     "noUnusedLocals": true,
     "outDir": "dist",
     "strict": true,
-    "target": "es5",
+    "target": "es2020",
     "sourceMap": false,
     "esModuleInterop": true,
     "allowJs": true,
@@ -18,7 +18,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "listEmittedFiles": true
+    "listEmittedFiles": false,
+    "lib": ["es2020"]
   },
   "include": ["./"],
   "exclude": ["dist", "node_modules"]
