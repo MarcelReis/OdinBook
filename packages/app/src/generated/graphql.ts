@@ -141,7 +141,7 @@ export type GetCurrentUserQuery = (
   { __typename?: 'Query' }
   & { user: (
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'firstname' | 'thumb'>
+    & Pick<User, 'id' | 'username' | 'firstname' | 'surname' | 'thumb'>
     & { connections?: Maybe<Array<(
       { __typename?: 'UserConnection' }
       & Pick<UserConnection, 'id' | 'status'>

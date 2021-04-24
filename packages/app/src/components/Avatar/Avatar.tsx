@@ -16,6 +16,7 @@ function Avatar(props: AvatarProps) {
       flexGrow={0}
       borderWidth="thick"
       borderColor="gray-100"
+      margin="0"
     >
       {props.username ? (
         <Link

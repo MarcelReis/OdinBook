@@ -3,6 +3,7 @@ query GetCurrentUser {
     id
     username
     firstname
+    surname
     thumb
 
     connections {
