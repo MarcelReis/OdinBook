@@ -6,6 +6,7 @@ import GenericLoading from "../../components/GenericLoading";
 import { GetUserQuery, GetUserQueryVariables } from "../../generated/graphql";
 import Post from "../../components/Post";
 import { ComponentProps } from "react";
+import { Helmet } from "react-helmet";
 
 const query = loader("./GetUser.graphql");
 
@@ -27,7 +28,7 @@ function UserPage() {
   }
 
   const posts: ComponentProps<typeof Post>[] =
-    data?.user.posts?.map((post) => ({
+    data.user.posts?.map((post) => ({
       id: post.id,
       content: post.content,
       createdAt: post.createdAt,
@@ -42,6 +43,9 @@ function UserPage() {
 
   return (
     <>
+      <Helmet>
+        <title>{`${data.user.firstname} ${data.user.surname} | Odinbook`}</title>
+      </Helmet>
       <Header>
         <View backgroundColor="blue-400" height="size-1700" position="relative">
           <View
