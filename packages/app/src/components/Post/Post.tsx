@@ -48,7 +48,10 @@ function Post(props: PostProps) {
           <Heading level={3} margin={0}>
             <Link
               to={`/user/${props.user.username}/`}
-              style={{ textDecoration: "none" }}
+              style={{
+                textDecoration: "none",
+                color: "var(--spectrum-global-color-gray-900)",
+              }}
             >
               {props.user.fullName}
             </Link>

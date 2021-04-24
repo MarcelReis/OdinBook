@@ -44,13 +44,13 @@ function Appbar() {
               alt=""
               src="/logo.svg"
               UNSAFE_style={{
-                filter: "drop-shadow(0px 0px 10px #FBB034)",
+                color: "--spectrum-global-color-gray-900",
               }}
             />
             <Text
               UNSAFE_style={{
                 fontSize: "2em",
-                filter: "drop-shadow(0px 0px 10px #FBB034)",
+                color: "var(--spectrum-global-color-gray-900)",
               }}
             >
               Odinbook
