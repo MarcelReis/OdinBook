@@ -62,7 +62,7 @@ export type MutationCreatePostArgs = {
 
 
 export type MutationDeleteUserPostArgs = {
-  content: Scalars['String'];
+  id: Scalars['ID'];
 };
 
 export type Post = {
