@@ -111,9 +111,9 @@ function Appbar() {
                         display: "block",
                       }}
                     >
-                      <Button variant="overBackground" isQuiet width="100%">
+                      <Button variant="secondary" isQuiet width="100%">
                         <RealTimeCustomerProfile />
-                        <Text marginStart="size-150">My Profile</Text>
+                        <Text>My Profile</Text>
                       </Button>
                     </Link>
 
@@ -126,9 +126,9 @@ function Appbar() {
                         display: "block",
                       }}
                     >
-                      <Button variant="overBackground" isQuiet width="100%">
+                      <Button variant="secondary" isQuiet width="100%">
                         <Branch2 />
-                        <Text marginStart="size-150">Connections</Text>
+                        <Text>Connections</Text>
                       </Button>
                     </Link>
 
@@ -141,9 +141,9 @@ function Appbar() {
                         display: "block",
                       }}
                     >
-                      <Button variant="overBackground" isQuiet width="100%">
+                      <Button variant="secondary" isQuiet width="100%">
                         <Settings />
-                        <Text marginStart="size-150">Settings</Text>
+                        <Text>Settings</Text>
                       </Button>
                     </Link>
                   </Flex>
