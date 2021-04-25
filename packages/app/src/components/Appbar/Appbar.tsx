@@ -77,14 +77,10 @@ function Appbar() {
               <ShowMenu />
             </ActionButton>
             {(close) => (
-              <Dialog>
+              <Dialog width="size-4600">
                 <Heading>
                   <View>
-                    <Flex
-                      gap="size-150"
-                      alignItems="center"
-                      justifyContent="center"
-                    >
+                    <Flex gap="size-150" alignItems="center">
                       <Avatar src={user.thumb!} />
                       <Heading level={1} margin="0">
                         {`${user.firstname} ${user.surname}`}
@@ -97,7 +93,6 @@ function Appbar() {
                 <Content>
                   <Flex
                     direction="column"
-                    maxWidth="size-4600"
                     margin="auto"
                     marginTop="size-300"
                     gap="size-100"
