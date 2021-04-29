@@ -42,6 +42,12 @@ jobs:
         if: steps.restore-lerna.outputs.cache-hit != 'true'
         run: npx lerna bootstrap --scope={functions,app}
 
+      - name: Lint
+        run: lerna run lint --parallel
+
+      - name: Test
+        run: lerna run test --parallel
+
       - name: Build packages
         run: npx lerna run build --scope={functions,app} --parallel
 
