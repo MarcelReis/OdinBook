@@ -1,0 +1,15 @@
+{
+  "name": "GraphQL",
+  "schemaPath": "./packages/functions/schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:5001/odinbook-30f97/us-central1/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
