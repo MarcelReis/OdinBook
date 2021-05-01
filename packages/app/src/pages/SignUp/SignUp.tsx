@@ -9,6 +9,7 @@ import {
   TextField,
   Text,
 } from "@adobe/react-spectrum";
+import { Redirect } from "react-router-dom";
 import { loader } from "graphql.macro";
 import { useMutation } from "@apollo/client";
 import {
@@ -100,7 +101,7 @@ const SignUpPage = () => {
   );
 
   if (!result.loading && result.data) {
-    return <View>Success</View>;
+    return <Redirect to={`/user/${result.data.createUser.username}/`} />;
   }
 
   return (
