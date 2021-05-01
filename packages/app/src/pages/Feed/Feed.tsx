@@ -17,9 +17,9 @@ import Post from "../../components/Post";
 import Avatar from "../../components/Avatar";
 
 import {
-  FeedPageQuery,
   CreatePostMutation,
   CreatePostMutationVariables,
+  FeedPageQuery,
 } from "../../generated/graphql";
 
 const query = loader("./FeedPage.graphql");
@@ -66,7 +66,11 @@ function FeedPage() {
               const post = result.data?.createPost.posts![0]!;
               const newRef = { __ref: `Post:${post.id}` };
 
-              return [newRef, ...currentRefs];
+              console.log(post);
+              console.log(newRef);
+              console.log(currentRefs);
+
+              return Array.from(new Set([newRef, ...currentRefs]));
             },
           },
         });
