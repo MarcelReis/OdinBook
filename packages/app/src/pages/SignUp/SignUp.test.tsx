@@ -7,6 +7,7 @@ import SignUpPage from ".";
 import { FinishSignUpMutation } from "../../generated/graphql";
 import { MemoryRouter } from "react-router";
 import { Route, Switch } from "react-router-dom";
+import { waitFor } from "@testing-library/dom";
 
 const mutation = loader("./FinishSignUp.graphql");
 
@@ -72,8 +73,12 @@ describe("<SignUpPage/>", () => {
 
     userEvent.click(button);
 
-    expect(await screen.findByText("Loading...")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/loading/i)).toBeInTheDocument();
+    });
 
-    expect(await screen.findByText("Success")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/success/i)).toBeInTheDocument();
+    });
   });
 });
