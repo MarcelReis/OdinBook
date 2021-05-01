@@ -9,7 +9,6 @@ import { MemoryRouter } from "react-router";
 import { createCache } from "../../apollo/cache";
 
 const query = loader("./FeedPage.graphql");
-console.log("query :>> ", query);
 const mutation = loader("./CreatePost.graphql");
 
 const postText = "This is an awesome post";
