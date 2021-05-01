@@ -6,7 +6,7 @@
     "build": "rm -rf dist/ && tsc",
     "lint": "eslint graphql --ext ts,js,tsx,jsx",
     "test": "echo 'Lacking tests!'",
-    "format": "prettier --write 'src/**/*.(js|ts)'",
+    "format": "prettier --write 'graphql/**/*.(js|ts)'",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "deploy": "firebase deploy --only functions",
