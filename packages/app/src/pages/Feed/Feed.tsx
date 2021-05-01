@@ -143,7 +143,7 @@ function FeedPage() {
               justifySelf="flex-end"
               variant="cta"
               onPress={submit}
-              isDisabled={newPost.isInvalid === true}
+              isDisabled={newPost.isInvalid === true || result.loading}
             >
               Post
             </Button>

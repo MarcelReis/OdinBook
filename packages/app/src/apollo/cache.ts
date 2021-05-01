@@ -2,41 +2,44 @@ import { InMemoryCache } from "@apollo/client";
 import { ConnectionStatus, User } from "../generated/graphql";
 import { userVar } from "../lib/odinAuth/_apolloVars";
 
-export const cache = new InMemoryCache({
-  typePolicies: {
-    User: {
-      fields: {
-        connectionStatus: {
-          read(_, { readField }): User["connectionStatus"] {
-            const currentUser = userVar();
-            if (!currentUser || !currentUser.connections) {
-              return null;
-            }
+export const createCache = () =>
+  new InMemoryCache({
+    typePolicies: {
+      User: {
+        fields: {
+          connectionStatus: {
+            read(_, { readField }): User["connectionStatus"] {
+              const currentUser = userVar();
+              if (!currentUser || !currentUser.connections) {
+                return null;
+              }
 
-            const parentUsername = readField("username");
+              const parentUsername = readField("username");
 
-            if (parentUsername === currentUser.username) {
-              return ConnectionStatus.Self;
-            }
+              if (parentUsername === currentUser.username) {
+                return ConnectionStatus.Self;
+              }
 
-            const connection = currentUser.connections.find(
-              ({ user }) => user.username === parentUsername
-            );
+              const connection = currentUser.connections.find(
+                ({ user }) => user.username === parentUsername
+              );
 
-            return connection?.status ?? null;
+              return connection?.status ?? null;
+            },
           },
-        },
-        name: {
-          read(_, { readField }) {
-            return `${readField("firstname")} ${readField("surname")}`;
+          name: {
+            read(_, { readField }) {
+              return `${readField("firstname")} ${readField("surname")}`;
+            },
           },
-        },
-        posts: {
-          merge(existing = [], incoming: unknown[]) {
-            return [...incoming, ...existing];
+          posts: {
+            merge(existing = [], incoming: unknown[]) {
+              return [...incoming, ...existing];
+            },
           },
         },
       },
     },
-  },
-});
+  });
+
+export const cache = createCache();

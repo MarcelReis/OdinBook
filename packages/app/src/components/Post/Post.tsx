@@ -31,14 +31,13 @@ function Post(props: PostProps) {
     DeleteUserPostMutationVariables
   >(DELETE_USER_POST);
 
-  const deletePost = () => {
+  const deletePost = () =>
     deleteUserPostMutation({
       variables: { id: props.id },
       update(cache) {
         cache.evict({ id: `Post:${props.id}` });
       },
     });
-  };
 
   return (
     <View backgroundColor="gray-200" borderRadius="regular" overflow="hidden">

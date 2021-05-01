@@ -6,7 +6,7 @@ import { CreatePostMutation, FeedPageQuery } from "../../generated/graphql";
 import FeedPage from "./Feed";
 import { waitFor } from "@testing-library/dom";
 import { MemoryRouter } from "react-router";
-import { cache } from "../../apollo/cache";
+import { createCache } from "../../apollo/cache";
 
 const query = loader("./FeedPage.graphql");
 console.log("query :>> ", query);
@@ -84,7 +84,7 @@ describe("FeedPage", () => {
       <MemoryRouter>
         <MockedProvider
           mocks={[mockFeedPageQuery, mockCreatePostMutation]}
-          cache={cache}
+          cache={createCache()}
         >
           <FeedPage />
         </MockedProvider>
@@ -92,18 +92,20 @@ describe("FeedPage", () => {
     );
 
     userEvent.type(await screen.findByRole("textbox"), postText);
-    userEvent.click(screen.getByRole("button"));
+
+    expect(screen.getByRole("button")).toBeEnabled();
+    userEvent.click(screen.getByRole("button", { name: /post/i }));
 
     await waitFor(() => {
-      expect(screen.getByText("Posting...")).toBeInTheDocument();
-      expect(screen.getByRole("button")).toBeDisabled();
+      expect(screen.getByText(/posting/i)).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: /^post$/i })).toBeDisabled();
       expect(screen.getByRole("textbox")).toBeDisabled();
       expect(screen.getByRole("textbox").textContent).toBe(postText);
     });
 
     await waitFor(() => {
-      expect(screen.queryByText("Posting...")).not.toBeInTheDocument();
-      expect(screen.getByRole("button")).toBeEnabled();
+      expect(screen.queryByText(/posting/i)).not.toBeInTheDocument();
+      expect(screen.getByRole("button", { name: /^post$/i })).toBeEnabled();
       expect(screen.getByRole("textbox")).toBeEnabled();
       expect(screen.getByRole("textbox").textContent).toBe("");
     });
@@ -114,7 +116,7 @@ describe("FeedPage", () => {
       <MemoryRouter>
         <MockedProvider
           mocks={[mockFeedPageQuery, mockCreatePostMutation]}
-          cache={cache}
+          cache={createCache()}
         >
           <FeedPage />
         </MockedProvider>
@@ -122,14 +124,14 @@ describe("FeedPage", () => {
     );
 
     userEvent.type(await screen.findByRole("textbox"), postText);
-    userEvent.click(screen.getByRole("button"));
+    userEvent.click(screen.getByRole("button", { name: /^post$/i }));
 
     await waitFor(() => {
-      expect(screen.getByText("Posting...")).toBeInTheDocument();
+      expect(screen.getByText(/posting/i)).toBeInTheDocument();
     });
 
     await waitFor(() => {
-      expect(screen.queryByText("Posting...")).not.toBeInTheDocument();
+      expect(screen.queryByText(/posting/i)).not.toBeInTheDocument();
     });
 
     await waitFor(() => {
@@ -141,7 +143,7 @@ describe("FeedPage", () => {
   it("Should block users from creating invalid posts", async () => {
     render(
       <MemoryRouter>
-        <MockedProvider mocks={[mockFeedPageQuery]} cache={cache}>
+        <MockedProvider mocks={[mockFeedPageQuery]} cache={createCache()}>
           <FeedPage />
         </MockedProvider>
       </MemoryRouter>
@@ -149,7 +151,7 @@ describe("FeedPage", () => {
 
     userEvent.type(await screen.findByRole("textbox"), " ");
 
-    const button = screen.getByRole("button");
+    const button = screen.getByRole("button", { name: /^post$/i });
     expect(button).toBeEnabled();
     userEvent.click(button);
 
