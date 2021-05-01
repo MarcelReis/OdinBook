@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { Flex, View, Image, Heading, Header } from "@adobe/react-spectrum";
+import { Flex, Header, Heading, Image, View } from "@adobe/react-spectrum";
 import { loader } from "graphql.macro";
 import { useParams } from "react-router";
 import GenericLoading from "../../components/GenericLoading";
@@ -24,6 +24,7 @@ function UserPage() {
   }
 
   if (!data || error) {
+    console.log(error);
     return <div>Error</div>;
   }
 

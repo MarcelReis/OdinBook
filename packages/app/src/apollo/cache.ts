@@ -33,8 +33,12 @@ export const createCache = () =>
             },
           },
           posts: {
-            merge(existing = [], incoming: unknown[]) {
-              return [...incoming, ...existing];
+            merge(existing = [], incoming: unknown[] | undefined, options) {
+              if (options?.variables?.username) {
+                return incoming;
+              }
+
+              return incoming ? [...incoming, ...existing] : existing;
             },
           },
         },

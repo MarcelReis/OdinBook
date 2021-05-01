@@ -61,9 +61,13 @@ export const resolvers: IResolvers<any, TContext> = {
         ? await ctx.auth.verifyIdToken(ctx.tokenID)
         : ({} as any);
 
-      const postsIDs = Object.keys(
-        (await ctx.database.ref(`/user_posts/${parent.username}`).get()).val()
-      );
+      const postIDsSnapshot = await ctx.database
+        .ref(`/user_posts/${parent.username}`)
+        .get();
+      if (!postIDsSnapshot.exists()) {
+        return null;
+      }
+      const postsIDs = Object.keys(postIDsSnapshot.val());
 
       const postsPromises = postsIDs.map(async (postID) => ({
         id: postID,
