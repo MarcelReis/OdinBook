@@ -6,8 +6,8 @@ import {
   Flex,
   Heading,
   ProgressCircle,
-  TextField,
   Text,
+  TextField,
 } from "@adobe/react-spectrum";
 import { Redirect } from "react-router-dom";
 import { loader } from "graphql.macro";
@@ -81,6 +81,22 @@ const SignUpPage = () => {
     });
 
   const submit = async () => {
+    const isFormValid = Object.values(form).every(
+      (field) => field.validation === "valid"
+    );
+    if (!isFormValid) {
+      setForm((state) => {
+        for (const stateKey in state) {
+          if (state[stateKey as FormKeys].validation === undefined) {
+            state[stateKey as FormKeys].validation = "invalid";
+          }
+        }
+
+        return { ...state };
+      });
+      return;
+    }
+
     try {
       await createUser({
         variables: {
@@ -96,8 +112,8 @@ const SignUpPage = () => {
     }
   };
 
-  const validSubmission = Object.values(form).some(
-    (field) => field.validation !== "valid"
+  const validSubmission = Object.values(form).every(
+    (field) => field.validation !== "invalid"
   );
 
   if (!result.loading && result.data) {
@@ -154,7 +170,7 @@ const SignUpPage = () => {
               <Button
                 variant="cta"
                 width="100%"
-                isDisabled={validSubmission && !result.loading}
+                isDisabled={!validSubmission || result.loading}
                 onPress={submit}
               >
                 Create
