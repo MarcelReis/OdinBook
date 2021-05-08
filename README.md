@@ -1,5 +1,5 @@
 # OdinBook
-[![Deploy](https://github.com/MarcelReis/OdinBook/actions/workflows/ci.yml/badge.svg)](https://github.com/MarcelReis/OdinBook/actions/workflows/ci.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ce19c193fa304224a0acfb22d553b43e)](https://www.codacy.com/gh/MarcelReis/marcelreis.dev/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MarcelReis/marcelreis.dev&amp;utm_campaign=Badge_Grade)
+[![Deploy](https://github.com/MarcelReis/OdinBook/actions/workflows/ci.yml/badge.svg)](https://github.com/MarcelReis/OdinBook/actions/workflows/ci.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ce19c193fa304224a0acfb22d553b43e)](https://www.codacy.com/gh/MarcelReis/marcelreis.dev/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MarcelReis/marcelreis.dev&amp;utm_campaign=Badge_Grade) [![codecov](https://codecov.io/gh/MarcelReis/OdinBook/branch/main/graph/badge.svg?token=8LCCII2L3R)](https://codecov.io/gh/MarcelReis/OdinBook)
 
 ## Requirements
 
