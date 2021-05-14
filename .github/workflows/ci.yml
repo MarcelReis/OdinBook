@@ -1,5 +1,5 @@
 name: Deploy
-"on":
+on:
   push:
     branches:
       - main
@@ -47,6 +47,11 @@ jobs:
 
       - name: Test
         run: lerna run test --parallel
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./package/app/coverage/clover.xml
 
       - name: Build packages
         run: npx lerna run build --scope={functions,app} --parallel
