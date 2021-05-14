@@ -9,6 +9,7 @@
     "@graphql-codegen/introspection": "1.18.1",
     "@graphql-codegen/typescript": "1.20.0",
     "@graphql-codegen/typescript-operations": "1.17.13",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.4",
     "@spectrum-icons/workflow": "^3.2.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
