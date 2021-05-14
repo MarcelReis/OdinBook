@@ -1,21 +1,22 @@
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import userEvent from "@testing-library/user-event";
-import { loader } from "graphql.macro";
 import { render, screen } from "../../setupTests";
-import { CreatePostMutation, FeedPageQuery } from "../../generated/graphql";
+import {
+  CreatePostDocument,
+  CreatePostMutation,
+  FeedPageDocument,
+  FeedPageQuery,
+} from "../../generated/graphql";
 import FeedPage from "./Feed";
 import { waitFor } from "@testing-library/dom";
 import { MemoryRouter } from "react-router";
 import { createCache } from "../../apollo/cache";
 
-const query = loader("./FeedPage.graphql");
-const mutation = loader("./CreatePost.graphql");
-
 const postText = "This is an awesome post";
 
 const mockFeedPageQuery: MockedResponse<FeedPageQuery> = {
   request: {
-    query: query,
+    query: FeedPageDocument,
   },
   result: {
     data: {
@@ -47,7 +48,7 @@ const mockFeedPageQuery: MockedResponse<FeedPageQuery> = {
 
 const mockCreatePostMutation: MockedResponse<CreatePostMutation> = {
   request: {
-    query: mutation,
+    query: CreatePostDocument,
     variables: { content: postText },
   },
   result: {

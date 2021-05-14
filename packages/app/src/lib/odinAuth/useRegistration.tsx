@@ -1,12 +1,8 @@
-import { useLazyQuery, useReactiveVar } from "@apollo/client";
-import { GetCurrentUserQuery } from "../../generated/graphql";
+import { useReactiveVar } from "@apollo/client";
+import { useGetCurrentUserLazyQuery } from "../../generated/graphql";
 import useAuth from "./useAuth";
-
-import { loader } from "graphql.macro";
 import { useEffect } from "react";
 import { loadingUserVar, userVar } from "./_apolloVars";
-
-const query = loader("./getCurrentUser.graphql");
 
 const useRegistration = () => {
   const { isLogged, loading: loadingAuth } = useAuth();
@@ -16,7 +12,7 @@ const useRegistration = () => {
   const [
     getUser,
     { data, error, loading: loadingQuery },
-  ] = useLazyQuery<GetCurrentUserQuery>(query);
+  ] = useGetCurrentUserLazyQuery();
 
   useEffect(() => {
     if (isLogged && error && loadingUser) {

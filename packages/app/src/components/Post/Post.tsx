@@ -1,15 +1,10 @@
 import { ActionButton, Flex, Heading, Text, View } from "@adobe/react-spectrum";
 import { Link } from "react-router-dom";
 import Delete from "@spectrum-icons/workflow/Delete";
-import { loader } from "graphql.macro";
 import moment from "moment";
 
 import Avatar from "../Avatar";
-import { useMutation } from "@apollo/client";
-import {
-  DeleteUserPostMutation,
-  DeleteUserPostMutationVariables,
-} from "../../generated/graphql";
+import { useDeleteUserPostMutation } from "../../generated/graphql";
 
 type PostProps = {
   id: string;
@@ -23,13 +18,8 @@ type PostProps = {
   };
 };
 
-const DELETE_USER_POST = loader("./DeletePost.graphql");
-
 function Post(props: PostProps) {
-  const [deleteUserPostMutation] = useMutation<
-    DeleteUserPostMutation,
-    DeleteUserPostMutationVariables
-  >(DELETE_USER_POST);
+  const [deleteUserPostMutation] = useDeleteUserPostMutation();
 
   const deletePost = () =>
     deleteUserPostMutation({

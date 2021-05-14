@@ -10,14 +10,7 @@ import {
   TextField,
 } from "@adobe/react-spectrum";
 import { Redirect } from "react-router-dom";
-import { loader } from "graphql.macro";
-import { useMutation } from "@apollo/client";
-import {
-  FinishSignUpMutation,
-  FinishSignUpMutationVariables,
-} from "../../generated/graphql";
-
-const mutation = loader("./FinishSignUp.graphql");
+import { useFinishSignUpMutation } from "../../generated/graphql";
 
 type FormKeys = "firstName" | "lastName" | "username";
 
@@ -27,10 +20,7 @@ type FormField = {
 };
 
 const SignUpPage = () => {
-  const [createUser, result] = useMutation<
-    FinishSignUpMutation,
-    FinishSignUpMutationVariables
-  >(mutation);
+  const [createUser, result] = useFinishSignUpMutation();
 
   const [form, setForm] = useState<Record<FormKeys, FormField>>({
     firstName: { value: "", validation: undefined },

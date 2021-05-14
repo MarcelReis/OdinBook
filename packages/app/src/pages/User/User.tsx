@@ -1,21 +1,15 @@
-import { useQuery } from "@apollo/client";
 import { Flex, Header, Heading, Image, View } from "@adobe/react-spectrum";
-import { loader } from "graphql.macro";
 import { useParams } from "react-router";
 import GenericLoading from "../../components/GenericLoading";
-import { GetUserQuery, GetUserQueryVariables } from "../../generated/graphql";
+import { useGetUserQuery } from "../../generated/graphql";
 import Post from "../../components/Post";
 import { ComponentProps } from "react";
 import { Helmet } from "react-helmet";
 
-const query = loader("./GetUser.graphql");
-
 function UserPage() {
   const { username } = useParams<{ username: string }>();
-  const { loading, data, error } = useQuery<
-    GetUserQuery,
-    GetUserQueryVariables
-  >(query, {
+
+  const { loading, data, error } = useGetUserQuery({
     variables: { username },
   });
 

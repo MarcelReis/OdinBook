@@ -1,19 +1,19 @@
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
-import { loader } from "graphql.macro";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import SignUpPage from ".";
-import { FinishSignUpMutation } from "../../generated/graphql";
+import {
+  FinishSignUpDocument,
+  FinishSignUpMutation,
+} from "../../generated/graphql";
 import { MemoryRouter } from "react-router";
 import { Route, Switch } from "react-router-dom";
 import { waitFor } from "@testing-library/dom";
 
-const mutation = loader("./FinishSignUp.graphql");
-
 const finishSignUpSucceeded: MockedResponse<FinishSignUpMutation> = {
   request: {
-    query: mutation,
+    query: FinishSignUpDocument,
     variables: {
       input: { firstname: "Marcelo", surname: "Reis", username: "marcelreis" },
     },

@@ -1,17 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { Route } from "react-router-dom";
-import { loader } from "graphql.macro";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 
 import UserPage from "./User";
-import { GetUserQuery } from "../../generated/graphql";
-
-const query = loader("./GetUser.graphql");
+import { GetUserDocument, GetUserQuery } from "../../generated/graphql";
 
 const getUserSucceeded: MockedResponse<GetUserQuery> = {
   request: {
-    query: query,
+    query: GetUserDocument,
     variables: { username: "marcelreis" },
   },
   result: {

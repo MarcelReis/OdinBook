@@ -7,8 +7,7 @@ import {
   TextArea,
   View,
 } from "@adobe/react-spectrum";
-import { makeReference, useMutation, useQuery } from "@apollo/client";
-import { loader } from "graphql.macro";
+import { makeReference } from "@apollo/client";
 import { ComponentProps, useState } from "react";
 
 import GenericError from "../../components/GenericError";
@@ -17,13 +16,9 @@ import Post from "../../components/Post";
 import Avatar from "../../components/Avatar";
 
 import {
-  CreatePostMutation,
-  CreatePostMutationVariables,
-  FeedPageQuery,
+  useCreatePostMutation,
+  useFeedPageQuery,
 } from "../../generated/graphql";
-
-const query = loader("./FeedPage.graphql");
-const mutation = loader("./CreatePost.graphql");
 
 function FeedPage() {
   const [newPost, setNewPost] = useState<{
@@ -31,11 +26,8 @@ function FeedPage() {
     isInvalid?: boolean;
   }>({ value: "", isInvalid: undefined });
 
-  const { data, loading, error } = useQuery<FeedPageQuery>(query);
-  const [createPost, result] = useMutation<
-    CreatePostMutation,
-    CreatePostMutationVariables
-  >(mutation);
+  const { data, loading, error } = useFeedPageQuery();
+  const [createPost, result] = useCreatePostMutation();
 
   const posts: ComponentProps<typeof Post>[] =
     data?.posts.map((post) => ({
@@ -65,10 +57,6 @@ function FeedPage() {
             posts(currentRefs) {
               const post = result.data?.createPost.posts![0]!;
               const newRef = { __ref: `Post:${post.id}` };
-
-              console.log(post);
-              console.log(newRef);
-              console.log(currentRefs);
 
               return Array.from(new Set([newRef, ...currentRefs]));
             },
