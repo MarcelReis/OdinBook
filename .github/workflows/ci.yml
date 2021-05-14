@@ -51,7 +51,7 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
-          file: ./package/app/coverage/clover.xml
+          file: ./packages/app/coverage/clover.xml
 
       - name: Build packages
         run: npx lerna run build --scope={functions,app} --parallel
